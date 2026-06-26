@@ -1,0 +1,7 @@
+{
+  "Python": ["FastAPI", "Pandas", "Machine Learning"],
+  "Machine Learning": ["PyTorch", "TensorFlow", "Statistics"],
+  "SQL": ["PostgreSQL", "Data Warehousing", "Product Analytics"],
+  "FastAPI": ["Python", "Backend Systems", "APIs"],
+  "Statistics": ["Machine Learning", "Experimentation", "Product Analytics"]
+}

@@ -1,0 +1,7 @@
+{
+  "FinTech": ["payments", "banking", "fraud", "transaction intelligence"],
+  "Machine Learning": ["models", "NLP", "prediction", "experimentation"],
+  "Backend Systems": ["APIs", "distributed systems", "services"],
+  "Product Analytics": ["metrics", "experiments", "cohorts"],
+  "Data Engineering": ["pipelines", "warehouses", "ETL"]
+}

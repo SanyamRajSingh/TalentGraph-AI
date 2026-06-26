@@ -1,0 +1,8 @@
+{
+  "Python": ["Backend Systems", "Machine Learning", "Data Engineering"],
+  "FastAPI": ["Backend Systems", "APIs"],
+  "Pandas": ["Data Analysis", "Machine Learning"],
+  "PyTorch": ["Machine Learning", "Research"],
+  "TensorFlow": ["Machine Learning", "Production ML"],
+  "PostgreSQL": ["Databases", "Backend Systems"]
+}
