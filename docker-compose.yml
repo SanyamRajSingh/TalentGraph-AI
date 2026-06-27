@@ -4,7 +4,7 @@ services:
       context: .
       dockerfile: infra/docker/api.Dockerfile
     environment:
-      APP_ENV: ${APP_ENV:-development}
+      APP_ENV: ${APP_ENV:-production}
       APP_NAME: ${APP_NAME:-TalentGraph AI}
       BACKEND_CORS_ORIGINS: ${BACKEND_CORS_ORIGINS:-http://localhost:3000}
       DATABASE_URL: ${DATABASE_URL:-postgresql+psycopg://talentgraph:talentgraph@postgres:5432/talentgraph}
@@ -16,8 +16,6 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./apps/api:/app/apps/api
-      - ./packages:/app/packages
       - ./data:/app/data
     depends_on:
       - postgres
@@ -32,9 +30,6 @@ services:
       NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL:-http://localhost:8000}
     ports:
       - "3000:3000"
-    volumes:
-      - ./apps/web:/app/apps/web
-      - ./packages:/app/packages
     depends_on:
       - api
 

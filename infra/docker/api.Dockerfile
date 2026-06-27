@@ -10,4 +10,4 @@ COPY packages packages
 
 RUN pip install --no-cache-dir -e apps/api
 
-CMD ["uvicorn", "app.main:app", "--app-dir", "apps/api", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+CMD ["uvicorn", "app.main:app", "--app-dir", "apps/api", "--host", "0.0.0.0", "--port", "8000"]

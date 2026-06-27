@@ -11,6 +11,9 @@ app = FastAPI(
     title=settings.app_name,
     version="0.1.0",
     description="Explainable Hiring Intelligence Platform API",
+    docs_url="/docs" if settings.app_env != "production" else None,
+    redoc_url="/redoc" if settings.app_env != "production" else None,
+    openapi_url="/openapi.json" if settings.app_env != "production" else None,
 )
 
 app.add_middleware(

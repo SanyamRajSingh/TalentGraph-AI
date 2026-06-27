@@ -11,5 +11,7 @@ RUN npm install
 COPY apps/web apps/web
 COPY packages packages
 
+RUN npm --workspace apps/web run build
+
 WORKDIR /app/apps/web
-CMD ["npm", "run", "dev"]
+CMD ["npm", "run", "start"]

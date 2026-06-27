@@ -524,7 +524,7 @@ export default function Home() {
                 <Summary label="Domain" value={`${evaluation.domain.score}`} />
                 <Summary label="Culture" value={`${evaluation.culture.score}`} />
               </div>
-              <div className="grid gap-4 lg:grid-cols-4">
+              <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 xl:grid-cols-4">
                 <EvaluatorCard title="Technical" result={evaluation.technical} />
                 <EvaluatorCard title="Growth" result={evaluation.growth} />
                 <EvaluatorCard title="Domain" result={evaluation.domain} />
@@ -581,8 +581,8 @@ export default function Home() {
           }
         >
           {rankings.length ? (
-            <div className="overflow-auto">
-              <table className="w-full border-collapse text-left text-sm">
+            <div className="overflow-x-auto w-full">
+              <table className="min-w-[600px] w-full border-collapse text-left text-sm">
                 <thead>
                   <tr className="border-b border-gray-200 text-xs uppercase tracking-wide text-graphite">
                     <th className="py-2 pr-3">Rank</th>
@@ -759,7 +759,7 @@ function ModulePanel({
         </div>
       </div>
       <div className="mt-5">{form}</div>
-      <div className="mt-6 border-t border-gray-100 pt-6">{children}</div>
+      <div className="mt-6 border-t border-gray-100 pt-6 animate-fade-in">{children}</div>
     </section>
   );
 }
@@ -767,21 +767,23 @@ function ModulePanel({
 function ProgressSteps({ completed }: { completed: boolean[] }) {
   const labels = ["Role DNA", "Candidate Twins", "Evaluate", "Rank", "Explain"];
   return (
-    <div className="grid gap-3 rounded border border-gray-200 bg-white p-4 sm:grid-cols-5">
+    <div className="flex flex-col sm:flex-row justify-between gap-4 rounded border border-gray-200 bg-white p-6 relative overflow-hidden">
+      <div className="hidden sm:block absolute top-[44px] left-[10%] right-[10%] h-[2px] bg-gray-100 -z-10" />
       {labels.map((label, index) => {
         const isComplete = completed[index];
+        const isCurrent = (index === 0 && !completed[0]) || (index > 0 && completed[index - 1] && !completed[index]);
         return (
-          <div key={label} className="flex items-center gap-3">
+          <div key={label} className="flex flex-row sm:flex-col items-center gap-3 bg-white z-10 px-2 flex-1">
             <div
-              className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-semibold ${
-                isComplete ? "bg-mint text-white" : "bg-gray-100 text-graphite"
+              className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-semibold transition-all duration-300 ${
+                isComplete ? "bg-mint text-white ring-4 ring-mint/20" : isCurrent ? "bg-signal text-white ring-4 ring-signal/20 scale-110" : "bg-gray-100 text-graphite"
               }`}
             >
               {index + 1}
             </div>
-            <div>
-              <p className="text-sm font-semibold">{label}</p>
-              <p className="text-xs text-graphite">{isComplete ? "Complete" : "Pending"}</p>
+            <div className="text-left sm:text-center">
+              <p className={`text-sm font-semibold transition-colors ${isComplete || isCurrent ? "text-ink" : "text-graphite"}`}>{label}</p>
+              <p className="text-xs text-graphite">{isComplete ? "Complete" : isCurrent ? "In Progress" : "Pending"}</p>
             </div>
           </div>
         );
@@ -833,7 +835,7 @@ function Summary({ label, value }: { label: string; value: string }) {
   return (
     <div className="rounded border border-gray-200 p-4">
       <p className="text-xs font-semibold uppercase tracking-wide text-graphite">{label}</p>
-      <p className="mt-2 text-base font-semibold">{value}</p>
+      <p className="mt-2 text-base font-semibold break-words">{value}</p>
     </div>
   );
 }
@@ -920,7 +922,7 @@ function RadarChart({ role }: { role: ApiRoleDNA }) {
 
 function MetricCards<T extends Record<string, unknown>>({ rows, source }: { rows: Array<[keyof T, string]>; source: T }) {
   return (
-    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="grid gap-3 grid-cols-2 md:grid-cols-3 xl:grid-cols-6">
       {rows.map(([key, label]) => (
         <Summary key={String(key)} label={label} value={String(Number(source[key]))} />
       ))}
@@ -969,7 +971,7 @@ function GraphList({ title, items }: { title: string; items: string[] }) {
       <h3 className="text-sm font-semibold uppercase tracking-wide text-graphite">{title}</h3>
       <ul className="mt-3 max-h-72 space-y-2 overflow-auto">
         {items.map((item) => (
-          <li key={item} className="rounded border border-gray-200 p-3 text-sm">
+          <li key={item} className="rounded border border-gray-200 p-3 text-sm break-words">
             {item}
           </li>
         ))}
@@ -984,7 +986,7 @@ function ReasoningList({ items }: { items: string[] }) {
       <h3 className="text-sm font-semibold uppercase tracking-wide text-graphite">Reasoning</h3>
       <ul className="mt-3 space-y-2">
         {items.map((item) => (
-          <li key={item} className="rounded border border-gray-200 p-3 text-sm leading-6">
+          <li key={item} className="rounded border border-gray-200 p-3 text-sm leading-6 break-words">
             {item}
           </li>
         ))}
@@ -1000,7 +1002,7 @@ function InsightList({ title, items, fallback }: { title: string; items: string[
       <h3 className="text-sm font-semibold uppercase tracking-wide text-graphite">{title}</h3>
       <ul className="mt-3 space-y-2">
         {visibleItems.map((item) => (
-          <li key={item} className="rounded border border-gray-200 p-3 text-sm leading-6">
+          <li key={item} className="rounded border border-gray-200 p-3 text-sm leading-6 break-words">
             {item}
           </li>
         ))}
@@ -1018,7 +1020,7 @@ function CounterfactualCards({ items }: { items: string[] }) {
         {visibleItems.map((item, index) => (
           <div key={item} className="rounded border border-mint/30 bg-teal-50 p-4">
             <p className="text-xs font-semibold uppercase tracking-wide text-mint">Counterfactual {index + 1}</p>
-            <p className="mt-2 text-sm leading-6">{item}</p>
+            <p className="mt-2 text-sm leading-6 break-words">{item}</p>
           </div>
         ))}
       </div>
@@ -1037,7 +1039,7 @@ function EvaluatorCard({ title, result }: { title: string; result: ApiEvaluatorR
       <h4 className="mt-4 text-xs font-semibold uppercase tracking-wide text-graphite">Strengths</h4>
       <ul className="mt-2 space-y-2">
         {(result.strengths.length ? result.strengths : ["No major strength signal."]).map((item) => (
-          <li key={item} className="text-sm leading-5">
+          <li key={item} className="text-sm leading-5 break-words">
             {item}
           </li>
         ))}
@@ -1045,7 +1047,7 @@ function EvaluatorCard({ title, result }: { title: string; result: ApiEvaluatorR
       <h4 className="mt-4 text-xs font-semibold uppercase tracking-wide text-graphite">Risks</h4>
       <ul className="mt-2 space-y-2">
         {(result.risks.length ? result.risks : ["No major risk signal."]).map((item) => (
-          <li key={item} className="text-sm leading-5">
+          <li key={item} className="text-sm leading-5 break-words">
             {item}
           </li>
         ))}
