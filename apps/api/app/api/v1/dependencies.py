@@ -44,9 +44,16 @@ from app.repositories import (
     PostgresExplanationRepository,
     PostgresRankingRepository,
     PostgresRoleDNARepository,
+    PostgresGraphRepository,
     RoleDNARepository,
     RankingRepository,
     VectorRepository,
+    RecommendationRepository,
+    CopilotConversationRepository,
+    InMemoryRecommendationRepository,
+    InMemoryCopilotRepository,
+    PostgresRecommendationRepository,
+    PostgresCopilotRepository,
 )
 
 
@@ -118,7 +125,9 @@ def get_explanation_repository() -> ExplanationRepository:
 
 @lru_cache
 def get_graph_repository() -> GraphRepository:
-    # Graph repository remains in-memory (Neo4j integration is a separate phase)
+    settings = get_settings()
+    if settings.use_postgres:
+        return PostgresGraphRepository(session_factory=_get_pg_session)
     return InMemoryGraphRepository()
 
 
@@ -126,6 +135,22 @@ def get_graph_repository() -> GraphRepository:
 def get_vector_repository() -> VectorRepository:
     # Vector repository remains in-memory (Chroma integration is a separate phase)
     return InMemoryVectorRepository()
+
+
+@lru_cache
+def get_recommendation_repository() -> RecommendationRepository:
+    settings = get_settings()
+    if settings.use_postgres:
+        return PostgresRecommendationRepository(session_factory=_get_pg_session)
+    return InMemoryRecommendationRepository()
+
+
+@lru_cache
+def get_copilot_repository() -> CopilotConversationRepository:
+    settings = get_settings()
+    if settings.use_postgres:
+        return PostgresCopilotRepository(session_factory=_get_pg_session)
+    return InMemoryCopilotRepository()
 
 
 # ---------------------------------------------------------------------------

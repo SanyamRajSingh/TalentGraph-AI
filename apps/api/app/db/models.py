@@ -138,3 +138,29 @@ class GraphRow(Base):
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), default=lambda: datetime.now(UTC), nullable=False
     )
+
+
+class RecommendationRow(Base):
+    __tablename__ = "recommendations"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    candidate_id: Mapped[str] = mapped_column(String(64), index=True, nullable=False)
+    role_id: Mapped[str] = mapped_column(String(64), index=True, nullable=False)
+    label: Mapped[str] = mapped_column(String(64), nullable=False)
+    payload: Mapped[dict] = mapped_column(JSON, nullable=False)
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), default=lambda: datetime.now(UTC), nullable=False
+    )
+
+
+class CopilotConversationRow(Base):
+    __tablename__ = "copilot_conversations"
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    conversation_id: Mapped[str] = mapped_column(String(64), unique=True, index=True, nullable=False)
+    role_id: Mapped[str | None] = mapped_column(String(64), index=True, nullable=True)
+    candidate_id: Mapped[str | None] = mapped_column(String(64), index=True, nullable=True)
+    payload: Mapped[dict] = mapped_column(JSON, nullable=False)
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), default=lambda: datetime.now(UTC), nullable=False
+    )

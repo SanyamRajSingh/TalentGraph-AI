@@ -20,6 +20,13 @@ INTENT_MAP: list[tuple[str, list[str]]] = [
     ("salary",          ["salary", "comp", "compensation", "pay", "rate"]),
     ("timeline",        ["timeline", "career", "experience", "year", "history"]),
     ("recommendation",  ["recommend", "hire", "decision", "verdict"]),
+    ("interview_first", ["interview first", "top candidate", "number one", "first choice"]),
+    ("learns_fastest",  ["learns fastest", "fastest learner", "learning velocity", "quick learner"]),
+    ("startup_dna",     ["startup dna", "startup experience", "founder", "hustle", "scrappy"]),
+    ("similar",         ["similar", "like", "compare", "looks like"]),
+    ("why_a_over_b",    ["why", "over", "better than", "compare to"]),
+    ("transition_ml",   ["transition into ml", "move to ml", "learn ml", "switch to ml"]),
+    ("draft_email",     ["draft outreach email", "draft email", "write email", "outreach"]),
     ("help",            ["help", "what can you do", "how do you work", "commands"]),
 ]
 
@@ -177,6 +184,31 @@ def _answer_general(candidate: CandidateDigitalTwin | None, role: RoleDNAProfile
     )
 
 
+def _answer_interview_first(candidate: CandidateDigitalTwin | None, role: RoleDNAProfile | None) -> tuple[str, list[str]]:
+    return ("Based on overall match and confidence, I recommend interviewing candidates with a High risk_profile and top technical scores first.", ["Who learns fastest?"])
+
+def _answer_learns_fastest(candidate: CandidateDigitalTwin | None, role: RoleDNAProfile | None) -> tuple[str, list[str]]:
+    if candidate:
+        return (f"{candidate.name} has a learning velocity of {candidate.learning_velocity}/100.", ["Who has startup DNA?"])
+    return ("Look for candidates with a learning velocity score above 85/100.", ["Who has startup DNA?"])
+
+def _answer_startup_dna(candidate: CandidateDigitalTwin | None, role: RoleDNAProfile | None) -> tuple[str, list[str]]:
+    return ("Candidates with high ambiguity tolerance and ownership typically have strong startup DNA.", ["Which candidates are similar?"])
+
+def _answer_similar(candidate: CandidateDigitalTwin | None, role: RoleDNAProfile | None) -> tuple[str, list[str]]:
+    return ("To find similar candidates, check the 'Similar Profiles' section in the Comparison Workspace which uses vector similarity.", ["Why Candidate A over Candidate B?"])
+
+def _answer_why_a_over_b(candidate: CandidateDigitalTwin | None, role: RoleDNAProfile | None) -> tuple[str, list[str]]:
+    return ("Candidate A might be preferred over Candidate B if they have stronger role alignment, higher ownership, and better learning velocity. Check the detailed evaluation for specific gaps.", ["Who can transition into ML?"])
+
+def _answer_transition_ml(candidate: CandidateDigitalTwin | None, role: RoleDNAProfile | None) -> tuple[str, list[str]]:
+    return ("Strong backend engineers with high learning velocity and problem-solving scores can often transition into ML smoothly.", ["Draft outreach email."])
+
+def _answer_draft_email(candidate: CandidateDigitalTwin | None, role: RoleDNAProfile | None) -> tuple[str, list[str]]:
+    name = candidate.name if candidate else "[Candidate]"
+    return (f"Subject: Exploring opportunities at our company\n\nHi {name},\n\nI was impressed by your background and would love to chat about a potential fit for our open role. Let me know when you're free for a quick call.\n\nBest,\nRecruiting Team", ["What are their strengths?"])
+
+
 # ── Intent router ─────────────────────────────────────────────────────────────
 
 _HANDLERS = {
@@ -189,6 +221,13 @@ _HANDLERS = {
     "timeline":       _answer_timeline,
     "recommendation": _answer_recommendation,
     "salary":         _answer_salary,
+    "interview_first": _answer_interview_first,
+    "learns_fastest": _answer_learns_fastest,
+    "startup_dna":    _answer_startup_dna,
+    "similar":        _answer_similar,
+    "why_a_over_b":   _answer_why_a_over_b,
+    "transition_ml":  _answer_transition_ml,
+    "draft_email":    _answer_draft_email,
     "help":           _answer_help,
     "general":        _answer_general,
 }

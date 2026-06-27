@@ -12,6 +12,8 @@ from app.repositories.memory import (
     InMemoryRankingRepository,
     InMemoryRoleDNARepository,
     InMemoryVectorRepository,
+    InMemoryRecommendationRepository,
+    InMemoryCopilotRepository,
 )
 from app.repositories.postgres import (
     PostgresCandidateRepository,
@@ -19,10 +21,16 @@ from app.repositories.postgres import (
     PostgresExplanationRepository,
     PostgresRankingRepository,
     PostgresRoleDNARepository,
+    PostgresGraphRepository,
+    PostgresRecommendationRepository,
+    PostgresCopilotRepository,
 )
 from app.repositories.ranking_repository import RankingRepository
 from app.repositories.role_dna_repository import RoleDNARepository
 from app.repositories.vector_repository import VectorRepository
+
+from app.repositories.recommendation_repository import RecommendationRepository
+from app.repositories.copilot_repository import CopilotConversationRepository
 
 __all__ = [
     # Interfaces
@@ -33,6 +41,8 @@ __all__ = [
     "RankingRepository",
     "RoleDNARepository",
     "VectorRepository",
+    "RecommendationRepository",
+    "CopilotConversationRepository",
     # In-memory implementations (default / tests)
     "InMemoryCandidateRepository",
     "InMemoryEvaluationRepository",
@@ -41,10 +51,15 @@ __all__ = [
     "InMemoryRankingRepository",
     "InMemoryRoleDNARepository",
     "InMemoryVectorRepository",
+    "InMemoryRecommendationRepository",
+    "InMemoryCopilotRepository",
     # PostgreSQL implementations (production)
     "PostgresCandidateRepository",
     "PostgresEvaluationRepository",
     "PostgresExplanationRepository",
     "PostgresRankingRepository",
     "PostgresRoleDNARepository",
+    "PostgresGraphRepository",
+    "PostgresRecommendationRepository",
+    "PostgresCopilotRepository",
 ]

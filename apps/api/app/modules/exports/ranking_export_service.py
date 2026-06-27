@@ -43,6 +43,7 @@ class RankingExportService:
             sheet.cell(row=row_index, column=6, value="\n".join(explanation.risks) if explanation else "")
 
         self._format(sheet)
+        self._autosize_columns(sheet)
         buffer = BytesIO()
         workbook.save(buffer)
         return buffer.getvalue()
@@ -54,20 +55,28 @@ class RankingExportService:
             cell.fill = PatternFill("solid", fgColor="1F4E79")
 
     def _format(self, sheet: Worksheet) -> None:
-        widths = {
-            "A": 10,
-            "B": 28,
-            "C": 12,
-            "D": 14,
-            "E": 48,
-            "F": 48,
-        }
-        for column, width in widths.items():
-            sheet.column_dimensions[column].width = width
+        # Enable AutoFilter
+        sheet.auto_filter.ref = sheet.dimensions
         sheet.freeze_panes = "A2"
+
         for row in sheet.iter_rows(min_row=2, max_col=6):
             for cell in row:
                 alignment = copy(cell.alignment)
                 alignment.wrap_text = True
                 alignment.vertical = "top"
                 cell.alignment = alignment
+
+    def _autosize_columns(self, sheet: Worksheet) -> None:
+        for col in sheet.columns:
+            max_length = 0
+            column = col[0].column_letter # Get the column name
+            for cell in col:
+                try:
+                    if len(str(cell.value)) > max_length:
+                        # For cells with newlines, consider the max line length
+                        lines = str(cell.value).split("\n")
+                        max_length = max(max_length, max(len(line) for line in lines))
+                except:
+                    pass
+            adjusted_width = min((max_length + 2), 60) # Max width 60
+            sheet.column_dimensions[column].width = adjusted_width

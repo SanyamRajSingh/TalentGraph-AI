@@ -7,6 +7,8 @@ from app.repositories.memory.in_memory_graph_repository import InMemoryGraphRepo
 from app.repositories.memory.in_memory_ranking_repository import InMemoryRankingRepository
 from app.repositories.memory.in_memory_vector_repository import InMemoryVectorRepository
 from app.repositories.memory.role_dna_repository import InMemoryRoleDNARepository
+from app.repositories.memory.memory_recommendation_repository import InMemoryRecommendationRepository
+from app.repositories.memory.memory_copilot_repository import InMemoryCopilotRepository
 
 __all__ = [
     "InMemoryCandidateRepository",
@@ -16,4 +18,6 @@ __all__ = [
     "InMemoryRankingRepository",
     "InMemoryRoleDNARepository",
     "InMemoryVectorRepository",
+    "InMemoryRecommendationRepository",
+    "InMemoryCopilotRepository",
 ]

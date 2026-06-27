@@ -1632,6 +1632,9 @@ function ForceGraphViz({ graph }: { graph: ApiGraph }) {
       };
     });
 
+    // Render Nodes (Hoist nodeData above link to prevent Temporal Dead Zone crash during minification)
+    const nodeData = gDagre.nodes().map(v => gDagre.node(v) as { id: string; label: string; name: string; x: number; y: number; width: number; height: number });
+
     // Instead of static Dagre points, we create a dynamic link generator
     // so we can update it on drag.
     const link = g.append("g").selectAll("path")
@@ -1639,13 +1642,10 @@ function ForceGraphViz({ graph }: { graph: ApiGraph }) {
       .attr("fill", "none")
       .attr("stroke", "#cbd5e1").attr("stroke-width", 1.5)
       .attr("class", "graph-link")
-      .attr("marker-end", d => {
+      .attr("marker-end", (d: any) => {
         const tNode = nodeById.get(d.id);
         return `url(#tg-arrow-${getRadius(tNode?.label ?? "")})`;
       });
-
-    // Render Nodes (Hoist nodeData above updateEdges to prevent Temporal Dead Zone crash during minification)
-    const nodeData = gDagre.nodes().map(v => gDagre.node(v) as { id: string; label: string; name: string; x: number; y: number; width: number; height: number });
 
     // Helper to draw edges
     const updateEdges = () => {

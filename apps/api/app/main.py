@@ -24,6 +24,14 @@ app = FastAPI(
     openapi_url="/openapi.json" if settings.app_env != "production" else None,
 )
 
+if settings.use_postgres:
+    from app.db.session import create_tables
+    try:
+        create_tables()
+    except Exception as e:
+        import logging
+        logging.getLogger(__name__).warning(f"Could not create database tables: {e}")
+
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
