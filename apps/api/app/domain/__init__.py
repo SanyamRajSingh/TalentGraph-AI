@@ -7,7 +7,7 @@ from app.domain.candidate_twin import (
     GrowthStage,
 )
 from app.domain.evaluation import EvaluatorResult, EvaluationBundle
-from app.domain.explanation import CandidateExplanation, CounterfactualSuggestion
+from app.domain.explanation import ExplanationProfile
 from app.domain.knowledge_graph import (
     GraphEntityType,
     GraphNode,
@@ -23,10 +23,9 @@ __all__ = [
     "CandidateDigitalTwin",
     "CandidateResume",
     "CandidateTimelineEntry",
-    "CandidateExplanation",
-    "CounterfactualSuggestion",
     "EvaluationBundle",
     "EvaluatorResult",
+    "ExplanationProfile",
     "GraphEntityType",
     "GraphNode",
     "GraphRelationship",

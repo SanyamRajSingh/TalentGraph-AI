@@ -42,9 +42,12 @@ def test_ranking_api_ranks_existing_evaluations_by_persona() -> None:
     assert fetch_response.json()["rankings"]
 
 
-def test_future_explanation_endpoint_still_501_after_ranking_module() -> None:
+def test_explanation_endpoint_requires_module_6_context_after_ranking_module() -> None:
     client = TestClient(app)
 
-    response = client.post("/api/v1/generate-explanations")
+    response = client.post(
+        "/api/v1/generate-explanations",
+        json={"role_id": "role_missing", "candidate_id": "candidate_missing"},
+    )
 
-    assert response.status_code == 501
+    assert response.status_code == 404

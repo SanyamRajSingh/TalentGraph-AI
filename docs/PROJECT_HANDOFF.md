@@ -417,7 +417,34 @@ Ranking output:
 - confidence
 - evaluation_id
 
-No recommendation labels, explanations, or counterfactuals are implemented.
+No recommendation labels are implemented.
+
+### Module 6: Explainability + Counterfactual Engine
+
+Purpose: Explain why ranked candidates received their scores and how they could improve.
+
+Key files:
+
+```text
+apps/api/app/domain/explanation.py
+apps/api/app/modules/explanations/service.py
+apps/api/app/modules/explanations/counterfactual_service.py
+apps/api/app/pipelines/explanation_pipeline.py
+apps/api/app/repositories/explanation_repository.py
+apps/api/app/repositories/memory/in_memory_explanation_repository.py
+apps/api/app/repositories/postgres/postgres_explanation_repository.py
+```
+
+Outputs include:
+
+- ranking position
+- strengths
+- risks
+- deterministic reasoning
+- 1-3 counterfactual improvement suggestions
+- generated timestamp
+
+No LLM calls, chat, agents, exports, or Hire/No Hire recommendations are implemented.
 
 ## API Surface
 
@@ -452,13 +479,15 @@ GET  /api/v1/evaluations/{evaluation_id}
 
 POST /api/v1/rank
 GET  /api/v1/rankings/{role_id}
+
+POST /api/v1/generate-explanations
+GET  /api/v1/explanations/{candidate_id}
 ```
 
 Legacy/future endpoints intentionally returning `501`:
 
 ```text
 POST /api/v1/rank-candidates
-POST /api/v1/generate-explanations
 GET  /api/v1/rankings
 ```
 
@@ -527,9 +556,7 @@ Not implemented:
 - Real sentence-transformer embeddings.
 - Neo4j writes/queries.
 - Chroma writes/queries.
-- Candidate explanations.
-- Counterfactuals.
-- XLSX export.
+- Recommendation labels.
 - Recruiter chat.
 - Autonomous agents.
 - Authentication.
@@ -615,7 +642,7 @@ Docker setup exists but has not been the main verification path. The Python test
 Last successful backend verification:
 
 ```text
-45 passed, 1 warning
+53 passed, 1 warning
 ```
 
 Command used:
@@ -635,7 +662,7 @@ The warning is an upstream FastAPI/Starlette `TestClient` deprecation warning.
    python -m pytest apps/api/tests
    ```
 
-3. If continuing non-feature cleanup, verify frontend dependency install/build next.
+3. If continuing non-feature cleanup, review npm audit findings only if approved.
 4. Read `apps/api/app/api/v1/router.py` to see current endpoint behavior.
 5. Read `apps/api/app/api/v1/dependencies.py` to understand current in-memory dependency wiring.
-6. Continue only with the next approved module. Do not jump ahead to explanations, exports, real DB integration, or AI calls unless explicitly approved.
+6. Continue only with the next approved module. Do not jump ahead to exports, real DB integration, AI calls, chat, or recommendations unless explicitly approved.

@@ -42,6 +42,7 @@ InMemoryGraphRepository
 InMemoryVectorRepository
 InMemoryEvaluationRepository
 InMemoryRankingRepository
+InMemoryExplanationRepository
 ```
 
 ### External Persistence Is Skeleton Only
@@ -73,6 +74,7 @@ It includes panels for:
 - Candidate Digital Twin
 - Evaluation
 - Ranking
+- Explanation
 - Knowledge Graph
 - Embeddings
 
@@ -115,6 +117,7 @@ EmbeddingCollection
 EvaluationBundle
 EvaluatorResult
 RankingResult
+ExplanationProfile
 ```
 
 ### Module Names
@@ -210,8 +213,8 @@ apps/api/tests/ranking
 4. Do not merge evaluator and ranking logic.
 5. Do not put business logic in `router.py`.
 6. Do not add recommendations to ranking results.
-7. Do not add explanation fields to ranking results unless the explanations module is approved.
-8. Do not implement counterfactuals inside evaluation or ranking.
+7. Do not add explanation fields to ranking results.
+8. Keep counterfactuals inside the explanations module, not evaluation or ranking.
 9. Do not create autonomous agents.
 10. Do not add unrelated UI landing/marketing pages.
 
@@ -225,13 +228,11 @@ apps/api/tests/ranking
 - Chroma persistence.
 - PostgreSQL persistence.
 - Database migrations.
-- Explanation generation.
-- Counterfactual generation.
-- XLSX export.
+- Recommendation labels such as Hire/No Hire.
 - Authentication.
 - Multi-page frontend routing.
 - CI/CD.
-- Deployment verification.
+- Production deployment verification.
 
 ## Assumptions
 
@@ -246,7 +247,7 @@ apps/api/tests/ranking
 Backend test suite:
 
 ```text
-45 passed, 1 warning
+53 passed, 1 warning
 ```
 
 Use this as the regression baseline.

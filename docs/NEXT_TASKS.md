@@ -2,17 +2,17 @@
 
 ## Current Recommended Next Module
 
-The likely next module is Module 6, but the exact module must be approved by the user before implementation.
+TalentGraph AI v1.0 feature work has been completed. The project is in Release Mode only.
 
-Based on the original project plan, plausible next modules are:
+Allowed work:
 
-1. Explainability Engine
-2. Counterfactual Explanations
-3. XLSX Export
-4. Persistence hardening
-5. Frontend polish and routing
+1. Verification
+2. Crash fixes
+3. Broken route fixes
+4. Documentation cleanup
+5. Release packaging
 
-Do not implement any of these without explicit approval.
+Do not implement new features without explicit approval.
 
 ## Immediate Next Tasks
 
@@ -30,11 +30,11 @@ README.md
 
 Acceptance criteria:
 
-- README lists implemented Modules 1-5. Complete.
+- README lists implemented Modules 1-7. Complete.
 - README includes current API endpoints. Complete.
 - README explains in-memory persistence. Complete.
 - README includes backend test command. Complete.
-- README notes frontend build is not yet verified. Complete.
+- README notes frontend build is verified. Complete.
 
 Potential pitfalls:
 
@@ -69,7 +69,7 @@ Potential pitfalls:
 
 ### Task 3: Verify Frontend Dependency Install
 
-Status: Next recommended task.
+Status: Complete.
 
 Reason: Backend tests pass, but frontend build has not been verified.
 
@@ -90,9 +90,9 @@ npm.cmd --workspace apps/web run build
 
 Acceptance criteria:
 
-- Dependencies install successfully.
-- Next.js build succeeds.
-- If build fails, fix TypeScript or Next.js issues only.
+- Dependencies install successfully. Complete.
+- Next.js build succeeds. Complete.
+- If build fails, fix TypeScript or Next.js issues only. Not needed.
 
 Potential pitfalls:
 
@@ -132,14 +132,14 @@ Potential pitfalls:
 - Do not create a marketing landing page.
 - Keep the actual app workflow as the first screen.
 
-## If Module 6 Is Explanations
+## Module 6: Explanations + Counterfactuals
 
-Only proceed if explicitly approved.
+Status: Complete.
 
 Recommended implementation order:
 
 1. Extend or create explanation domain.
-2. Implement deterministic `ReasoningEngine`.
+2. Implement deterministic explanation service.
 3. Implement explanation repository memory/Postgres skeleton.
 4. Implement `ExplanationPipeline`.
 5. Add endpoints:
@@ -156,7 +156,6 @@ Files likely to create or modify:
 
 ```text
 apps/api/app/domain/explanation.py
-apps/api/app/modules/recruiter_brain/reasoning_engine.py
 apps/api/app/modules/explanations/service.py
 apps/api/app/repositories/explanation_repository.py
 apps/api/app/repositories/memory/in_memory_explanation_repository.py
@@ -173,41 +172,30 @@ packages/shared/src/index.ts
 
 Acceptance criteria:
 
-- Explanation uses existing evaluation/ranking data.
-- No LLM calls unless explicitly approved.
-- No counterfactuals unless explicitly included in the approval.
-- Tests cover service, repository, pipeline, API.
+- Explanation uses existing evaluation/ranking data. Complete.
+- No LLM calls unless explicitly approved. Complete.
+- Counterfactuals included because the approved Module 6 scope requested them. Complete.
+- Tests cover service, counterfactual service, repository, pipeline, API. Complete.
 
 Potential pitfalls:
 
 - Do not mutate ranking outputs to include recommendations unless approved.
 - Do not add autonomous agents.
 
-## If Module 6 Is Counterfactuals
+## Module 7: Dashboard + XLSX Export + Demo Dataset
 
-Only proceed if explicitly approved.
+Status: Complete.
 
-Recommended approach:
+Completed:
 
-- Use existing role, candidate, evaluation, and ranking objects.
-- Generate deterministic improvement suggestions.
-- Keep suggestions separate from ranking.
+- Five-step dashboard workflow.
+- Visual cards and role radar.
+- XLSX export endpoint.
+- Demo dataset.
+- Release documentation.
+- Backend and frontend verification.
 
-Potential files:
-
-```text
-apps/api/app/modules/recruiter_brain/counterfactual_engine.py
-apps/api/app/modules/explanations/
-apps/api/tests/explanations/
-```
-
-Acceptance criteria:
-
-- Returns improvement suggestions.
-- Does not rerank candidates.
-- Does not modify candidate profiles.
-
-## If Module 6 Is Persistence Hardening
+## Future: Persistence Hardening
 
 Only proceed if explicitly approved.
 

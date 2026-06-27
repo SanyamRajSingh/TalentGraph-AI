@@ -1,5 +1,6 @@
 # Python
 __pycache__/
+**/__pycache__/
 *.py[cod]
 .venv/
 .pytest_cache/
@@ -10,6 +11,7 @@ node_modules/
 .next/
 out/
 dist/
+build/
 npm-debug.log*
 pnpm-debug.log*
 yarn-debug.log*
@@ -23,6 +25,8 @@ yarn-debug.log*
 data/uploads/
 data/generated/
 chroma/
+*.xlsx
+*.xls
 
 # OS/editor
 .DS_Store

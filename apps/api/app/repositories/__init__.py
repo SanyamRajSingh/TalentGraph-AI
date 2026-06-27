@@ -2,10 +2,12 @@
 
 from app.repositories.candidate_repository import CandidateRepository
 from app.repositories.evaluation_repository import EvaluationRepository
+from app.repositories.explanation_repository import ExplanationRepository
 from app.repositories.graph_repository import GraphRepository
 from app.repositories.memory import (
     InMemoryCandidateRepository,
     InMemoryEvaluationRepository,
+    InMemoryExplanationRepository,
     InMemoryGraphRepository,
     InMemoryRankingRepository,
     InMemoryRoleDNARepository,
@@ -18,9 +20,11 @@ from app.repositories.vector_repository import VectorRepository
 __all__ = [
     "CandidateRepository",
     "EvaluationRepository",
+    "ExplanationRepository",
     "GraphRepository",
     "InMemoryCandidateRepository",
     "InMemoryEvaluationRepository",
+    "InMemoryExplanationRepository",
     "InMemoryGraphRepository",
     "InMemoryRankingRepository",
     "InMemoryRoleDNARepository",

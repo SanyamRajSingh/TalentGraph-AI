@@ -88,6 +88,17 @@ export type RankingSummary = {
   evaluationId: string;
 };
 
+export type ExplanationProfile = {
+  candidateId: string;
+  roleId: string;
+  rankingPosition: number;
+  strengths: string[];
+  risks: string[];
+  reasoning: string[];
+  counterfactuals: string[];
+  generatedAt: string;
+};
+
 export type GraphNode = {
   id: string;
   label: "Candidate" | "Role" | "Skill" | "Technology" | "Project" | "Company" | "Domain";

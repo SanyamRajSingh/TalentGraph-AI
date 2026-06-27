@@ -3,21 +3,26 @@ from functools import lru_cache
 from app.modules.candidates import CandidateDigitalTwinService, LocalResumeParserProvider
 from app.modules.embeddings import EmbeddingFoundationService, LocalEmbeddingProvider, SummaryService
 from app.modules.evaluators import EvaluationService
+from app.modules.explanations import CounterfactualService, ExplanationService
+from app.modules.exports import RankingExportService
 from app.modules.graph_builder import GraphBuilderService
 from app.modules.ranking import RankingService
 from app.modules.role_dna import LocalRoleDNALLMProvider, RoleDNAService
 from app.pipelines.candidate_pipeline import CandidatePipeline
 from app.pipelines.embedding_pipeline import EmbeddingPipeline
 from app.pipelines.evaluation_pipeline import EvaluationPipeline
+from app.pipelines.explanation_pipeline import ExplanationPipeline
 from app.pipelines.graph_pipeline import GraphPipeline
 from app.pipelines.ranking_pipeline import RankingPipeline
 from app.pipelines.role_pipeline import RolePipeline
 from app.repositories import (
     CandidateRepository,
     EvaluationRepository,
+    ExplanationRepository,
     GraphRepository,
     InMemoryCandidateRepository,
     InMemoryEvaluationRepository,
+    InMemoryExplanationRepository,
     InMemoryGraphRepository,
     InMemoryRankingRepository,
     InMemoryRoleDNARepository,
@@ -136,3 +141,38 @@ def get_ranking_service() -> RankingService:
 
 def get_ranking_pipeline() -> RankingPipeline:
     return RankingPipeline(ranking_service=get_ranking_service())
+
+
+@lru_cache
+def get_explanation_repository() -> ExplanationRepository:
+    return InMemoryExplanationRepository()
+
+
+@lru_cache
+def get_counterfactual_service() -> CounterfactualService:
+    return CounterfactualService()
+
+
+def get_explanation_service() -> ExplanationService:
+    return ExplanationService(
+        counterfactual_service=get_counterfactual_service(),
+        explanation_repository=get_explanation_repository(),
+    )
+
+
+def get_explanation_pipeline() -> ExplanationPipeline:
+    return ExplanationPipeline(
+        explanation_service=get_explanation_service(),
+        role_repository=get_role_dna_repository(),
+        candidate_repository=get_candidate_repository(),
+        evaluation_repository=get_evaluation_repository(),
+        ranking_repository=get_ranking_repository(),
+    )
+
+
+def get_ranking_export_service() -> RankingExportService:
+    return RankingExportService(
+        ranking_repository=get_ranking_repository(),
+        candidate_repository=get_candidate_repository(),
+        explanation_repository=get_explanation_repository(),
+    )

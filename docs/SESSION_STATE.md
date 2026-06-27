@@ -2,16 +2,17 @@
 
 ## Last Completed Task
 
-Initial baseline commit after README refresh.
+Module 7: Dashboard Polish + XLSX Export + Submission Assets.
 
 Completed:
 
-- Updated `README.md` to describe the working Modules 1-5 implementation.
-- Documented current API endpoints.
-- Documented in-memory persistence and skeleton external repositories.
-- Documented backend test command and current `45 passed, 1 warning` status.
-- Documented that the frontend build is not yet verified in this environment.
-- Created the initial Git baseline commit.
+- Polished the frontend into a five-step workflow.
+- Added role radar, candidate metric cards, evaluation cards, leaderboard, and counterfactual cards.
+- Added XLSX ranking export endpoint and service.
+- Added `data/demo/` release dataset.
+- Added release notes, demo script, and submission checklist docs.
+- Verified backend tests, frontend build, demo dataset flow, and XLSX generation.
+- Verified Docker Compose config; full startup is blocked because Docker Desktop is not running locally.
 
 Previous completed product task:
 
@@ -31,7 +32,7 @@ Completed:
 Last confirmed backend test result:
 
 ```text
-45 passed, 1 warning
+53 passed, 1 warning
 ```
 
 ## Current Task In Progress
@@ -82,7 +83,8 @@ packages/shared/src/index.ts
 
 Recommended immediate non-feature work:
 
-1. Verify frontend dependency install/build.
+1. Complete release verification and GitHub release tasks.
+2. Do not implement new features without explicit approval.
 
 If the user asks to continue product implementation, ask or confirm which module is approved.
 
@@ -147,7 +149,14 @@ npm.cmd install
 npm.cmd --workspace apps/web run build
 ```
 
-Frontend build has not been verified successfully yet.
+Frontend:
+
+```powershell
+npm.cmd install
+npm.cmd --workspace apps/web run build
+```
+
+Frontend build has been verified successfully.
 
 # START HERE FOR NEXT AI SESSION
 

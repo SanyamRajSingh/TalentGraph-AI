@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, Response, status
 
 from app.api.v1.dependencies import (
     get_candidate_pipeline,
@@ -6,8 +6,11 @@ from app.api.v1.dependencies import (
     get_embedding_pipeline,
     get_evaluation_pipeline,
     get_evaluation_repository,
+    get_explanation_pipeline,
+    get_explanation_repository,
     get_graph_pipeline,
     get_graph_repository,
+    get_ranking_export_service,
     get_ranking_pipeline,
     get_ranking_repository,
     get_role_dna_repository,
@@ -18,6 +21,8 @@ from app.contracts.requests import (
     BuildDigitalTwinRequest,
     BuildGraphRequest,
     EvaluateRequest,
+    ExportRankingsRequest,
+    GenerateExplanationRequest,
     GenerateEmbeddingsRequest,
     GenerateRoleDNARequest,
     RankRequest,
@@ -30,6 +35,7 @@ from app.contracts.responses.candidate_responses import (
     UploadCandidateResponse,
 )
 from app.contracts.responses.evaluation_responses import EvaluationResponse
+from app.contracts.responses.explanation_responses import ExplanationResponse
 from app.contracts.responses.foundation_responses import EmbeddingCollectionResponse, GraphResponse
 from app.contracts.responses.rank_responses import RankingResponse
 from app.contracts.responses.role_dna_responses import (
@@ -40,12 +46,15 @@ from app.contracts.responses.role_dna_responses import (
 from app.pipelines.candidate_pipeline import CandidatePipeline
 from app.pipelines.embedding_pipeline import EmbeddingPipeline
 from app.pipelines.evaluation_pipeline import EvaluationPipeline
+from app.pipelines.explanation_pipeline import ExplanationPipeline
 from app.pipelines.graph_pipeline import GraphPipeline
 from app.pipelines.ranking_pipeline import RankingPipeline
+from app.modules.exports import RankingExportService
 from app.pipelines.role_pipeline import RolePipeline
 from app.repositories import (
     CandidateRepository,
     EvaluationRepository,
+    ExplanationRepository,
     GraphRepository,
     RankingRepository,
     RoleDNARepository,
@@ -209,9 +218,59 @@ def evaluate_candidate(
     return EvaluationResponse(evaluation_id=evaluation.evaluation_id, evaluation=evaluation)
 
 
-@api_router.post("/generate-explanations", tags=["explanations"])
-def generate_explanations() -> None:
-    not_implemented("Explainability engine")
+@api_router.post("/generate-explanations", response_model=ExplanationResponse, tags=["explanations"])
+def generate_explanations(
+    request: GenerateExplanationRequest,
+    pipeline: ExplanationPipeline = Depends(get_explanation_pipeline),
+) -> ExplanationResponse:
+    try:
+        explanation = pipeline.run(
+            role_id=request.role_id,
+            candidate_id=request.candidate_id,
+            persona=request.persona,
+        )
+    except ValueError as exc:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(exc)) from exc
+    return ExplanationResponse(
+        candidate_id=explanation.candidate_id,
+        role_id=explanation.role_id,
+        explanation=explanation,
+    )
+
+
+@api_router.post("/export-rankings", tags=["exports"])
+def export_rankings(
+    request: ExportRankingsRequest,
+    export_service: RankingExportService = Depends(get_ranking_export_service),
+) -> Response:
+    content = export_service.export_rankings(
+        role_id=request.role_id,
+        persona=request.persona.value if request.persona is not None else None,
+    )
+    filename = f"talentgraph-rankings-{request.role_id}.xlsx"
+    return Response(
+        content=content,
+        media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        headers={"Content-Disposition": f'attachment; filename="{filename}"'},
+    )
+
+
+@api_router.get("/explanations/{candidate_id}", response_model=ExplanationResponse, tags=["explanations"])
+def get_explanation(
+    candidate_id: str,
+    repository: ExplanationRepository = Depends(get_explanation_repository),
+) -> ExplanationResponse:
+    explanation = repository.get_by_candidate_id(candidate_id)
+    if explanation is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Explanation for candidate {candidate_id} not found.",
+        )
+    return ExplanationResponse(
+        candidate_id=explanation.candidate_id,
+        role_id=explanation.role_id,
+        explanation=explanation,
+    )
 
 
 @api_router.get("/rankings/{role_id}", response_model=RankingResponse, tags=["ranking"])

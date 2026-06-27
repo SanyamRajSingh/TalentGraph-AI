@@ -26,17 +26,21 @@ The commit includes the README refresh and the Modules 1-5 project baseline.
 
 ## Last Completed Task
 
-Initial baseline commit after README refresh.
+Module 7: Dashboard Polish + XLSX Export + Submission Assets.
 
 Completed:
 
-- README now reflects the implemented Modules 1-5, current API endpoints,
-  in-memory persistence, backend test command, and unverified frontend build status.
-- Initial Git baseline commit was created.
+- Polished dashboard into a five-step workflow.
+- Added progress indicators, role radar, candidate metric cards, leaderboard, and counterfactual cards.
+- Added `POST /api/v1/export-rankings`.
+- Added XLSX generation using existing ranking, candidate, and explanation data.
+- Added `data/demo/` release dataset with one job and four resumes.
+- Added release docs: `RELEASE_NOTES.md`, `DEMO_SCRIPT.md`, and `SUBMISSION_CHECKLIST.md`.
+- Verified backend tests, frontend build, demo dataset flow, and XLSX export.
 
-Previous completed product module:
+Previous completed product task:
 
-Module 5: Ranking Engine + Hiring Personas.
+Module 6: Explainability + Counterfactual Engine.
 
 The latest implemented feature ranks candidates from existing `EvaluationBundle` records using persona-specific deterministic weights.
 
@@ -225,26 +229,26 @@ Working:
   - Candidate Digital Twin
   - Evaluation
   - Ranking
+  - Explanation
+  - XLSX Export
   - Knowledge Graph
   - Embedding Inspection
 
-Not verified recently:
+Verified:
 
-- Frontend build. Earlier `npm.cmd install` stalled in this environment; no successful frontend build was recorded.
+- `npm.cmd install`
+- `npm.cmd --workspace apps/web run build`
 
 ### Docker
 
-Dockerfiles and `docker-compose.yml` exist. They have not been the primary verification path.
+Dockerfiles and `docker-compose.yml` exist. `docker compose config` passes. Full startup is blocked locally because Docker Desktop is not running.
 
 ## Features Not Started
 
 Not implemented:
 
-- Explanation generation.
-- Counterfactual explanations.
 - Recruiter chat.
 - Recommendation engine.
-- XLSX export.
 - Final polished multi-page dashboard routing.
 - Authentication.
 - Real OpenAI integration.
@@ -306,13 +310,16 @@ GET  /api/v1/evaluations/{evaluation_id}
 ```text
 POST /api/v1/rank
 GET  /api/v1/rankings/{role_id}
+
+POST /api/v1/generate-explanations
+GET  /api/v1/explanations/{candidate_id}
+POST /api/v1/export-rankings
 ```
 
 ### Future/Legacy 501 Endpoints
 
 ```text
 POST /api/v1/rank-candidates
-POST /api/v1/generate-explanations
 GET  /api/v1/rankings
 ```
 
@@ -355,7 +362,7 @@ Skeleton only:
 Last backend test run:
 
 ```text
-45 passed, 1 warning
+53 passed, 1 warning
 ```
 
 Command:
@@ -372,10 +379,8 @@ StarletteDeprecationWarning from FastAPI TestClient/httpx compatibility.
 
 ## Known Issues and Technical Debt
 
-1. Frontend dependencies are not installed in the repo.
-   - `node_modules` does not exist.
-   - `package-lock.json` does not exist.
-   - Frontend build has not been verified.
+1. NPM audit reports 2 moderate dependency vulnerabilities after install.
+   - No dependency upgrades were applied because Module 6 scope did not include dependency remediation.
 
 2. In-memory storage resets on process restart.
    - Demo flow works only inside one API process lifetime.
@@ -395,8 +400,8 @@ StarletteDeprecationWarning from FastAPI TestClient/httpx compatibility.
 7. No real similarity scoring.
    - Embeddings are generated and stored for inspection only.
 
-8. No explanations/counterfactuals.
-    - `modules/recruiter_brain/reasoning_engine.py` and `counterfactual_engine.py` are placeholders.
+8. No recommendation labels.
+    - Module 6 intentionally avoids Hire/No Hire style recommendations.
 
 # START HERE FOR NEXT AI SESSION
 
@@ -408,5 +413,5 @@ StarletteDeprecationWarning from FastAPI TestClient/httpx compatibility.
 
 2. Inspect `apps/api/app/api/v1/router.py` for all live endpoints.
 3. Inspect `apps/api/app/api/v1/dependencies.py` to understand in-memory repository wiring.
-4. If asked for Module 6, first clarify which module is approved. Do not infer that explanations or exports are approved unless the user says so.
+4. Ask which next module or cleanup task is approved before continuing product scope.
 5. Before any major refactor, remember all current tests pass and the module-by-module architecture is intentional.

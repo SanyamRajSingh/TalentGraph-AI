@@ -214,7 +214,46 @@ Does not:
 
 - Evaluate candidates.
 - Generate recommendations.
-- Generate explanations.
+- Persist explanations.
+
+### ExplanationService
+
+File:
+
+```text
+apps/api/app/modules/explanations/service.py
+```
+
+Responsibilities:
+
+- Generate deterministic strengths, risks, and reasoning from role, candidate, evaluation, and ranking data.
+- Call `CounterfactualService`.
+- Persist `ExplanationProfile`.
+
+Does not:
+
+- Rank candidates.
+- Evaluate candidates.
+- Call LLMs.
+- Generate Hire/No Hire recommendations.
+
+### CounterfactualService
+
+File:
+
+```text
+apps/api/app/modules/explanations/counterfactual_service.py
+```
+
+Responsibilities:
+
+- Generate 1-3 actionable suggestions from evaluator score gaps.
+
+Does not:
+
+- Mutate candidate profiles.
+- Re-rank candidates.
+- Call LLMs.
 
 ## Class Responsibilities
 
@@ -382,7 +421,8 @@ POST /api/v1/rank
 7. Ranking depends on existing evaluations, not raw candidate/role objects.
 8. Embeddings are for inspection only. No similarity calculations exist.
 9. Evaluation produces match scores but not recommendations.
-10. Ranking produces ordered results but not explanations.
+10. Ranking produces ordered results but not recommendations.
+11. Explanations are generated separately from ranking outputs.
 
 ## Dependency Relationships
 
@@ -429,15 +469,12 @@ migrations/
 
 ### Explanations
 
-Use:
+Implemented in Module 6 under:
 
 ```text
-apps/api/app/modules/recruiter_brain/reasoning_engine.py
-apps/api/app/modules/recruiter_brain/counterfactual_engine.py
 apps/api/app/modules/explanations/
+apps/api/app/pipelines/explanation_pipeline.py
 ```
-
-These are currently placeholders.
 
 ### Export
 

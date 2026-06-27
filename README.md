@@ -2,56 +2,58 @@
 
 Explainable Hiring Intelligence Platform.
 
-TalentGraph AI is a hackathon-oriented hiring intelligence platform that evaluates
-candidates with structured role understanding, deterministic candidate profiles,
-semantic foundations, evaluator modules, and persona-aware ranking. The current
-implementation is a working local demo for Modules 1-5, not just scaffolding.
+TalentGraph AI is a v1.0 hackathon-ready hiring intelligence demo. It evaluates candidates through structured role understanding, deterministic candidate profiles, semantic foundations, evaluator modules, hiring personas, explanations, counterfactual improvements, and XLSX export.
 
 ## Implemented Modules
 
-1. **Role DNA Generator**
-   - Accepts job descriptions.
-   - Generates structured Role DNA profiles with skills, seniority, archetype,
-     work environment signals, reasoning, and confidence.
+1. **Role DNA Generator**: converts a job description into structured role requirements, skills, work signals, and reasoning.
+2. **Candidate Digital Twin Builder**: converts resume text into normalized candidate profiles, metrics, skills, projects, and timeline.
+3. **Knowledge Graph + Embedding Foundation**: builds graph snapshots and deterministic local embedding summaries for inspection.
+4. **Candidate Evaluation Engine**: scores candidate-role fit across technical, growth, domain, and culture dimensions.
+5. **Ranking Engine + Hiring Personas**: ranks evaluated candidates for Startup Founder, Enterprise Recruiter, and Research Team personas.
+6. **Explainability + Counterfactuals**: explains strengths, risks, reasoning, and actionable score-gap improvements.
+7. **Dashboard + XLSX Export + Demo Dataset**: provides a polished workflow UI, demo dataset, and ranking export workbook.
 
-2. **Candidate Digital Twin Builder**
-   - Accepts pasted resume text.
-   - Builds normalized candidate profiles with skills, technologies, projects,
-     timeline entries, growth signals, reasoning, and confidence.
+## Architecture
 
-3. **Talent Knowledge Graph and Embedding Foundation**
-   - Builds deterministic graph snapshots from role and candidate entities.
-   - Generates deterministic summaries and local embedding vectors for inspection.
+```mermaid
+flowchart LR
+  JD["Job Description"] --> Role["Role DNA Pipeline"]
+  Resume["Resume Text"] --> Twin["Candidate Twin Pipeline"]
+  Role --> Graph["Knowledge Graph"]
+  Twin --> Graph
+  Role --> Embed["Embedding Foundation"]
+  Twin --> Embed
+  Role --> Eval["Evaluation Pipeline"]
+  Twin --> Eval
+  Eval --> Rank["Ranking Pipeline + Personas"]
+  Rank --> Explain["Explanation Pipeline"]
+  Explain --> Export["XLSX Export"]
+  Rank --> Export
+  Graph --> Dashboard["Next.js Dashboard"]
+  Embed --> Dashboard
+  Export --> Dashboard
+```
 
-4. **Candidate Evaluation and Match Engine**
-   - Evaluates candidate-role fit across technical, growth, domain, and culture
-     dimensions.
-   - Calculates an overall match score using deterministic evaluator weights.
-
-5. **Ranking Engine and Hiring Personas**
-   - Ranks existing evaluation records under a selected hiring persona.
-   - Supports Startup Founder, Enterprise Recruiter, and Research Team personas.
-
-## Current Architecture
-
-The backend follows this pattern:
+Backend pattern:
 
 ```text
 API Router -> Pipeline -> Service -> Provider/Repository -> Domain Model
 ```
 
-Runtime behavior is wired in `apps/api/app/api/v1/dependencies.py`.
+The working demo uses deterministic local providers and in-memory repositories. PostgreSQL, Neo4j, ChromaDB, OpenAI, and sentence-transformer integrations are intentionally not active in v1.0.
 
-The working implementation uses:
+## Module Flow
 
-- FastAPI, Pydantic v2, and pytest for the backend.
-- Next.js 15, React 19, TypeScript, Tailwind CSS, and lucide-react for the frontend.
-- In-memory repositories for local demo and tests.
-- Deterministic local providers for role parsing, resume parsing, and embeddings.
-
-PostgreSQL, Neo4j, ChromaDB, OpenAI, and sentence-transformer integrations are
-present only as dependency/configuration boundaries or skeletons. They are not
-active in the current working flow.
+```text
+1. Generate Role DNA
+2. Generate Candidate Twins
+3. Build Knowledge Graph and Embedding Foundation
+4. Evaluate Candidates
+5. Rank Candidates by Hiring Persona
+6. View Explanations and Counterfactuals
+7. Export Rankings to XLSX
+```
 
 ## API Endpoints
 
@@ -88,138 +90,128 @@ POST /api/v1/generate-embeddings
 GET  /api/v1/embeddings/{collection_id}
 ```
 
-Evaluation and ranking:
+Evaluation, ranking, explanations, and export:
 
 ```text
 POST /api/v1/evaluate
 GET  /api/v1/evaluations/{evaluation_id}
 POST /api/v1/rank
 GET  /api/v1/rankings/{role_id}
+POST /api/v1/generate-explanations
+GET  /api/v1/explanations/{candidate_id}
+POST /api/v1/export-rankings
 ```
 
-Future or legacy endpoints currently return `501 Not Implemented`:
+Legacy placeholders returning `501`:
 
 ```text
 POST /api/v1/rank-candidates
-POST /api/v1/generate-explanations
 GET  /api/v1/rankings
 ```
 
-## Persistence
+## Setup
 
-The current working persistence layer is in-memory. Data is available only for
-the lifetime of the running API process.
-
-Functional repositories live under:
-
-```text
-apps/api/app/repositories/memory
-```
-
-Skeleton repositories exist for PostgreSQL, Neo4j, and ChromaDB, but they
-intentionally raise `NotImplementedError` until persistence hardening is approved.
-
-## Local Development
-
-Backend setup from the repository root:
+Backend:
 
 ```powershell
 python -m venv .venv
 .venv\Scripts\Activate.ps1
 python -m pip install -r requirements/dev.txt
 python -m pip install -e apps/api
-```
-
-Run the API:
-
-```powershell
 uvicorn app.main:app --app-dir apps/api --host 0.0.0.0 --port 8000 --reload
 ```
 
-API docs:
-
-```text
-http://localhost:8000/docs
-```
-
-Frontend setup:
+Frontend:
 
 ```powershell
 npm.cmd install
 npm.cmd --workspace apps/web run dev
 ```
 
-Frontend URL:
+URLs:
 
 ```text
-http://localhost:3000
+Frontend: http://localhost:3000
+Backend:  http://localhost:8000
+API docs: http://localhost:8000/docs
 ```
 
-PowerShell may block `npm.ps1`; use `npm.cmd` on Windows.
+Docker:
+
+```powershell
+docker compose up --build
+```
+
+## Demo Dataset
+
+Use `data/demo/`:
+
+```text
+data/demo/job-description.md
+data/demo/resumes/01-mira-shah.md
+data/demo/resumes/02-aarav-menon.md
+data/demo/resumes/03-kavya-rao.md
+data/demo/resumes/04-rahul-iyer.md
+```
 
 ## Verification
 
-Backend tests:
+Backend:
 
 ```powershell
 python -m pytest apps/api/tests
 ```
 
-Known-good command in the Codex runtime:
+Frontend:
 
 ```powershell
-C:\Users\sanya\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe -m pytest apps/api/tests
-```
-
-Current confirmed backend status:
-
-```text
-45 passed, 1 warning
-```
-
-The warning is a FastAPI/Starlette `TestClient` deprecation warning.
-
-Frontend build status:
-
-```text
-Not yet verified in this environment.
-```
-
-The next frontend verification step is:
-
-```powershell
-npm.cmd install
 npm.cmd --workspace apps/web run build
 ```
+
+Current release-candidate baseline:
+
+```text
+Backend: 53 passed, 1 warning
+Frontend: production build passing
+End-to-end demo dataset: verified
+XLSX export: verified
+```
+
+## Screenshots
+
+Recommended submission screenshots:
+
+- Workflow dashboard with all five main steps visible.
+- Role DNA radar chart and role metrics.
+- Candidate Twin timeline and metric cards.
+- Evaluation score cards.
+- Ranking leaderboard with persona selector.
+- Explanation panel with strengths, risks, and counterfactual cards.
+- XLSX export opened in Excel or spreadsheet viewer.
 
 ## Repository Layout
 
 ```text
 apps/
   api/             FastAPI backend
-  web/             Next.js frontend demo
+  web/             Next.js frontend dashboard
 packages/
   shared/          Shared TypeScript contracts
-docs/              Persistent project memory and handoff notes
 data/
-  jobs/            Demo job descriptions
-  resumes/         Demo markdown resumes
+  demo/            Release demo dataset
+  jobs/            Additional job descriptions
+  resumes/         Additional resume samples
   ontology/        Skill/domain/technology ontology seeds
-  structured/      Placeholder for structured artifacts
-  samples/         Placeholder for demo samples
-  seeds/           Placeholder for seed scripts
+docs/              Handoff, release, and demo documentation
 infra/
   docker/          API and web Dockerfiles
 requirements/      Python dependency groups
 ```
 
-## Not Implemented Yet
+## Known Limitations
 
-- Production database schema and migrations.
-- Real PostgreSQL, Neo4j, or Chroma persistence.
-- Real OpenAI calls or sentence-transformer embeddings.
-- Explanation generation and counterfactuals.
-- XLSX export.
-- Recruiter chat or autonomous agents.
-- Authentication.
-- Verified frontend production build.
+- Persistence is process-local and in-memory.
+- PostgreSQL, Neo4j, and Chroma repositories are skeleton boundaries only.
+- No real OpenAI calls or sentence-transformer model execution.
+- No authentication, recruiter chat, notifications, or autonomous agents.
+- No Hire/No Hire recommendation labels.

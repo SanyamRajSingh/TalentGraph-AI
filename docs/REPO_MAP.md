@@ -42,7 +42,7 @@ The current test path uses in-memory repositories and deterministic local provid
 
 ### `README.md`
 
-Project README. Updated after Module 5 to describe the working local demo, implemented Modules 1-5, API endpoints, in-memory persistence, test command, and unverified frontend build status.
+Project README. Updated for v1.0 to describe implemented Modules 1-7, architecture, module flow, API endpoints, setup, screenshots, and known limitations.
 
 ### `docker-compose.yml`
 
@@ -164,7 +164,7 @@ Creates the FastAPI application, configures CORS, exposes `/health`, and mounts 
 
 ### `apps/api/app/api/v1/router.py`
 
-Primary HTTP boundary. Contains implemented endpoints for Modules 1-5 and 501 placeholders for explicitly postponed future endpoints.
+Primary HTTP boundary. Contains implemented endpoints for Modules 1-7 and 501 placeholders for explicitly postponed future endpoints.
 
 Implemented endpoints:
 
@@ -184,11 +184,13 @@ Implemented endpoints:
 - `GET /api/v1/evaluations/{evaluation_id}`
 - `POST /api/v1/rank`
 - `GET /api/v1/rankings/{role_id}`
+- `POST /api/v1/generate-explanations`
+- `GET /api/v1/explanations/{candidate_id}`
+- `POST /api/v1/export-rankings`
 
 Known future or legacy placeholder endpoints:
 
 - `POST /api/v1/rank-candidates`
-- `POST /api/v1/generate-explanations`
 - `GET /api/v1/rankings`
 
 ### `apps/api/app/api/v1/dependencies.py`
@@ -228,7 +230,7 @@ Important files:
 - `vector.py`: summary and embedding record models.
 - `evaluation.py`: `EvaluatorResult`, `EvaluationBundle`.
 - `ranking.py`: `HiringPersona`, `RankingResult`.
-- `explanation.py`: future explanation/counterfactual domain boundary.
+- `explanation.py`: `ExplanationProfile`.
 
 ## `apps/api/app/modules/`
 
@@ -316,8 +318,6 @@ Persona and future recruiter intelligence boundary.
 Important files:
 
 - `persona_engine.py`: implemented for Module 5; provides persona weights.
-- `reasoning_engine.py`: future explanation reasoning boundary.
-- `counterfactual_engine.py`: future counterfactual boundary.
 
 ### `modules/scoring/`
 
@@ -326,11 +326,15 @@ Scoring extension boundary.
 Important files:
 
 - `weight_registry.py`: wraps persona weight access for ranking.
-- `score_calculator.py`: placeholder for future scoring engine; not active in Module 5.
 
 ### `modules/explanations/`
 
-Future module. Do not implement unless the user explicitly approves an explanation module.
+Module 6 explanation and counterfactual logic.
+
+Important files:
+
+- `service.py`: deterministic strengths, risks, reasoning, and profile persistence.
+- `counterfactual_service.py`: score-gap-driven improvement suggestions.
 
 ### `modules/exports/`
 
@@ -506,7 +510,7 @@ tests/
 Current known test status:
 
 ```text
-45 passed, 1 warning
+53 passed, 1 warning
 ```
 
 Run command:
@@ -540,7 +544,7 @@ apps/web/
 
 ### `apps/web/app/page.tsx`
 
-Single-page demo UI for Modules 1-5.
+Single-page dashboard UI for Modules 1-7.
 
 Current panels:
 
@@ -554,8 +558,7 @@ Current panels:
 Known frontend status:
 
 - Source files exist.
-- Frontend build has not been successfully verified in the current session.
-- Earlier `npm.cmd install` attempt stalled.
+- Frontend build has been successfully verified with `npm.cmd --workspace apps/web run build`.
 
 ### `apps/web/app/globals.css`
 

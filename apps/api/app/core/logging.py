@@ -2,10 +2,7 @@ import logging
 
 
 def configure_logging(level: str = "INFO") -> None:
-    """Configure application logging.
-
-    TODO: Add structured JSON logging before production/demo hardening.
-    """
+    """Configure application logging."""
 
     logging.basicConfig(
         level=level,
