@@ -1,0 +1,81 @@
+{
+  "candidate_id": "seed_backend_engineer_01",
+  "resume_id": null,
+  "resume_versions": [],
+  "name": "Mid-Level Backend Engineer #2",
+  "email": "mid-level.backendengineer2@talentgraph.dev",
+  "phone": "+1-555-100-1001",
+  "location": "New York, NY",
+  "skills": [
+    "Python",
+    "FastAPI",
+    "PostgreSQL",
+    "Redis",
+    "EHR Integration"
+  ],
+  "technologies": [],
+  "projects": [
+    "Led Healthcare platform rebuild (25% perf gain)",
+    "Shipped Backend Engineer tooling for distributed teams"
+  ],
+  "experiences": [],
+  "certifications": [],
+  "achievements": [],
+  "domains": [
+    "Healthcare"
+  ],
+  "timeline": [
+    {
+      "year": 2024,
+      "event": "Mid-Level Backend Engineer at TechStartup"
+    },
+    {
+      "year": 2023,
+      "event": "Mid-Level Backend Engineer at MegaCorp"
+    },
+    {
+      "year": 2022,
+      "event": "Mid-Level Backend Engineer at ScaleAI"
+    },
+    {
+      "year": 2021,
+      "event": "Mid-Level Backend Engineer at DevHouse"
+    },
+    {
+      "year": 2020,
+      "event": "Mid-Level Backend Engineer at InnovateCo"
+    }
+  ],
+  "evaluations_history": [],
+  "technical_depth": 58,
+  "learning_velocity": 82,
+  "leadership": 36,
+  "ownership": 94,
+  "communication": 64,
+  "project_complexity": 43,
+  "collaboration": 68,
+  "consistency": 50,
+  "leadership_readiness": 41,
+  "adaptability": 86,
+  "execution_speed": 71,
+  "business_acumen": 67,
+  "growth_stage": "Builder",
+  "strengths": [
+    "Strong Python skills",
+    "Healthcare domain expertise"
+  ],
+  "weaknesses": [
+    "Limited public-speaking experience"
+  ],
+  "growth_signals": [],
+  "leadership_signals": [],
+  "career_progression_score": 50,
+  "risk_profile": "Low",
+  "recommended_roles": [],
+  "success_environments": [],
+  "confidence": 58,
+  "reasoning": [],
+  "generated_at": "2026-06-27T16:40:08.987003Z",
+  "processing_time_ms": 0,
+  "version": "candidate-twin-v1"
+}

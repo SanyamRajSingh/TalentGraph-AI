@@ -1,0 +1,21 @@
+{
+  "role_id": "seed_job_4_0",
+  "role_title": "Mid Full Stack Engineer",
+  "domain": "Cybersecurity",
+  "seniority": "Mid",
+  "required_skills": [
+    "GraphQL",
+    "PostgreSQL",
+    "Node.js",
+    "React"
+  ],
+  "description": "We are looking for a Mid Full Stack Engineer to join our fast-paced startup.",
+  "technical_bar": 70,
+  "velocity_bar": 75,
+  "ownership_bar": 70,
+  "communication_bar": 70,
+  "mission_critical_skills": [
+    "Tailwind CSS",
+    "Node.js"
+  ]
+}

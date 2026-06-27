@@ -1,0 +1,43 @@
+{
+  "candidate_id": "seed_cand_7",
+  "name": "Candidate 7 (Lead Backend Engineer)",
+  "email": "cand7@example.com",
+  "phone": "+15550000000",
+  "experience": "12 years",
+  "skills": [
+    "PostgreSQL",
+    "Redis",
+    "Kubernetes",
+    "Python",
+    "Java",
+    "Docker"
+  ],
+  "projects": [
+    "Built a scalable system for Cybersecurity",
+    "Led initiative in backend engineer"
+  ],
+  "domains": [
+    "Cybersecurity"
+  ],
+  "strengths": [
+    "Deep Technical Expertise",
+    "Leadership"
+  ],
+  "weaknesses": [
+    "Delegation"
+  ],
+  "career_trajectory": "Emerging Leader",
+  "growth_stage": "Builder",
+  "risk_profile": "Low",
+  "timeline": [
+    {
+      "event": "Started",
+      "year": "2020",
+      "role": "Engineer"
+    }
+  ],
+  "technical_depth": 98,
+  "learning_velocity": 94,
+  "ownership": 100,
+  "communication": 90
+}

@@ -1,0 +1,65 @@
+{
+  "candidate_id": "seed_product_analyst_05",
+  "resume_id": null,
+  "resume_versions": [],
+  "name": "Junior Product Analyst #6",
+  "email": "junior.productanalyst6@talentgraph.dev",
+  "phone": "+1-555-103-1005",
+  "location": "London, UK",
+  "skills": [
+    "SQL",
+    "Tableau",
+    "A/B Testing",
+    "Excel",
+    "EHR Integration"
+  ],
+  "technologies": [],
+  "projects": [
+    "Led Healthcare platform rebuild (25% perf gain)",
+    "Shipped Product Analyst tooling for distributed teams"
+  ],
+  "experiences": [],
+  "certifications": [],
+  "achievements": [],
+  "domains": [
+    "Healthcare"
+  ],
+  "timeline": [
+    {
+      "year": 2024,
+      "event": "Junior Product Analyst at TechStartup"
+    }
+  ],
+  "evaluations_history": [],
+  "technical_depth": 41,
+  "learning_velocity": 93,
+  "leadership": 30,
+  "ownership": 100,
+  "communication": 89,
+  "project_complexity": 35,
+  "collaboration": 83,
+  "consistency": 50,
+  "leadership_readiness": 35,
+  "adaptability": 87,
+  "execution_speed": 84,
+  "business_acumen": 90,
+  "growth_stage": "Builder",
+  "strengths": [
+    "Strong SQL skills",
+    "Healthcare domain expertise"
+  ],
+  "weaknesses": [
+    "Limited public-speaking experience"
+  ],
+  "growth_signals": [],
+  "leadership_signals": [],
+  "career_progression_score": 50,
+  "risk_profile": "Low",
+  "recommended_roles": [],
+  "success_environments": [],
+  "confidence": 54,
+  "reasoning": [],
+  "generated_at": "2026-06-27T16:40:08.989543Z",
+  "processing_time_ms": 0,
+  "version": "candidate-twin-v1"
+}

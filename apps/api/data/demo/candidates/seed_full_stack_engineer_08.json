@@ -1,0 +1,85 @@
+{
+  "candidate_id": "seed_full_stack_engineer_08",
+  "resume_id": null,
+  "resume_versions": [],
+  "name": "Lead Full Stack Engineer #9",
+  "email": "lead.fullstackengineer9@talentgraph.dev",
+  "phone": "+1-555-104-1008",
+  "location": "San Francisco, CA",
+  "skills": [
+    "React",
+    "TypeScript",
+    "Node.js",
+    "FastAPI",
+    "AWS"
+  ],
+  "technologies": [],
+  "projects": [
+    "Led Cloud platform rebuild (25% perf gain)",
+    "Shipped Full Stack Engineer tooling for distributed teams"
+  ],
+  "experiences": [],
+  "certifications": [],
+  "achievements": [],
+  "domains": [
+    "Cloud"
+  ],
+  "timeline": [
+    {
+      "year": 2024,
+      "event": "Lead Full Stack Engineer at TechStartup"
+    },
+    {
+      "year": 2023,
+      "event": "Lead Full Stack Engineer at MegaCorp"
+    },
+    {
+      "year": 2022,
+      "event": "Lead Full Stack Engineer at ScaleAI"
+    },
+    {
+      "year": 2021,
+      "event": "Lead Full Stack Engineer at DevHouse"
+    },
+    {
+      "year": 2020,
+      "event": "Lead Full Stack Engineer at InnovateCo"
+    },
+    {
+      "year": 2019,
+      "event": "Lead Full Stack Engineer at BuildFast"
+    }
+  ],
+  "evaluations_history": [],
+  "technical_depth": 79,
+  "learning_velocity": 62,
+  "leadership": 59,
+  "ownership": 67,
+  "communication": 78,
+  "project_complexity": 70,
+  "collaboration": 66,
+  "consistency": 50,
+  "leadership_readiness": 64,
+  "adaptability": 66,
+  "execution_speed": 87,
+  "business_acumen": 51,
+  "growth_stage": "Emerging Leader",
+  "strengths": [
+    "Strong React skills",
+    "Cloud domain expertise"
+  ],
+  "weaknesses": [
+    "Limited public-speaking experience"
+  ],
+  "growth_signals": [],
+  "leadership_signals": [],
+  "career_progression_score": 50,
+  "risk_profile": "Medium",
+  "recommended_roles": [],
+  "success_environments": [],
+  "confidence": 66,
+  "reasoning": [],
+  "generated_at": "2026-06-27T16:40:08.990447Z",
+  "processing_time_ms": 0,
+  "version": "candidate-twin-v1"
+}

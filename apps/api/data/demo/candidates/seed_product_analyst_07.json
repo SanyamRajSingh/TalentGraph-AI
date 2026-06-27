@@ -1,0 +1,85 @@
+{
+  "candidate_id": "seed_product_analyst_07",
+  "resume_id": null,
+  "resume_versions": [],
+  "name": "Senior Product Analyst #8",
+  "email": "senior.productanalyst8@talentgraph.dev",
+  "phone": "+1-555-103-1007",
+  "location": "Toronto, Canada",
+  "skills": [
+    "SQL",
+    "Tableau",
+    "A/B Testing",
+    "Excel",
+    "LMS"
+  ],
+  "technologies": [],
+  "projects": [
+    "Led EdTech platform rebuild (25% perf gain)",
+    "Shipped Product Analyst tooling for distributed teams"
+  ],
+  "experiences": [],
+  "certifications": [],
+  "achievements": [],
+  "domains": [
+    "EdTech"
+  ],
+  "timeline": [
+    {
+      "year": 2024,
+      "event": "Senior Product Analyst at TechStartup"
+    },
+    {
+      "year": 2023,
+      "event": "Senior Product Analyst at MegaCorp"
+    },
+    {
+      "year": 2022,
+      "event": "Senior Product Analyst at ScaleAI"
+    },
+    {
+      "year": 2021,
+      "event": "Senior Product Analyst at DevHouse"
+    },
+    {
+      "year": 2020,
+      "event": "Senior Product Analyst at InnovateCo"
+    },
+    {
+      "year": 2019,
+      "event": "Senior Product Analyst at BuildFast"
+    }
+  ],
+  "evaluations_history": [],
+  "technical_depth": 90,
+  "learning_velocity": 73,
+  "leadership": 66,
+  "ownership": 86,
+  "communication": 81,
+  "project_complexity": 79,
+  "collaboration": 73,
+  "consistency": 50,
+  "leadership_readiness": 71,
+  "adaptability": 65,
+  "execution_speed": 92,
+  "business_acumen": 69,
+  "growth_stage": "Technical Specialist",
+  "strengths": [
+    "Strong SQL skills",
+    "EdTech domain expertise"
+  ],
+  "weaknesses": [
+    "Limited public-speaking experience"
+  ],
+  "growth_signals": [],
+  "leadership_signals": [],
+  "career_progression_score": 50,
+  "risk_profile": "Medium",
+  "recommended_roles": [],
+  "success_environments": [],
+  "confidence": 76,
+  "reasoning": [],
+  "generated_at": "2026-06-27T16:40:08.989674Z",
+  "processing_time_ms": 0,
+  "version": "candidate-twin-v1"
+}

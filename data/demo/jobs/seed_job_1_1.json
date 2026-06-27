@@ -1,0 +1,21 @@
+{
+  "role_id": "seed_job_1_1",
+  "role_title": "Senior ML Engineer",
+  "domain": "EdTech",
+  "seniority": "Senior",
+  "required_skills": [
+    "FastAPI",
+    "PyTorch",
+    "TensorFlow",
+    "CUDA"
+  ],
+  "description": "We are looking for a Senior ML Engineer to join our fast-paced startup.",
+  "technical_bar": 85,
+  "velocity_bar": 75,
+  "ownership_bar": 85,
+  "communication_bar": 70,
+  "mission_critical_skills": [
+    "FastAPI",
+    "MLflow"
+  ]
+}

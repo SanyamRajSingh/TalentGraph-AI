@@ -1,0 +1,43 @@
+{
+  "candidate_id": "seed_cand_26",
+  "name": "Candidate 26 (Mid Data Scientist)",
+  "email": "cand26@example.com",
+  "phone": "+15550000000",
+  "experience": "5 years",
+  "skills": [
+    "A/B Testing",
+    "XGBoost",
+    "SQL",
+    "Stats",
+    "Pandas",
+    "R"
+  ],
+  "projects": [
+    "Built a scalable system for E-commerce",
+    "Led initiative in data scientist"
+  ],
+  "domains": [
+    "E-commerce"
+  ],
+  "strengths": [
+    "Leadership",
+    "Problem Solver"
+  ],
+  "weaknesses": [
+    "Context Switching"
+  ],
+  "career_trajectory": "Rapid Promotion Track",
+  "growth_stage": "Explorer",
+  "risk_profile": "Low",
+  "timeline": [
+    {
+      "event": "Started",
+      "year": "2020",
+      "role": "Engineer"
+    }
+  ],
+  "technical_depth": 67,
+  "learning_velocity": 73,
+  "ownership": 60,
+  "communication": 69
+}

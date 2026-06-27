@@ -1,0 +1,85 @@
+{
+  "candidate_id": "seed_backend_engineer_03",
+  "resume_id": null,
+  "resume_versions": [],
+  "name": "Lead Backend Engineer #4",
+  "email": "lead.backendengineer4@talentgraph.dev",
+  "phone": "+1-555-100-1003",
+  "location": "Seattle, WA",
+  "skills": [
+    "Python",
+    "FastAPI",
+    "PostgreSQL",
+    "Redis",
+    "LMS"
+  ],
+  "technologies": [],
+  "projects": [
+    "Led EdTech platform rebuild (25% perf gain)",
+    "Shipped Backend Engineer tooling for distributed teams"
+  ],
+  "experiences": [],
+  "certifications": [],
+  "achievements": [],
+  "domains": [
+    "EdTech"
+  ],
+  "timeline": [
+    {
+      "year": 2024,
+      "event": "Lead Backend Engineer at TechStartup"
+    },
+    {
+      "year": 2023,
+      "event": "Lead Backend Engineer at MegaCorp"
+    },
+    {
+      "year": 2022,
+      "event": "Lead Backend Engineer at ScaleAI"
+    },
+    {
+      "year": 2021,
+      "event": "Lead Backend Engineer at DevHouse"
+    },
+    {
+      "year": 2020,
+      "event": "Lead Backend Engineer at InnovateCo"
+    },
+    {
+      "year": 2019,
+      "event": "Lead Backend Engineer at BuildFast"
+    }
+  ],
+  "evaluations_history": [],
+  "technical_depth": 70,
+  "learning_velocity": 95,
+  "leadership": 58,
+  "ownership": 100,
+  "communication": 75,
+  "project_complexity": 83,
+  "collaboration": 78,
+  "consistency": 50,
+  "leadership_readiness": 63,
+  "adaptability": 60,
+  "execution_speed": 87,
+  "business_acumen": 59,
+  "growth_stage": "Emerging Leader",
+  "strengths": [
+    "Strong Python skills",
+    "EdTech domain expertise"
+  ],
+  "weaknesses": [
+    "Limited public-speaking experience"
+  ],
+  "growth_signals": [],
+  "leadership_signals": [],
+  "career_progression_score": 50,
+  "risk_profile": "Low",
+  "recommended_roles": [],
+  "success_environments": [],
+  "confidence": 74,
+  "reasoning": [],
+  "generated_at": "2026-06-27T16:40:08.987180Z",
+  "processing_time_ms": 0,
+  "version": "candidate-twin-v1"
+}

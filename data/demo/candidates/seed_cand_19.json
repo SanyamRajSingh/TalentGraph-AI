@@ -1,0 +1,43 @@
+{
+  "candidate_id": "seed_cand_19",
+  "name": "Candidate 19 (Lead ML Engineer)",
+  "email": "cand19@example.com",
+  "phone": "+15550000000",
+  "experience": "11 years",
+  "skills": [
+    "FastAPI",
+    "TensorFlow",
+    "CUDA",
+    "PyTorch",
+    "Hugging Face",
+    "Python"
+  ],
+  "projects": [
+    "Built a scalable system for AI/ML",
+    "Led initiative in ml engineer"
+  ],
+  "domains": [
+    "AI/ML"
+  ],
+  "strengths": [
+    "Strong Communicator",
+    "Leadership"
+  ],
+  "weaknesses": [
+    "Context Switching"
+  ],
+  "career_trajectory": "Emerging Leader",
+  "growth_stage": "Builder",
+  "risk_profile": "Low",
+  "timeline": [
+    {
+      "event": "Started",
+      "year": "2020",
+      "role": "Engineer"
+    }
+  ],
+  "technical_depth": 96,
+  "learning_velocity": 91,
+  "ownership": 100,
+  "communication": 90
+}

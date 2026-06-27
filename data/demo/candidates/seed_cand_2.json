@@ -1,0 +1,43 @@
+{
+  "candidate_id": "seed_cand_2",
+  "name": "Candidate 2 (Intern Backend Engineer)",
+  "email": "cand2@example.com",
+  "phone": "+15550000000",
+  "experience": "1 years",
+  "skills": [
+    "Kubernetes",
+    "Python",
+    "gRPC",
+    "AWS",
+    "PostgreSQL",
+    "Docker"
+  ],
+  "projects": [
+    "Built a scalable system for AI/ML",
+    "Led initiative in backend engineer"
+  ],
+  "domains": [
+    "AI/ML"
+  ],
+  "strengths": [
+    "Deep Technical Expertise",
+    "Strong Communicator"
+  ],
+  "weaknesses": [
+    "Public Speaking"
+  ],
+  "career_trajectory": "Cross-Functional Contributor",
+  "growth_stage": "Explorer",
+  "risk_profile": "Medium",
+  "timeline": [
+    {
+      "event": "Started",
+      "year": "2020",
+      "role": "Engineer"
+    }
+  ],
+  "technical_depth": 46,
+  "learning_velocity": 71,
+  "ownership": 42,
+  "communication": 79
+}

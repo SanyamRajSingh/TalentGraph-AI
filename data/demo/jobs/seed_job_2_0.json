@@ -1,0 +1,21 @@
+{
+  "role_id": "seed_job_2_0",
+  "role_title": "Mid Data Scientist",
+  "domain": "SaaS",
+  "seniority": "Mid",
+  "required_skills": [
+    "R",
+    "XGBoost",
+    "A/B Testing",
+    "Tableau"
+  ],
+  "description": "We are looking for a Mid Data Scientist to join our fast-paced startup.",
+  "technical_bar": 70,
+  "velocity_bar": 75,
+  "ownership_bar": 70,
+  "communication_bar": 70,
+  "mission_critical_skills": [
+    "NumPy",
+    "SQL"
+  ]
+}

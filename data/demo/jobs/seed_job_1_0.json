@@ -1,0 +1,21 @@
+{
+  "role_id": "seed_job_1_0",
+  "role_title": "Mid ML Engineer",
+  "domain": "Cloud",
+  "seniority": "Mid",
+  "required_skills": [
+    "scikit-learn",
+    "Python",
+    "CUDA",
+    "Hugging Face"
+  ],
+  "description": "We are looking for a Mid ML Engineer to join our fast-paced startup.",
+  "technical_bar": 70,
+  "velocity_bar": 75,
+  "ownership_bar": 70,
+  "communication_bar": 70,
+  "mission_critical_skills": [
+    "Hugging Face",
+    "scikit-learn"
+  ]
+}

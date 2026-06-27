@@ -1,0 +1,85 @@
+{
+  "candidate_id": "seed_ml_engineer_09",
+  "resume_id": null,
+  "resume_versions": [],
+  "name": "Principal ML Engineer #10",
+  "email": "principal.mlengineer10@talentgraph.dev",
+  "phone": "+1-555-101-1009",
+  "location": "New York, NY",
+  "skills": [
+    "Python",
+    "PyTorch",
+    "MLflow",
+    "Kubeflow",
+    "EHR Integration"
+  ],
+  "technologies": [],
+  "projects": [
+    "Led Healthcare platform rebuild (25% perf gain)",
+    "Shipped ML Engineer tooling for distributed teams"
+  ],
+  "experiences": [],
+  "certifications": [],
+  "achievements": [],
+  "domains": [
+    "Healthcare"
+  ],
+  "timeline": [
+    {
+      "year": 2024,
+      "event": "Principal ML Engineer at TechStartup"
+    },
+    {
+      "year": 2023,
+      "event": "Principal ML Engineer at MegaCorp"
+    },
+    {
+      "year": 2022,
+      "event": "Principal ML Engineer at ScaleAI"
+    },
+    {
+      "year": 2021,
+      "event": "Principal ML Engineer at DevHouse"
+    },
+    {
+      "year": 2020,
+      "event": "Principal ML Engineer at InnovateCo"
+    },
+    {
+      "year": 2019,
+      "event": "Principal ML Engineer at BuildFast"
+    }
+  ],
+  "evaluations_history": [],
+  "technical_depth": 100,
+  "learning_velocity": 88,
+  "leadership": 95,
+  "ownership": 100,
+  "communication": 73,
+  "project_complexity": 100,
+  "collaboration": 95,
+  "consistency": 50,
+  "leadership_readiness": 100,
+  "adaptability": 75,
+  "execution_speed": 85,
+  "business_acumen": 58,
+  "growth_stage": "Technical Specialist",
+  "strengths": [
+    "Strong Python skills",
+    "Healthcare domain expertise"
+  ],
+  "weaknesses": [
+    "Limited public-speaking experience"
+  ],
+  "growth_signals": [],
+  "leadership_signals": [],
+  "career_progression_score": 50,
+  "risk_profile": "Low",
+  "recommended_roles": [],
+  "success_environments": [],
+  "confidence": 94,
+  "reasoning": [],
+  "generated_at": "2026-06-27T16:40:08.988244Z",
+  "processing_time_ms": 0,
+  "version": "candidate-twin-v1"
+}

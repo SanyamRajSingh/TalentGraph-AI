@@ -1,0 +1,65 @@
+{
+  "candidate_id": "seed_backend_engineer_05",
+  "resume_id": null,
+  "resume_versions": [],
+  "name": "Junior Backend Engineer #6",
+  "email": "junior.backendengineer6@talentgraph.dev",
+  "phone": "+1-555-100-1005",
+  "location": "London, UK",
+  "skills": [
+    "Python",
+    "FastAPI",
+    "PostgreSQL",
+    "Redis",
+    "Pen Testing"
+  ],
+  "technologies": [],
+  "projects": [
+    "Led Cybersecurity platform rebuild (25% perf gain)",
+    "Shipped Backend Engineer tooling for distributed teams"
+  ],
+  "experiences": [],
+  "certifications": [],
+  "achievements": [],
+  "domains": [
+    "Cybersecurity"
+  ],
+  "timeline": [
+    {
+      "year": 2024,
+      "event": "Junior Backend Engineer at TechStartup"
+    }
+  ],
+  "evaluations_history": [],
+  "technical_depth": 33,
+  "learning_velocity": 83,
+  "leadership": 21,
+  "ownership": 93,
+  "communication": 83,
+  "project_complexity": 22,
+  "collaboration": 92,
+  "consistency": 50,
+  "leadership_readiness": 26,
+  "adaptability": 94,
+  "execution_speed": 63,
+  "business_acumen": 63,
+  "growth_stage": "Builder",
+  "strengths": [
+    "Strong Python skills",
+    "Cybersecurity domain expertise"
+  ],
+  "weaknesses": [
+    "Limited public-speaking experience"
+  ],
+  "growth_signals": [],
+  "leadership_signals": [],
+  "career_progression_score": 50,
+  "risk_profile": "Low",
+  "recommended_roles": [],
+  "success_environments": [],
+  "confidence": 45,
+  "reasoning": [],
+  "generated_at": "2026-06-27T16:40:08.987314Z",
+  "processing_time_ms": 0,
+  "version": "candidate-twin-v1"
+}

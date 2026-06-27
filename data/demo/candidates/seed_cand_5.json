@@ -1,0 +1,43 @@
+{
+  "candidate_id": "seed_cand_5",
+  "name": "Candidate 5 (Senior Backend Engineer)",
+  "email": "cand5@example.com",
+  "phone": "+15550000000",
+  "experience": "6 years",
+  "skills": [
+    "Kubernetes",
+    "Redis",
+    "AWS",
+    "Kafka",
+    "Docker",
+    "gRPC"
+  ],
+  "projects": [
+    "Built a scalable system for EdTech",
+    "Led initiative in backend engineer"
+  ],
+  "domains": [
+    "EdTech"
+  ],
+  "strengths": [
+    "Problem Solver",
+    "Fast Learner"
+  ],
+  "weaknesses": [
+    "Impatience with Process"
+  ],
+  "career_trajectory": "Steady Specialist",
+  "growth_stage": "Builder",
+  "risk_profile": "Low",
+  "timeline": [
+    {
+      "event": "Started",
+      "year": "2020",
+      "role": "Engineer"
+    }
+  ],
+  "technical_depth": 73,
+  "learning_velocity": 93,
+  "ownership": 65,
+  "communication": 71
+}

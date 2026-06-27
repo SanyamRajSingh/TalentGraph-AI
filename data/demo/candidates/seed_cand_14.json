@@ -1,0 +1,43 @@
+{
+  "candidate_id": "seed_cand_14",
+  "name": "Candidate 14 (Junior ML Engineer)",
+  "email": "cand14@example.com",
+  "phone": "+15550000000",
+  "experience": "3 years",
+  "skills": [
+    "scikit-learn",
+    "Hugging Face",
+    "Ray",
+    "MLflow",
+    "CUDA",
+    "PyTorch"
+  ],
+  "projects": [
+    "Built a scalable system for AI/ML",
+    "Led initiative in ml engineer"
+  ],
+  "domains": [
+    "AI/ML"
+  ],
+  "strengths": [
+    "Deep Technical Expertise",
+    "Strong Communicator"
+  ],
+  "weaknesses": [
+    "Delegation"
+  ],
+  "career_trajectory": "Steady Specialist",
+  "growth_stage": "Explorer",
+  "risk_profile": "Medium",
+  "timeline": [
+    {
+      "event": "Started",
+      "year": "2020",
+      "role": "Engineer"
+    }
+  ],
+  "technical_depth": 54,
+  "learning_velocity": 79,
+  "ownership": 57,
+  "communication": 67
+}

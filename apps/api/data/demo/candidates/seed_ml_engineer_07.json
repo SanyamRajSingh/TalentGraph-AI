@@ -1,0 +1,85 @@
+{
+  "candidate_id": "seed_ml_engineer_07",
+  "resume_id": null,
+  "resume_versions": [],
+  "name": "Senior ML Engineer #8",
+  "email": "senior.mlengineer8@talentgraph.dev",
+  "phone": "+1-555-101-1007",
+  "location": "Toronto, Canada",
+  "skills": [
+    "Python",
+    "PyTorch",
+    "MLflow",
+    "Kubeflow",
+    "ADAS"
+  ],
+  "technologies": [],
+  "projects": [
+    "Led Automotive platform rebuild (25% perf gain)",
+    "Shipped ML Engineer tooling for distributed teams"
+  ],
+  "experiences": [],
+  "certifications": [],
+  "achievements": [],
+  "domains": [
+    "Automotive"
+  ],
+  "timeline": [
+    {
+      "year": 2024,
+      "event": "Senior ML Engineer at TechStartup"
+    },
+    {
+      "year": 2023,
+      "event": "Senior ML Engineer at MegaCorp"
+    },
+    {
+      "year": 2022,
+      "event": "Senior ML Engineer at ScaleAI"
+    },
+    {
+      "year": 2021,
+      "event": "Senior ML Engineer at DevHouse"
+    },
+    {
+      "year": 2020,
+      "event": "Senior ML Engineer at InnovateCo"
+    },
+    {
+      "year": 2019,
+      "event": "Senior ML Engineer at BuildFast"
+    }
+  ],
+  "evaluations_history": [],
+  "technical_depth": 77,
+  "learning_velocity": 80,
+  "leadership": 56,
+  "ownership": 93,
+  "communication": 94,
+  "project_complexity": 89,
+  "collaboration": 93,
+  "consistency": 50,
+  "leadership_readiness": 61,
+  "adaptability": 74,
+  "execution_speed": 83,
+  "business_acumen": 76,
+  "growth_stage": "Technical Specialist",
+  "strengths": [
+    "Strong Python skills",
+    "Automotive domain expertise"
+  ],
+  "weaknesses": [
+    "Limited public-speaking experience"
+  ],
+  "growth_signals": [],
+  "leadership_signals": [],
+  "career_progression_score": 50,
+  "risk_profile": "Low",
+  "recommended_roles": [],
+  "success_environments": [],
+  "confidence": 71,
+  "reasoning": [],
+  "generated_at": "2026-06-27T16:40:08.988108Z",
+  "processing_time_ms": 0,
+  "version": "candidate-twin-v1"
+}

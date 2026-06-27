@@ -1,0 +1,43 @@
+{
+  "candidate_id": "seed_cand_30",
+  "name": "Candidate 30 (Lead Data Scientist)",
+  "email": "cand30@example.com",
+  "phone": "+15550000000",
+  "experience": "10 years",
+  "skills": [
+    "SQL",
+    "Pandas",
+    "Python",
+    "NumPy",
+    "XGBoost",
+    "Stats"
+  ],
+  "projects": [
+    "Built a scalable system for Cloud",
+    "Led initiative in data scientist"
+  ],
+  "domains": [
+    "Cloud"
+  ],
+  "strengths": [
+    "Strong Communicator",
+    "Product Mindset"
+  ],
+  "weaknesses": [
+    "Over-engineers solutions"
+  ],
+  "career_trajectory": "Rapid Promotion Track",
+  "growth_stage": "Builder",
+  "risk_profile": "Low",
+  "timeline": [
+    {
+      "event": "Started",
+      "year": "2020",
+      "role": "Engineer"
+    }
+  ],
+  "technical_depth": 89,
+  "learning_velocity": 67,
+  "ownership": 95,
+  "communication": 86
+}

@@ -1,0 +1,85 @@
+{
+  "candidate_id": "seed_ml_engineer_08",
+  "resume_id": null,
+  "resume_versions": [],
+  "name": "Lead ML Engineer #9",
+  "email": "lead.mlengineer9@talentgraph.dev",
+  "phone": "+1-555-101-1008",
+  "location": "San Francisco, CA",
+  "skills": [
+    "Python",
+    "PyTorch",
+    "MLflow",
+    "Kubeflow",
+    "Payments"
+  ],
+  "technologies": [],
+  "projects": [
+    "Led Fintech platform rebuild (25% perf gain)",
+    "Shipped ML Engineer tooling for distributed teams"
+  ],
+  "experiences": [],
+  "certifications": [],
+  "achievements": [],
+  "domains": [
+    "Fintech"
+  ],
+  "timeline": [
+    {
+      "year": 2024,
+      "event": "Lead ML Engineer at TechStartup"
+    },
+    {
+      "year": 2023,
+      "event": "Lead ML Engineer at MegaCorp"
+    },
+    {
+      "year": 2022,
+      "event": "Lead ML Engineer at ScaleAI"
+    },
+    {
+      "year": 2021,
+      "event": "Lead ML Engineer at DevHouse"
+    },
+    {
+      "year": 2020,
+      "event": "Lead ML Engineer at InnovateCo"
+    },
+    {
+      "year": 2019,
+      "event": "Lead ML Engineer at BuildFast"
+    }
+  ],
+  "evaluations_history": [],
+  "technical_depth": 83,
+  "learning_velocity": 55,
+  "leadership": 72,
+  "ownership": 64,
+  "communication": 80,
+  "project_complexity": 88,
+  "collaboration": 70,
+  "consistency": 50,
+  "leadership_readiness": 77,
+  "adaptability": 80,
+  "execution_speed": 76,
+  "business_acumen": 80,
+  "growth_stage": "Emerging Leader",
+  "strengths": [
+    "Strong Python skills",
+    "Fintech domain expertise"
+  ],
+  "weaknesses": [
+    "Limited public-speaking experience"
+  ],
+  "growth_signals": [],
+  "leadership_signals": [],
+  "career_progression_score": 50,
+  "risk_profile": "High",
+  "recommended_roles": [],
+  "success_environments": [],
+  "confidence": 70,
+  "reasoning": [],
+  "generated_at": "2026-06-27T16:40:08.988172Z",
+  "processing_time_ms": 0,
+  "version": "candidate-twin-v1"
+}

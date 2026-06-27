@@ -1,0 +1,21 @@
+{
+  "role_id": "seed_job_2_1",
+  "role_title": "Senior Data Scientist",
+  "domain": "AI/ML",
+  "seniority": "Senior",
+  "required_skills": [
+    "SQL",
+    "XGBoost",
+    "Tableau",
+    "Pandas"
+  ],
+  "description": "We are looking for a Senior Data Scientist to join our fast-paced startup.",
+  "technical_bar": 85,
+  "velocity_bar": 75,
+  "ownership_bar": 85,
+  "communication_bar": 70,
+  "mission_critical_skills": [
+    "Stats",
+    "SQL"
+  ]
+}

@@ -1,82 +1,205 @@
-from copy import copy
 from io import BytesIO
-
+from copy import copy
 from openpyxl import Workbook
-from openpyxl.styles import Font, PatternFill
+from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
+from openpyxl.utils import get_column_letter
 from openpyxl.worksheet.worksheet import Worksheet
 
 from app.repositories.candidate_repository import CandidateRepository
 from app.repositories.explanation_repository import ExplanationRepository
 from app.repositories.ranking_repository import RankingRepository
-
+from app.repositories.evaluation_repository import EvaluationRepository
 
 class RankingExportService:
-    """Builds XLSX exports from existing ranking and explanation data."""
-
-    HEADERS = ["Rank", "Candidate Name", "Score", "Confidence", "Strengths", "Risks"]
+    """Builds comprehensive XLSX exports from existing data."""
 
     def __init__(
         self,
         ranking_repository: RankingRepository,
         candidate_repository: CandidateRepository,
         explanation_repository: ExplanationRepository,
+        evaluation_repository: EvaluationRepository = None,
     ) -> None:
         self.ranking_repository = ranking_repository
         self.candidate_repository = candidate_repository
         self.explanation_repository = explanation_repository
+        self.evaluation_repository = evaluation_repository
 
     def export_rankings(self, role_id: str, persona: str | None = None) -> bytes:
         rankings = self.ranking_repository.list_by_role_id(role_id, persona=persona)
+        
         workbook = Workbook()
-        sheet = workbook.active
-        sheet.title = "Rankings"
-        self._write_header(sheet)
+        
+        # 1. Executive Summary
+        ws_exec = workbook.active
+        ws_exec.title = "Executive Summary"
+        self._build_executive_summary(ws_exec, role_id, rankings)
 
-        for row_index, ranking in enumerate(rankings, start=2):
-            candidate = self.candidate_repository.get_by_candidate_id(ranking.candidate_id)
-            explanation = self.explanation_repository.get_by_candidate_id(ranking.candidate_id)
-            sheet.cell(row=row_index, column=1, value=ranking.rank)
-            sheet.cell(row=row_index, column=2, value=candidate.name if candidate else ranking.candidate_id)
-            sheet.cell(row=row_index, column=3, value=ranking.score)
-            sheet.cell(row=row_index, column=4, value=ranking.confidence)
-            sheet.cell(row=row_index, column=5, value="\n".join(explanation.strengths) if explanation else "")
-            sheet.cell(row=row_index, column=6, value="\n".join(explanation.risks) if explanation else "")
+        # 2. Rankings
+        ws_rank = workbook.create_sheet(title="Rankings")
+        self._build_rankings(ws_rank, rankings)
 
-        self._format(sheet)
-        self._autosize_columns(sheet)
+        # 3. Evaluation Breakdown
+        ws_eval = workbook.create_sheet(title="Evaluation Breakdown")
+        self._build_evaluation_breakdown(ws_eval, rankings)
+
+        # 4. Explanations
+        ws_exp = workbook.create_sheet(title="Explanations")
+        self._build_explanations(ws_exp, rankings)
+
+        # 5. Candidate Profiles
+        ws_prof = workbook.create_sheet(title="Candidate Profiles")
+        self._build_candidate_profiles(ws_prof, rankings)
+
         buffer = BytesIO()
         workbook.save(buffer)
         return buffer.getvalue()
 
-    def _write_header(self, sheet: Worksheet) -> None:
-        for column_index, header in enumerate(self.HEADERS, start=1):
-            cell = sheet.cell(row=1, column=column_index, value=header)
+    def _apply_header_style(self, sheet: Worksheet, headers: list[str]):
+        sheet.append(headers)
+        for col_idx in range(1, len(headers) + 1):
+            cell = sheet.cell(row=1, column=col_idx)
             cell.font = Font(bold=True, color="FFFFFF")
-            cell.fill = PatternFill("solid", fgColor="1F4E79")
-
-    def _format(self, sheet: Worksheet) -> None:
-        # Enable AutoFilter
-        sheet.auto_filter.ref = sheet.dimensions
+            cell.fill = PatternFill("solid", fgColor="2C3E50")
+            cell.alignment = Alignment(horizontal="center", vertical="center")
+        
+        # Freeze top row
         sheet.freeze_panes = "A2"
+        # Add auto filter
+        sheet.auto_filter.ref = sheet.dimensions
 
-        for row in sheet.iter_rows(min_row=2, max_col=6):
-            for cell in row:
-                alignment = copy(cell.alignment)
-                alignment.wrap_text = True
-                alignment.vertical = "top"
-                cell.alignment = alignment
-
-    def _autosize_columns(self, sheet: Worksheet) -> None:
+    def _format_sheet(self, sheet: Worksheet):
+        # Auto size
         for col in sheet.columns:
             max_length = 0
-            column = col[0].column_letter # Get the column name
+            column = col[0].column_letter
             for cell in col:
                 try:
-                    if len(str(cell.value)) > max_length:
-                        # For cells with newlines, consider the max line length
+                    if cell.value:
                         lines = str(cell.value).split("\n")
                         max_length = max(max_length, max(len(line) for line in lines))
                 except:
                     pass
-            adjusted_width = min((max_length + 2), 60) # Max width 60
-            sheet.column_dimensions[column].width = adjusted_width
+            sheet.column_dimensions[column].width = min(max_length + 2, 80)
+
+        # Top align and wrap text for all cells
+        for row in sheet.iter_rows(min_row=2):
+            for i, cell in enumerate(row):
+                cell.alignment = Alignment(vertical="top", wrap_text=True)
+                # Alternating row colors
+                if cell.row % 2 == 0:
+                    cell.fill = PatternFill("solid", fgColor="F8F9FA")
+                else:
+                    cell.fill = PatternFill("solid", fgColor="FFFFFF")
+
+    def _color_score(self, cell, score):
+        if not isinstance(score, (int, float)):
+            return
+        if score >= 80:
+            cell.fill = PatternFill("solid", fgColor="D4EDDA") # Green
+            cell.font = Font(color="155724")
+        elif score >= 50:
+            cell.fill = PatternFill("solid", fgColor="FFF3CD") # Yellow
+            cell.font = Font(color="856404")
+        else:
+            cell.fill = PatternFill("solid", fgColor="F8D7DA") # Red
+            cell.font = Font(color="721C24")
+
+    def _build_executive_summary(self, sheet, role_id, rankings):
+        sheet.append(["TalentGraph AI - Executive Summary"])
+        sheet.cell(1,1).font = Font(bold=True, size=16)
+        sheet.append([])
+        sheet.append(["Role ID", role_id])
+        sheet.append(["Total Candidates Evaluated", len(rankings)])
+        sheet.append([])
+        
+        headers = ["Top Candidates", "Match Score", "Recommendation"]
+        self._apply_header_style(sheet, headers)
+        
+        for r in rankings[:10]:
+            cand = self.candidate_repository.get_by_candidate_id(r.candidate_id)
+            name = cand.name if cand else r.candidate_id
+            rec = "Strong Hire" if r.confidence >= 75 else "Hire" if r.confidence >= 55 else "Growth Hire" if r.confidence >= 40 else "Borderline"
+            sheet.append([name, r.score, rec])
+            self._color_score(sheet.cell(sheet.max_row, 2), r.score)
+
+        self._format_sheet(sheet)
+
+    def _build_rankings(self, sheet, rankings):
+        headers = ["Rank", "Candidate", "Match Score", "Confidence", "Recommendation", "Risk Profile", "Growth Stage"]
+        self._apply_header_style(sheet, headers)
+        
+        for r in rankings:
+            cand = self.candidate_repository.get_by_candidate_id(r.candidate_id)
+            name = cand.name if cand else r.candidate_id
+            rec = "Strong Hire" if r.confidence >= 75 else "Hire" if r.confidence >= 55 else "Growth Hire" if r.confidence >= 40 else "Borderline"
+            stage = cand.growth_stage if cand else "Unknown"
+            risk = "Low" if r.confidence >= 75 else "Medium" if r.confidence >= 50 else "High"
+            
+            sheet.append([r.rank, name, r.score, r.confidence, rec, risk, stage])
+            self._color_score(sheet.cell(sheet.max_row, 3), r.score)
+            self._color_score(sheet.cell(sheet.max_row, 4), r.confidence)
+
+        self._format_sheet(sheet)
+
+    def _build_evaluation_breakdown(self, sheet, rankings):
+        headers = ["Candidate", "Technical Depth", "Learning Velocity", "Leadership", "Ownership", "Communication", "Project Complexity", "Collaboration"]
+        self._apply_header_style(sheet, headers)
+        
+        for r in rankings:
+            cand = self.candidate_repository.get_by_candidate_id(r.candidate_id)
+            if cand:
+                name = cand.name
+                row = [name, cand.technical_depth, cand.learning_velocity, cand.leadership, cand.ownership, cand.communication, cand.project_complexity, cand.collaboration]
+                sheet.append(row)
+                for c in range(2, 9):
+                    self._color_score(sheet.cell(sheet.max_row, c), row[c-1])
+            else:
+                sheet.append([r.candidate_id, "", "", "", "", "", "", ""])
+
+        self._format_sheet(sheet)
+
+    def _build_explanations(self, sheet, rankings):
+        headers = ["Candidate", "Strengths", "Weaknesses", "Explanations", "Counterfactual Improvements"]
+        self._apply_header_style(sheet, headers)
+        
+        for r in rankings:
+            cand = self.candidate_repository.get_by_candidate_id(r.candidate_id)
+            name = cand.name if cand else r.candidate_id
+            exp = self.explanation_repository.get_by_candidate_id(r.candidate_id)
+            if exp:
+                sheet.append([
+                    name,
+                    "\n".join(exp.strengths),
+                    "\n".join(exp.risks),
+                    "\n".join(exp.reasoning),
+                    "\n".join(exp.counterfactuals)
+                ])
+            else:
+                sheet.append([name, "", "", "", ""])
+
+        self._format_sheet(sheet)
+
+    def _build_candidate_profiles(self, sheet, rankings):
+        headers = ["Candidate", "Email", "Phone", "Location", "Experience (Events)", "Domains", "Skills", "Career Trajectory"]
+        self._apply_header_style(sheet, headers)
+        
+        for r in rankings:
+            cand = self.candidate_repository.get_by_candidate_id(r.candidate_id)
+            if cand:
+                events = len(cand.timeline)
+                timeline_str = "\n".join(f"{t.year}: {t.event}" for t in sorted(cand.timeline, key=lambda x: x.year, reverse=True))
+                sheet.append([
+                    cand.name,
+                    cand.email,
+                    cand.phone,
+                    cand.location,
+                    f"{events} timeline events",
+                    ", ".join(cand.domains),
+                    ", ".join(cand.skills),
+                    timeline_str
+                ])
+            else:
+                sheet.append([r.candidate_id, "", "", "", "", "", "", ""])
+
+        self._format_sheet(sheet)

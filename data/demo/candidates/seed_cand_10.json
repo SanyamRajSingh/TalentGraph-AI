@@ -1,0 +1,43 @@
+{
+  "candidate_id": "seed_cand_10",
+  "name": "Candidate 10 (Junior Backend Engineer)",
+  "email": "cand10@example.com",
+  "phone": "+15550000000",
+  "experience": "2 years",
+  "skills": [
+    "AWS",
+    "Docker",
+    "Java",
+    "Kafka",
+    "Go",
+    "Redis"
+  ],
+  "projects": [
+    "Built a scalable system for EdTech",
+    "Led initiative in backend engineer"
+  ],
+  "domains": [
+    "EdTech"
+  ],
+  "strengths": [
+    "Deep Technical Expertise",
+    "Data-Driven"
+  ],
+  "weaknesses": [
+    "Over-engineers solutions"
+  ],
+  "career_trajectory": "Rapid Promotion Track",
+  "growth_stage": "Explorer",
+  "risk_profile": "Medium",
+  "timeline": [
+    {
+      "event": "Started",
+      "year": "2020",
+      "role": "Engineer"
+    }
+  ],
+  "technical_depth": 46,
+  "learning_velocity": 95,
+  "ownership": 51,
+  "communication": 82
+}

@@ -1,0 +1,85 @@
+{
+  "candidate_id": "seed_data_scientist_02",
+  "resume_id": null,
+  "resume_versions": [],
+  "name": "Senior Data Scientist #3",
+  "email": "senior.datascientist3@talentgraph.dev",
+  "phone": "+1-555-102-1002",
+  "location": "Austin, TX",
+  "skills": [
+    "Python",
+    "Pandas",
+    "Scikit-learn",
+    "Spark",
+    "AWS"
+  ],
+  "technologies": [],
+  "projects": [
+    "Led Cloud platform rebuild (25% perf gain)",
+    "Shipped Data Scientist tooling for distributed teams"
+  ],
+  "experiences": [],
+  "certifications": [],
+  "achievements": [],
+  "domains": [
+    "Cloud"
+  ],
+  "timeline": [
+    {
+      "year": 2024,
+      "event": "Senior Data Scientist at TechStartup"
+    },
+    {
+      "year": 2023,
+      "event": "Senior Data Scientist at MegaCorp"
+    },
+    {
+      "year": 2022,
+      "event": "Senior Data Scientist at ScaleAI"
+    },
+    {
+      "year": 2021,
+      "event": "Senior Data Scientist at DevHouse"
+    },
+    {
+      "year": 2020,
+      "event": "Senior Data Scientist at InnovateCo"
+    },
+    {
+      "year": 2019,
+      "event": "Senior Data Scientist at BuildFast"
+    }
+  ],
+  "evaluations_history": [],
+  "technical_depth": 58,
+  "learning_velocity": 85,
+  "leadership": 43,
+  "ownership": 95,
+  "communication": 88,
+  "project_complexity": 70,
+  "collaboration": 66,
+  "consistency": 50,
+  "leadership_readiness": 48,
+  "adaptability": 94,
+  "execution_speed": 95,
+  "business_acumen": 80,
+  "growth_stage": "Technical Specialist",
+  "strengths": [
+    "Strong Python skills",
+    "Cloud domain expertise"
+  ],
+  "weaknesses": [
+    "Limited public-speaking experience"
+  ],
+  "growth_signals": [],
+  "leadership_signals": [],
+  "career_progression_score": 50,
+  "risk_profile": "Low",
+  "recommended_roles": [],
+  "success_environments": [],
+  "confidence": 62,
+  "reasoning": [],
+  "generated_at": "2026-06-27T16:40:08.988428Z",
+  "processing_time_ms": 0,
+  "version": "candidate-twin-v1"
+}

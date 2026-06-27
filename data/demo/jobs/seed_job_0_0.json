@@ -1,0 +1,21 @@
+{
+  "role_id": "seed_job_0_0",
+  "role_title": "Mid Backend Engineer",
+  "domain": "Fintech",
+  "seniority": "Mid",
+  "required_skills": [
+    "Kafka",
+    "Redis",
+    "Go",
+    "Python"
+  ],
+  "description": "We are looking for a Mid Backend Engineer to join our fast-paced startup.",
+  "technical_bar": 70,
+  "velocity_bar": 75,
+  "ownership_bar": 70,
+  "communication_bar": 70,
+  "mission_critical_skills": [
+    "Java",
+    "PostgreSQL"
+  ]
+}

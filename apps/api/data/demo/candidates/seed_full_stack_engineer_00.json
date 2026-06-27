@@ -1,0 +1,69 @@
+{
+  "candidate_id": "seed_full_stack_engineer_00",
+  "resume_id": null,
+  "resume_versions": [],
+  "name": "Junior Full Stack Engineer #1",
+  "email": "junior.fullstackengineer1@talentgraph.dev",
+  "phone": "+1-555-104-1000",
+  "location": "San Francisco, CA",
+  "skills": [
+    "React",
+    "TypeScript",
+    "Node.js",
+    "FastAPI",
+    "Unity"
+  ],
+  "technologies": [],
+  "projects": [
+    "Led Gaming platform rebuild (25% perf gain)",
+    "Shipped Full Stack Engineer tooling for distributed teams"
+  ],
+  "experiences": [],
+  "certifications": [],
+  "achievements": [],
+  "domains": [
+    "Gaming"
+  ],
+  "timeline": [
+    {
+      "year": 2024,
+      "event": "Junior Full Stack Engineer at TechStartup"
+    },
+    {
+      "year": 2023,
+      "event": "Junior Full Stack Engineer at MegaCorp"
+    }
+  ],
+  "evaluations_history": [],
+  "technical_depth": 39,
+  "learning_velocity": 65,
+  "leadership": 37,
+  "ownership": 80,
+  "communication": 85,
+  "project_complexity": 48,
+  "collaboration": 84,
+  "consistency": 50,
+  "leadership_readiness": 42,
+  "adaptability": 60,
+  "execution_speed": 82,
+  "business_acumen": 84,
+  "growth_stage": "Builder",
+  "strengths": [
+    "Strong React skills",
+    "Gaming domain expertise"
+  ],
+  "weaknesses": [
+    "Limited public-speaking experience"
+  ],
+  "growth_signals": [],
+  "leadership_signals": [],
+  "career_progression_score": 50,
+  "risk_profile": "Medium",
+  "recommended_roles": [],
+  "success_environments": [],
+  "confidence": 47,
+  "reasoning": [],
+  "generated_at": "2026-06-27T16:40:08.989922Z",
+  "processing_time_ms": 0,
+  "version": "candidate-twin-v1"
+}

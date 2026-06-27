@@ -1,0 +1,43 @@
+{
+  "candidate_id": "seed_cand_44",
+  "name": "Candidate 44 (Intern Full Stack Engineer)",
+  "email": "cand44@example.com",
+  "phone": "+15550000000",
+  "experience": "0 years",
+  "skills": [
+    "TypeScript",
+    "Next.js",
+    "Express",
+    "PostgreSQL",
+    "AWS",
+    "Node.js"
+  ],
+  "projects": [
+    "Built a scalable system for E-commerce",
+    "Led initiative in full stack engineer"
+  ],
+  "domains": [
+    "E-commerce"
+  ],
+  "strengths": [
+    "Fast Learner",
+    "Leadership"
+  ],
+  "weaknesses": [
+    "Over-engineers solutions"
+  ],
+  "career_trajectory": "Rapid Promotion Track",
+  "growth_stage": "Explorer",
+  "risk_profile": "Medium",
+  "timeline": [
+    {
+      "event": "Started",
+      "year": "2020",
+      "role": "Engineer"
+    }
+  ],
+  "technical_depth": 36,
+  "learning_velocity": 63,
+  "ownership": 37,
+  "communication": 87
+}

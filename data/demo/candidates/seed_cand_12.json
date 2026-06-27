@@ -1,0 +1,43 @@
+{
+  "candidate_id": "seed_cand_12",
+  "name": "Candidate 12 (Junior ML Engineer)",
+  "email": "cand12@example.com",
+  "phone": "+15550000000",
+  "experience": "3 years",
+  "skills": [
+    "MLflow",
+    "FastAPI",
+    "Hugging Face",
+    "TensorFlow",
+    "PyTorch",
+    "Ray"
+  ],
+  "projects": [
+    "Built a scalable system for Fintech",
+    "Led initiative in ml engineer"
+  ],
+  "domains": [
+    "Fintech"
+  ],
+  "strengths": [
+    "Deep Technical Expertise",
+    "Problem Solver"
+  ],
+  "weaknesses": [
+    "Context Switching"
+  ],
+  "career_trajectory": "Emerging Leader",
+  "growth_stage": "Explorer",
+  "risk_profile": "Medium",
+  "timeline": [
+    {
+      "event": "Started",
+      "year": "2020",
+      "role": "Engineer"
+    }
+  ],
+  "technical_depth": 55,
+  "learning_velocity": 86,
+  "ownership": 46,
+  "communication": 78
+}

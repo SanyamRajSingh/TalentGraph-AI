@@ -1,0 +1,43 @@
+{
+  "candidate_id": "seed_cand_8",
+  "name": "Candidate 8 (Lead Backend Engineer)",
+  "email": "cand8@example.com",
+  "phone": "+15550000000",
+  "experience": "12 years",
+  "skills": [
+    "Go",
+    "Docker",
+    "Kafka",
+    "Python",
+    "gRPC",
+    "AWS"
+  ],
+  "projects": [
+    "Built a scalable system for E-commerce",
+    "Led initiative in backend engineer"
+  ],
+  "domains": [
+    "E-commerce"
+  ],
+  "strengths": [
+    "Fast Learner",
+    "Product Mindset"
+  ],
+  "weaknesses": [
+    "Impatience with Process"
+  ],
+  "career_trajectory": "Steady Specialist",
+  "growth_stage": "Builder",
+  "risk_profile": "Low",
+  "timeline": [
+    {
+      "event": "Started",
+      "year": "2020",
+      "role": "Engineer"
+    }
+  ],
+  "technical_depth": 100,
+  "learning_velocity": 80,
+  "ownership": 100,
+  "communication": 54
+}

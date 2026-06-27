@@ -1,0 +1,38 @@
+{
+  "role_id": "seed_role_06",
+  "job_id": null,
+  "role_title": "Senior Product Analyst",
+  "domain": "Technology",
+  "seniority": "Senior",
+  "role_archetype": "Individual Contributor",
+  "fingerprint": "senior_product_analyst_6",
+  "required_skills": [
+    "SQL",
+    "Tableau",
+    "A/B Testing"
+  ],
+  "preferred_skills": [
+    "Excel",
+    "Python"
+  ],
+  "skill_importance": {},
+  "technical_depth": 75,
+  "problem_solving": 75,
+  "communication": 70,
+  "ownership": 80,
+  "leadership": 50,
+  "learning_agility": 75,
+  "ambiguity_tolerance": 65,
+  "collaboration": 75,
+  "startup_vs_enterprise_environment": 60,
+  "work_environment": {
+    "startup_vs_enterprise": 50,
+    "ambiguity_tolerance": 50,
+    "collaboration": 75,
+    "ownership": 80,
+    "communication": 70
+  },
+  "weight_distribution": {},
+  "reasoning": [],
+  "confidence": 80
+}

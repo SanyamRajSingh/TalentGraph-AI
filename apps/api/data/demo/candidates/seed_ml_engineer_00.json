@@ -1,0 +1,65 @@
+{
+  "candidate_id": "seed_ml_engineer_00",
+  "resume_id": null,
+  "resume_versions": [],
+  "name": "Junior ML Engineer #1",
+  "email": "junior.mlengineer1@talentgraph.dev",
+  "phone": "+1-555-101-1000",
+  "location": "San Francisco, CA",
+  "skills": [
+    "Python",
+    "PyTorch",
+    "MLflow",
+    "Kubeflow",
+    "Inventory Systems"
+  ],
+  "technologies": [],
+  "projects": [
+    "Led E-commerce platform rebuild (25% perf gain)",
+    "Shipped ML Engineer tooling for distributed teams"
+  ],
+  "experiences": [],
+  "certifications": [],
+  "achievements": [],
+  "domains": [
+    "E-commerce"
+  ],
+  "timeline": [
+    {
+      "year": 2024,
+      "event": "Junior ML Engineer at TechStartup"
+    }
+  ],
+  "evaluations_history": [],
+  "technical_depth": 34,
+  "learning_velocity": 95,
+  "leadership": 25,
+  "ownership": 100,
+  "communication": 68,
+  "project_complexity": 21,
+  "collaboration": 93,
+  "consistency": 50,
+  "leadership_readiness": 30,
+  "adaptability": 85,
+  "execution_speed": 74,
+  "business_acumen": 68,
+  "growth_stage": "Builder",
+  "strengths": [
+    "Strong Python skills",
+    "E-commerce domain expertise"
+  ],
+  "weaknesses": [
+    "Limited public-speaking experience"
+  ],
+  "growth_signals": [],
+  "leadership_signals": [],
+  "career_progression_score": 50,
+  "risk_profile": "Low",
+  "recommended_roles": [],
+  "success_environments": [],
+  "confidence": 51,
+  "reasoning": [],
+  "generated_at": "2026-06-27T16:40:08.987665Z",
+  "processing_time_ms": 0,
+  "version": "candidate-twin-v1"
+}

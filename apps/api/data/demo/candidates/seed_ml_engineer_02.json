@@ -1,0 +1,85 @@
+{
+  "candidate_id": "seed_ml_engineer_02",
+  "resume_id": null,
+  "resume_versions": [],
+  "name": "Senior ML Engineer #3",
+  "email": "senior.mlengineer3@talentgraph.dev",
+  "phone": "+1-555-101-1002",
+  "location": "Austin, TX",
+  "skills": [
+    "Python",
+    "PyTorch",
+    "MLflow",
+    "Kubeflow",
+    "Multi-tenancy"
+  ],
+  "technologies": [],
+  "projects": [
+    "Led SaaS platform rebuild (25% perf gain)",
+    "Shipped ML Engineer tooling for distributed teams"
+  ],
+  "experiences": [],
+  "certifications": [],
+  "achievements": [],
+  "domains": [
+    "SaaS"
+  ],
+  "timeline": [
+    {
+      "year": 2024,
+      "event": "Senior ML Engineer at TechStartup"
+    },
+    {
+      "year": 2023,
+      "event": "Senior ML Engineer at MegaCorp"
+    },
+    {
+      "year": 2022,
+      "event": "Senior ML Engineer at ScaleAI"
+    },
+    {
+      "year": 2021,
+      "event": "Senior ML Engineer at DevHouse"
+    },
+    {
+      "year": 2020,
+      "event": "Senior ML Engineer at InnovateCo"
+    },
+    {
+      "year": 2019,
+      "event": "Senior ML Engineer at BuildFast"
+    }
+  ],
+  "evaluations_history": [],
+  "technical_depth": 78,
+  "learning_velocity": 71,
+  "leadership": 65,
+  "ownership": 83,
+  "communication": 64,
+  "project_complexity": 79,
+  "collaboration": 94,
+  "consistency": 50,
+  "leadership_readiness": 70,
+  "adaptability": 82,
+  "execution_speed": 90,
+  "business_acumen": 58,
+  "growth_stage": "Technical Specialist",
+  "strengths": [
+    "Strong Python skills",
+    "SaaS domain expertise"
+  ],
+  "weaknesses": [
+    "Limited public-speaking experience"
+  ],
+  "growth_signals": [],
+  "leadership_signals": [],
+  "career_progression_score": 50,
+  "risk_profile": "Medium",
+  "recommended_roles": [],
+  "success_environments": [],
+  "confidence": 71,
+  "reasoning": [],
+  "generated_at": "2026-06-27T16:40:08.987803Z",
+  "processing_time_ms": 0,
+  "version": "candidate-twin-v1"
+}

@@ -1,0 +1,43 @@
+{
+  "candidate_id": "seed_cand_41",
+  "name": "Candidate 41 (Intern Full Stack Engineer)",
+  "email": "cand41@example.com",
+  "phone": "+15550000000",
+  "experience": "1 years",
+  "skills": [
+    "Next.js",
+    "PostgreSQL",
+    "Express",
+    "TypeScript",
+    "Tailwind CSS",
+    "Node.js"
+  ],
+  "projects": [
+    "Built a scalable system for Cloud",
+    "Led initiative in full stack engineer"
+  ],
+  "domains": [
+    "Cloud"
+  ],
+  "strengths": [
+    "Deep Technical Expertise",
+    "Data-Driven"
+  ],
+  "weaknesses": [
+    "Requires structured guidance"
+  ],
+  "career_trajectory": "Steady Specialist",
+  "growth_stage": "Explorer",
+  "risk_profile": "Medium",
+  "timeline": [
+    {
+      "event": "Started",
+      "year": "2020",
+      "role": "Engineer"
+    }
+  ],
+  "technical_depth": 41,
+  "learning_velocity": 85,
+  "ownership": 31,
+  "communication": 72
+}

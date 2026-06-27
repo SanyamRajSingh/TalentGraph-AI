@@ -1,0 +1,85 @@
+{
+  "candidate_id": "seed_data_scientist_04",
+  "resume_id": null,
+  "resume_versions": [],
+  "name": "Principal Data Scientist #5",
+  "email": "principal.datascientist5@talentgraph.dev",
+  "phone": "+1-555-102-1004",
+  "location": "Remote",
+  "skills": [
+    "Python",
+    "Pandas",
+    "Scikit-learn",
+    "Spark",
+    "Unity"
+  ],
+  "technologies": [],
+  "projects": [
+    "Led Gaming platform rebuild (25% perf gain)",
+    "Shipped Data Scientist tooling for distributed teams"
+  ],
+  "experiences": [],
+  "certifications": [],
+  "achievements": [],
+  "domains": [
+    "Gaming"
+  ],
+  "timeline": [
+    {
+      "year": 2024,
+      "event": "Principal Data Scientist at TechStartup"
+    },
+    {
+      "year": 2023,
+      "event": "Principal Data Scientist at MegaCorp"
+    },
+    {
+      "year": 2022,
+      "event": "Principal Data Scientist at ScaleAI"
+    },
+    {
+      "year": 2021,
+      "event": "Principal Data Scientist at DevHouse"
+    },
+    {
+      "year": 2020,
+      "event": "Principal Data Scientist at InnovateCo"
+    },
+    {
+      "year": 2019,
+      "event": "Principal Data Scientist at BuildFast"
+    }
+  ],
+  "evaluations_history": [],
+  "technical_depth": 100,
+  "learning_velocity": 78,
+  "leadership": 100,
+  "ownership": 83,
+  "communication": 94,
+  "project_complexity": 100,
+  "collaboration": 65,
+  "consistency": 50,
+  "leadership_readiness": 100,
+  "adaptability": 62,
+  "execution_speed": 73,
+  "business_acumen": 65,
+  "growth_stage": "Technical Specialist",
+  "strengths": [
+    "Strong Python skills",
+    "Gaming domain expertise"
+  ],
+  "weaknesses": [
+    "Limited public-speaking experience"
+  ],
+  "growth_signals": [],
+  "leadership_signals": [],
+  "career_progression_score": 50,
+  "risk_profile": "Medium",
+  "recommended_roles": [],
+  "success_environments": [],
+  "confidence": 92,
+  "reasoning": [],
+  "generated_at": "2026-06-27T16:40:08.988830Z",
+  "processing_time_ms": 0,
+  "version": "candidate-twin-v1"
+}

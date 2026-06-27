@@ -1,0 +1,85 @@
+{
+  "candidate_id": "seed_full_stack_engineer_09",
+  "resume_id": null,
+  "resume_versions": [],
+  "name": "Principal Full Stack Engineer #10",
+  "email": "principal.fullstackengineer10@talentgraph.dev",
+  "phone": "+1-555-104-1009",
+  "location": "New York, NY",
+  "skills": [
+    "React",
+    "TypeScript",
+    "Node.js",
+    "FastAPI",
+    "LLMs"
+  ],
+  "technologies": [],
+  "projects": [
+    "Led AI/ML platform rebuild (25% perf gain)",
+    "Shipped Full Stack Engineer tooling for distributed teams"
+  ],
+  "experiences": [],
+  "certifications": [],
+  "achievements": [],
+  "domains": [
+    "AI/ML"
+  ],
+  "timeline": [
+    {
+      "year": 2024,
+      "event": "Principal Full Stack Engineer at TechStartup"
+    },
+    {
+      "year": 2023,
+      "event": "Principal Full Stack Engineer at MegaCorp"
+    },
+    {
+      "year": 2022,
+      "event": "Principal Full Stack Engineer at ScaleAI"
+    },
+    {
+      "year": 2021,
+      "event": "Principal Full Stack Engineer at DevHouse"
+    },
+    {
+      "year": 2020,
+      "event": "Principal Full Stack Engineer at InnovateCo"
+    },
+    {
+      "year": 2019,
+      "event": "Principal Full Stack Engineer at BuildFast"
+    }
+  ],
+  "evaluations_history": [],
+  "technical_depth": 93,
+  "learning_velocity": 78,
+  "leadership": 76,
+  "ownership": 90,
+  "communication": 85,
+  "project_complexity": 88,
+  "collaboration": 95,
+  "consistency": 50,
+  "leadership_readiness": 81,
+  "adaptability": 95,
+  "execution_speed": 94,
+  "business_acumen": 61,
+  "growth_stage": "Technical Specialist",
+  "strengths": [
+    "Strong React skills",
+    "AI/ML domain expertise"
+  ],
+  "weaknesses": [
+    "Limited public-speaking experience"
+  ],
+  "growth_signals": [],
+  "leadership_signals": [],
+  "career_progression_score": 50,
+  "risk_profile": "Medium",
+  "recommended_roles": [],
+  "success_environments": [],
+  "confidence": 82,
+  "reasoning": [],
+  "generated_at": "2026-06-27T16:40:08.990515Z",
+  "processing_time_ms": 0,
+  "version": "candidate-twin-v1"
+}

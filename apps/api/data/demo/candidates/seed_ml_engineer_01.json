@@ -1,0 +1,85 @@
+{
+  "candidate_id": "seed_ml_engineer_01",
+  "resume_id": null,
+  "resume_versions": [],
+  "name": "Mid-Level ML Engineer #2",
+  "email": "mid-level.mlengineer2@talentgraph.dev",
+  "phone": "+1-555-101-1001",
+  "location": "New York, NY",
+  "skills": [
+    "Python",
+    "PyTorch",
+    "MLflow",
+    "Kubeflow",
+    "LMS"
+  ],
+  "technologies": [],
+  "projects": [
+    "Led EdTech platform rebuild (25% perf gain)",
+    "Shipped ML Engineer tooling for distributed teams"
+  ],
+  "experiences": [],
+  "certifications": [],
+  "achievements": [],
+  "domains": [
+    "EdTech"
+  ],
+  "timeline": [
+    {
+      "year": 2024,
+      "event": "Mid-Level ML Engineer at TechStartup"
+    },
+    {
+      "year": 2023,
+      "event": "Mid-Level ML Engineer at MegaCorp"
+    },
+    {
+      "year": 2022,
+      "event": "Mid-Level ML Engineer at ScaleAI"
+    },
+    {
+      "year": 2021,
+      "event": "Mid-Level ML Engineer at DevHouse"
+    },
+    {
+      "year": 2020,
+      "event": "Mid-Level ML Engineer at InnovateCo"
+    },
+    {
+      "year": 2019,
+      "event": "Mid-Level ML Engineer at BuildFast"
+    }
+  ],
+  "evaluations_history": [],
+  "technical_depth": 56,
+  "learning_velocity": 69,
+  "leadership": 54,
+  "ownership": 83,
+  "communication": 79,
+  "project_complexity": 55,
+  "collaboration": 92,
+  "consistency": 50,
+  "leadership_readiness": 59,
+  "adaptability": 88,
+  "execution_speed": 71,
+  "business_acumen": 56,
+  "growth_stage": "Builder",
+  "strengths": [
+    "Strong Python skills",
+    "EdTech domain expertise"
+  ],
+  "weaknesses": [
+    "Limited public-speaking experience"
+  ],
+  "growth_signals": [],
+  "leadership_signals": [],
+  "career_progression_score": 50,
+  "risk_profile": "Medium",
+  "recommended_roles": [],
+  "success_environments": [],
+  "confidence": 59,
+  "reasoning": [],
+  "generated_at": "2026-06-27T16:40:08.987731Z",
+  "processing_time_ms": 0,
+  "version": "candidate-twin-v1"
+}

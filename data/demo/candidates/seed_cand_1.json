@@ -1,0 +1,43 @@
+{
+  "candidate_id": "seed_cand_1",
+  "name": "Candidate 1 (Lead Backend Engineer)",
+  "email": "cand1@example.com",
+  "phone": "+15550000000",
+  "experience": "12 years",
+  "skills": [
+    "Redis",
+    "Java",
+    "gRPC",
+    "Kubernetes",
+    "PostgreSQL",
+    "AWS"
+  ],
+  "projects": [
+    "Built a scalable system for SaaS",
+    "Led initiative in backend engineer"
+  ],
+  "domains": [
+    "SaaS"
+  ],
+  "strengths": [
+    "Fast Learner",
+    "Deep Technical Expertise"
+  ],
+  "weaknesses": [
+    "Requires structured guidance"
+  ],
+  "career_trajectory": "Cross-Functional Contributor",
+  "growth_stage": "Builder",
+  "risk_profile": "Low",
+  "timeline": [
+    {
+      "event": "Started",
+      "year": "2020",
+      "role": "Engineer"
+    }
+  ],
+  "technical_depth": 100,
+  "learning_velocity": 89,
+  "ownership": 100,
+  "communication": 79
+}

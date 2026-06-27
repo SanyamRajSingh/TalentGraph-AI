@@ -1,0 +1,81 @@
+{
+  "candidate_id": "seed_product_analyst_01",
+  "resume_id": null,
+  "resume_versions": [],
+  "name": "Mid-Level Product Analyst #2",
+  "email": "mid-level.productanalyst2@talentgraph.dev",
+  "phone": "+1-555-103-1001",
+  "location": "New York, NY",
+  "skills": [
+    "SQL",
+    "Tableau",
+    "A/B Testing",
+    "Excel",
+    "LLMs"
+  ],
+  "technologies": [],
+  "projects": [
+    "Led AI/ML platform rebuild (25% perf gain)",
+    "Shipped Product Analyst tooling for distributed teams"
+  ],
+  "experiences": [],
+  "certifications": [],
+  "achievements": [],
+  "domains": [
+    "AI/ML"
+  ],
+  "timeline": [
+    {
+      "year": 2024,
+      "event": "Mid-Level Product Analyst at TechStartup"
+    },
+    {
+      "year": 2023,
+      "event": "Mid-Level Product Analyst at MegaCorp"
+    },
+    {
+      "year": 2022,
+      "event": "Mid-Level Product Analyst at ScaleAI"
+    },
+    {
+      "year": 2021,
+      "event": "Mid-Level Product Analyst at DevHouse"
+    },
+    {
+      "year": 2020,
+      "event": "Mid-Level Product Analyst at InnovateCo"
+    }
+  ],
+  "evaluations_history": [],
+  "technical_depth": 64,
+  "learning_velocity": 90,
+  "leadership": 42,
+  "ownership": 98,
+  "communication": 74,
+  "project_complexity": 57,
+  "collaboration": 69,
+  "consistency": 50,
+  "leadership_readiness": 47,
+  "adaptability": 64,
+  "execution_speed": 81,
+  "business_acumen": 52,
+  "growth_stage": "Builder",
+  "strengths": [
+    "Strong SQL skills",
+    "AI/ML domain expertise"
+  ],
+  "weaknesses": [
+    "Limited public-speaking experience"
+  ],
+  "growth_signals": [],
+  "leadership_signals": [],
+  "career_progression_score": 50,
+  "risk_profile": "Low",
+  "recommended_roles": [],
+  "success_environments": [],
+  "confidence": 65,
+  "reasoning": [],
+  "generated_at": "2026-06-27T16:40:08.989287Z",
+  "processing_time_ms": 0,
+  "version": "candidate-twin-v1"
+}

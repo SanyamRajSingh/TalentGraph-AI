@@ -1,0 +1,43 @@
+{
+  "candidate_id": "seed_cand_23",
+  "name": "Candidate 23 (Senior Data Scientist)",
+  "email": "cand23@example.com",
+  "phone": "+15550000000",
+  "experience": "7 years",
+  "skills": [
+    "R",
+    "NumPy",
+    "Stats",
+    "Tableau",
+    "Pandas",
+    "XGBoost"
+  ],
+  "projects": [
+    "Built a scalable system for Cybersecurity",
+    "Led initiative in data scientist"
+  ],
+  "domains": [
+    "Cybersecurity"
+  ],
+  "strengths": [
+    "Deep Technical Expertise",
+    "Leadership"
+  ],
+  "weaknesses": [
+    "Public Speaking"
+  ],
+  "career_trajectory": "Emerging Leader",
+  "growth_stage": "Builder",
+  "risk_profile": "Low",
+  "timeline": [
+    {
+      "event": "Started",
+      "year": "2020",
+      "role": "Engineer"
+    }
+  ],
+  "technical_depth": 85,
+  "learning_velocity": 78,
+  "ownership": 67,
+  "communication": 50
+}

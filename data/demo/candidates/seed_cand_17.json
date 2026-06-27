@@ -1,0 +1,43 @@
+{
+  "candidate_id": "seed_cand_17",
+  "name": "Candidate 17 (Intern ML Engineer)",
+  "email": "cand17@example.com",
+  "phone": "+15550000000",
+  "experience": "1 years",
+  "skills": [
+    "PyTorch",
+    "scikit-learn",
+    "Hugging Face",
+    "MLflow",
+    "Ray",
+    "Python"
+  ],
+  "projects": [
+    "Built a scalable system for Cybersecurity",
+    "Led initiative in ml engineer"
+  ],
+  "domains": [
+    "Cybersecurity"
+  ],
+  "strengths": [
+    "Fast Learner",
+    "Problem Solver"
+  ],
+  "weaknesses": [
+    "Public Speaking"
+  ],
+  "career_trajectory": "Steady Specialist",
+  "growth_stage": "Explorer",
+  "risk_profile": "Medium",
+  "timeline": [
+    {
+      "event": "Started",
+      "year": "2020",
+      "role": "Engineer"
+    }
+  ],
+  "technical_depth": 43,
+  "learning_velocity": 92,
+  "ownership": 42,
+  "communication": 68
+}

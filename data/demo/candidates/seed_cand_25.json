@@ -1,0 +1,43 @@
+{
+  "candidate_id": "seed_cand_25",
+  "name": "Candidate 25 (Junior Data Scientist)",
+  "email": "cand25@example.com",
+  "phone": "+15550000000",
+  "experience": "3 years",
+  "skills": [
+    "Stats",
+    "Tableau",
+    "SQL",
+    "NumPy",
+    "XGBoost",
+    "Python"
+  ],
+  "projects": [
+    "Built a scalable system for E-commerce",
+    "Led initiative in data scientist"
+  ],
+  "domains": [
+    "E-commerce"
+  ],
+  "strengths": [
+    "Product Mindset",
+    "Data-Driven"
+  ],
+  "weaknesses": [
+    "Delegation"
+  ],
+  "career_trajectory": "Steady Specialist",
+  "growth_stage": "Explorer",
+  "risk_profile": "Medium",
+  "timeline": [
+    {
+      "event": "Started",
+      "year": "2020",
+      "role": "Engineer"
+    }
+  ],
+  "technical_depth": 61,
+  "learning_velocity": 67,
+  "ownership": 43,
+  "communication": 79
+}

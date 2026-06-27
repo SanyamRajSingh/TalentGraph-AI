@@ -1,0 +1,43 @@
+{
+  "candidate_id": "seed_cand_11",
+  "name": "Candidate 11 (Intern ML Engineer)",
+  "email": "cand11@example.com",
+  "phone": "+15550000000",
+  "experience": "0 years",
+  "skills": [
+    "PyTorch",
+    "Hugging Face",
+    "Python",
+    "Ray",
+    "FastAPI",
+    "CUDA"
+  ],
+  "projects": [
+    "Built a scalable system for Cloud",
+    "Led initiative in ml engineer"
+  ],
+  "domains": [
+    "Cloud"
+  ],
+  "strengths": [
+    "Problem Solver",
+    "Data-Driven"
+  ],
+  "weaknesses": [
+    "Impatience with Process"
+  ],
+  "career_trajectory": "Steady Specialist",
+  "growth_stage": "Explorer",
+  "risk_profile": "Medium",
+  "timeline": [
+    {
+      "event": "Started",
+      "year": "2020",
+      "role": "Engineer"
+    }
+  ],
+  "technical_depth": 46,
+  "learning_velocity": 87,
+  "ownership": 40,
+  "communication": 63
+}

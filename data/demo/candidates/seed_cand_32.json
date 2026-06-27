@@ -1,0 +1,43 @@
+{
+  "candidate_id": "seed_cand_32",
+  "name": "Candidate 32 (Intern Product Analyst)",
+  "email": "cand32@example.com",
+  "phone": "+15550000000",
+  "experience": "2 years",
+  "skills": [
+    "Tableau",
+    "SQL",
+    "Google Analytics",
+    "Product Sense",
+    "Looker",
+    "Mixpanel"
+  ],
+  "projects": [
+    "Built a scalable system for E-commerce",
+    "Led initiative in product analyst"
+  ],
+  "domains": [
+    "E-commerce"
+  ],
+  "strengths": [
+    "Fast Learner",
+    "Strong Communicator"
+  ],
+  "weaknesses": [
+    "Over-engineers solutions"
+  ],
+  "career_trajectory": "Rapid Promotion Track",
+  "growth_stage": "Explorer",
+  "risk_profile": "Medium",
+  "timeline": [
+    {
+      "event": "Started",
+      "year": "2020",
+      "role": "Engineer"
+    }
+  ],
+  "technical_depth": 53,
+  "learning_velocity": 94,
+  "ownership": 40,
+  "communication": 60
+}

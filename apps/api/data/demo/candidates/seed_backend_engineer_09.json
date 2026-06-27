@@ -1,0 +1,85 @@
+{
+  "candidate_id": "seed_backend_engineer_09",
+  "resume_id": null,
+  "resume_versions": [],
+  "name": "Principal Backend Engineer #10",
+  "email": "principal.backendengineer10@talentgraph.dev",
+  "phone": "+1-555-100-1009",
+  "location": "New York, NY",
+  "skills": [
+    "Python",
+    "FastAPI",
+    "PostgreSQL",
+    "Redis",
+    "ADAS"
+  ],
+  "technologies": [],
+  "projects": [
+    "Led Automotive platform rebuild (25% perf gain)",
+    "Shipped Backend Engineer tooling for distributed teams"
+  ],
+  "experiences": [],
+  "certifications": [],
+  "achievements": [],
+  "domains": [
+    "Automotive"
+  ],
+  "timeline": [
+    {
+      "year": 2024,
+      "event": "Principal Backend Engineer at TechStartup"
+    },
+    {
+      "year": 2023,
+      "event": "Principal Backend Engineer at MegaCorp"
+    },
+    {
+      "year": 2022,
+      "event": "Principal Backend Engineer at ScaleAI"
+    },
+    {
+      "year": 2021,
+      "event": "Principal Backend Engineer at DevHouse"
+    },
+    {
+      "year": 2020,
+      "event": "Principal Backend Engineer at InnovateCo"
+    },
+    {
+      "year": 2019,
+      "event": "Principal Backend Engineer at BuildFast"
+    }
+  ],
+  "evaluations_history": [],
+  "technical_depth": 100,
+  "learning_velocity": 72,
+  "leadership": 78,
+  "ownership": 85,
+  "communication": 85,
+  "project_complexity": 80,
+  "collaboration": 82,
+  "consistency": 50,
+  "leadership_readiness": 83,
+  "adaptability": 79,
+  "execution_speed": 86,
+  "business_acumen": 78,
+  "growth_stage": "Technical Specialist",
+  "strengths": [
+    "Strong Python skills",
+    "Automotive domain expertise"
+  ],
+  "weaknesses": [
+    "Limited public-speaking experience"
+  ],
+  "growth_signals": [],
+  "leadership_signals": [],
+  "career_progression_score": 50,
+  "risk_profile": "Medium",
+  "recommended_roles": [],
+  "success_environments": [],
+  "confidence": 83,
+  "reasoning": [],
+  "generated_at": "2026-06-27T16:40:08.987610Z",
+  "processing_time_ms": 0,
+  "version": "candidate-twin-v1"
+}

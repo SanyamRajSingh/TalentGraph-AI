@@ -1,0 +1,85 @@
+{
+  "candidate_id": "seed_backend_engineer_02",
+  "resume_id": null,
+  "resume_versions": [],
+  "name": "Senior Backend Engineer #3",
+  "email": "senior.backendengineer3@talentgraph.dev",
+  "phone": "+1-555-100-1002",
+  "location": "Austin, TX",
+  "skills": [
+    "Python",
+    "FastAPI",
+    "PostgreSQL",
+    "Redis",
+    "Inventory Systems"
+  ],
+  "technologies": [],
+  "projects": [
+    "Led E-commerce platform rebuild (25% perf gain)",
+    "Shipped Backend Engineer tooling for distributed teams"
+  ],
+  "experiences": [],
+  "certifications": [],
+  "achievements": [],
+  "domains": [
+    "E-commerce"
+  ],
+  "timeline": [
+    {
+      "year": 2024,
+      "event": "Senior Backend Engineer at TechStartup"
+    },
+    {
+      "year": 2023,
+      "event": "Senior Backend Engineer at MegaCorp"
+    },
+    {
+      "year": 2022,
+      "event": "Senior Backend Engineer at ScaleAI"
+    },
+    {
+      "year": 2021,
+      "event": "Senior Backend Engineer at DevHouse"
+    },
+    {
+      "year": 2020,
+      "event": "Senior Backend Engineer at InnovateCo"
+    },
+    {
+      "year": 2019,
+      "event": "Senior Backend Engineer at BuildFast"
+    }
+  ],
+  "evaluations_history": [],
+  "technical_depth": 78,
+  "learning_velocity": 63,
+  "leadership": 48,
+  "ownership": 71,
+  "communication": 61,
+  "project_complexity": 72,
+  "collaboration": 93,
+  "consistency": 50,
+  "leadership_readiness": 53,
+  "adaptability": 87,
+  "execution_speed": 80,
+  "business_acumen": 69,
+  "growth_stage": "Technical Specialist",
+  "strengths": [
+    "Strong Python skills",
+    "E-commerce domain expertise"
+  ],
+  "weaknesses": [
+    "Limited public-speaking experience"
+  ],
+  "growth_signals": [],
+  "leadership_signals": [],
+  "career_progression_score": 50,
+  "risk_profile": "Medium",
+  "recommended_roles": [],
+  "success_environments": [],
+  "confidence": 63,
+  "reasoning": [],
+  "generated_at": "2026-06-27T16:40:08.987103Z",
+  "processing_time_ms": 0,
+  "version": "candidate-twin-v1"
+}

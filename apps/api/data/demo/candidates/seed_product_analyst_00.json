@@ -1,0 +1,65 @@
+{
+  "candidate_id": "seed_product_analyst_00",
+  "resume_id": null,
+  "resume_versions": [],
+  "name": "Junior Product Analyst #1",
+  "email": "junior.productanalyst1@talentgraph.dev",
+  "phone": "+1-555-103-1000",
+  "location": "San Francisco, CA",
+  "skills": [
+    "SQL",
+    "Tableau",
+    "A/B Testing",
+    "Excel",
+    "AWS"
+  ],
+  "technologies": [],
+  "projects": [
+    "Led Cloud platform rebuild (25% perf gain)",
+    "Shipped Product Analyst tooling for distributed teams"
+  ],
+  "experiences": [],
+  "certifications": [],
+  "achievements": [],
+  "domains": [
+    "Cloud"
+  ],
+  "timeline": [
+    {
+      "year": 2024,
+      "event": "Junior Product Analyst at TechStartup"
+    }
+  ],
+  "evaluations_history": [],
+  "technical_depth": 39,
+  "learning_velocity": 68,
+  "leadership": 26,
+  "ownership": 81,
+  "communication": 71,
+  "project_complexity": 27,
+  "collaboration": 87,
+  "consistency": 50,
+  "leadership_readiness": 31,
+  "adaptability": 70,
+  "execution_speed": 84,
+  "business_acumen": 76,
+  "growth_stage": "Builder",
+  "strengths": [
+    "Strong SQL skills",
+    "Cloud domain expertise"
+  ],
+  "weaknesses": [
+    "Limited public-speaking experience"
+  ],
+  "growth_signals": [],
+  "leadership_signals": [],
+  "career_progression_score": 50,
+  "risk_profile": "Medium",
+  "recommended_roles": [],
+  "success_environments": [],
+  "confidence": 44,
+  "reasoning": [],
+  "generated_at": "2026-06-27T16:40:08.989222Z",
+  "processing_time_ms": 0,
+  "version": "candidate-twin-v1"
+}

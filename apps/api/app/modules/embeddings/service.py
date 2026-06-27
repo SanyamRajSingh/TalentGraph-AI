@@ -62,6 +62,19 @@ class EmbeddingFoundationService:
                 )
             )
 
+        for domain in candidate_twin.domains if candidate_twin is not None else []:
+            text = f"Domain: {domain}"
+            embeddings.append(
+                EmbeddingRecord(
+                    id=f"embedding:domain:{self._slug(domain)}",
+                    source_id=f"domain:{self._slug(domain)}",
+                    kind="domain",
+                    text=text,
+                    vector=self.embedding_provider.embed(text),
+                    metadata={"domain": domain},
+                )
+            )
+
         return EmbeddingCollection(
             collection_id=self._collection_id(role_dna, candidate_twin),
             summaries=summaries,

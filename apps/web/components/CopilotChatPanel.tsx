@@ -44,7 +44,7 @@ export default function CopilotChatPanel({ apiBaseUrl, candidateId, roleId }: Pr
         body: JSON.stringify({
           role_id: roleId,
           candidate_id: candidateId,
-          query: userMsg
+          message: userMsg
         })
       });
 

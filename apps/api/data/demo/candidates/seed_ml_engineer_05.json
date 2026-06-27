@@ -1,0 +1,65 @@
+{
+  "candidate_id": "seed_ml_engineer_05",
+  "resume_id": null,
+  "resume_versions": [],
+  "name": "Junior ML Engineer #6",
+  "email": "junior.mlengineer6@talentgraph.dev",
+  "phone": "+1-555-101-1005",
+  "location": "London, UK",
+  "skills": [
+    "Python",
+    "PyTorch",
+    "MLflow",
+    "Kubeflow",
+    "LLMs"
+  ],
+  "technologies": [],
+  "projects": [
+    "Led AI/ML platform rebuild (25% perf gain)",
+    "Shipped ML Engineer tooling for distributed teams"
+  ],
+  "experiences": [],
+  "certifications": [],
+  "achievements": [],
+  "domains": [
+    "AI/ML"
+  ],
+  "timeline": [
+    {
+      "year": 2024,
+      "event": "Junior ML Engineer at TechStartup"
+    }
+  ],
+  "evaluations_history": [],
+  "technical_depth": 35,
+  "learning_velocity": 69,
+  "leadership": 19,
+  "ownership": 84,
+  "communication": 90,
+  "project_complexity": 43,
+  "collaboration": 91,
+  "consistency": 50,
+  "leadership_readiness": 24,
+  "adaptability": 79,
+  "execution_speed": 71,
+  "business_acumen": 90,
+  "growth_stage": "Builder",
+  "strengths": [
+    "Strong Python skills",
+    "AI/ML domain expertise"
+  ],
+  "weaknesses": [
+    "Limited public-speaking experience"
+  ],
+  "growth_signals": [],
+  "leadership_signals": [],
+  "career_progression_score": 50,
+  "risk_profile": "Medium",
+  "recommended_roles": [],
+  "success_environments": [],
+  "confidence": 41,
+  "reasoning": [],
+  "generated_at": "2026-06-27T16:40:08.987983Z",
+  "processing_time_ms": 0,
+  "version": "candidate-twin-v1"
+}

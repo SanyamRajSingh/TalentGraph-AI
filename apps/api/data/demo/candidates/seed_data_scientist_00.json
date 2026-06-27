@@ -1,0 +1,65 @@
+{
+  "candidate_id": "seed_data_scientist_00",
+  "resume_id": null,
+  "resume_versions": [],
+  "name": "Junior Data Scientist #1",
+  "email": "junior.datascientist1@talentgraph.dev",
+  "phone": "+1-555-102-1000",
+  "location": "San Francisco, CA",
+  "skills": [
+    "Python",
+    "Pandas",
+    "Scikit-learn",
+    "Spark",
+    "Multi-tenancy"
+  ],
+  "technologies": [],
+  "projects": [
+    "Led SaaS platform rebuild (25% perf gain)",
+    "Shipped Data Scientist tooling for distributed teams"
+  ],
+  "experiences": [],
+  "certifications": [],
+  "achievements": [],
+  "domains": [
+    "SaaS"
+  ],
+  "timeline": [
+    {
+      "year": 2024,
+      "event": "Junior Data Scientist at TechStartup"
+    }
+  ],
+  "evaluations_history": [],
+  "technical_depth": 43,
+  "learning_velocity": 79,
+  "leadership": 29,
+  "ownership": 90,
+  "communication": 83,
+  "project_complexity": 35,
+  "collaboration": 77,
+  "consistency": 50,
+  "leadership_readiness": 34,
+  "adaptability": 82,
+  "execution_speed": 67,
+  "business_acumen": 81,
+  "growth_stage": "Builder",
+  "strengths": [
+    "Strong Python skills",
+    "SaaS domain expertise"
+  ],
+  "weaknesses": [
+    "Limited public-speaking experience"
+  ],
+  "growth_signals": [],
+  "leadership_signals": [],
+  "career_progression_score": 50,
+  "risk_profile": "Medium",
+  "recommended_roles": [],
+  "success_environments": [],
+  "confidence": 50,
+  "reasoning": [],
+  "generated_at": "2026-06-27T16:40:08.988292Z",
+  "processing_time_ms": 0,
+  "version": "candidate-twin-v1"
+}

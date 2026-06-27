@@ -1,0 +1,73 @@
+{
+  "candidate_id": "seed_full_stack_engineer_01",
+  "resume_id": null,
+  "resume_versions": [],
+  "name": "Mid-Level Full Stack Engineer #2",
+  "email": "mid-level.fullstackengineer2@talentgraph.dev",
+  "phone": "+1-555-104-1001",
+  "location": "New York, NY",
+  "skills": [
+    "React",
+    "TypeScript",
+    "Node.js",
+    "FastAPI",
+    "ADAS"
+  ],
+  "technologies": [],
+  "projects": [
+    "Led Automotive platform rebuild (25% perf gain)",
+    "Shipped Full Stack Engineer tooling for distributed teams"
+  ],
+  "experiences": [],
+  "certifications": [],
+  "achievements": [],
+  "domains": [
+    "Automotive"
+  ],
+  "timeline": [
+    {
+      "year": 2024,
+      "event": "Mid-Level Full Stack Engineer at TechStartup"
+    },
+    {
+      "year": 2023,
+      "event": "Mid-Level Full Stack Engineer at MegaCorp"
+    },
+    {
+      "year": 2022,
+      "event": "Mid-Level Full Stack Engineer at ScaleAI"
+    }
+  ],
+  "evaluations_history": [],
+  "technical_depth": 47,
+  "learning_velocity": 69,
+  "leadership": 30,
+  "ownership": 83,
+  "communication": 91,
+  "project_complexity": 52,
+  "collaboration": 70,
+  "consistency": 50,
+  "leadership_readiness": 35,
+  "adaptability": 89,
+  "execution_speed": 76,
+  "business_acumen": 66,
+  "growth_stage": "Builder",
+  "strengths": [
+    "Strong React skills",
+    "Automotive domain expertise"
+  ],
+  "weaknesses": [
+    "Limited public-speaking experience"
+  ],
+  "growth_signals": [],
+  "leadership_signals": [],
+  "career_progression_score": 50,
+  "risk_profile": "Medium",
+  "recommended_roles": [],
+  "success_environments": [],
+  "confidence": 48,
+  "reasoning": [],
+  "generated_at": "2026-06-27T16:40:08.989978Z",
+  "processing_time_ms": 0,
+  "version": "candidate-twin-v1"
+}

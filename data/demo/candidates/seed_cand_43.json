@@ -1,0 +1,43 @@
+{
+  "candidate_id": "seed_cand_43",
+  "name": "Candidate 43 (Senior Full Stack Engineer)",
+  "email": "cand43@example.com",
+  "phone": "+15550000000",
+  "experience": "8 years",
+  "skills": [
+    "Tailwind CSS",
+    "Next.js",
+    "AWS",
+    "PostgreSQL",
+    "Node.js",
+    "React"
+  ],
+  "projects": [
+    "Built a scalable system for Fintech",
+    "Led initiative in full stack engineer"
+  ],
+  "domains": [
+    "Fintech"
+  ],
+  "strengths": [
+    "Leadership",
+    "Problem Solver"
+  ],
+  "weaknesses": [
+    "Delegation"
+  ],
+  "career_trajectory": "Steady Specialist",
+  "growth_stage": "Builder",
+  "risk_profile": "Low",
+  "timeline": [
+    {
+      "event": "Started",
+      "year": "2020",
+      "role": "Engineer"
+    }
+  ],
+  "technical_depth": 88,
+  "learning_velocity": 87,
+  "ownership": 78,
+  "communication": 50
+}

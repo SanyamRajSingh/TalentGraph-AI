@@ -1,0 +1,77 @@
+{
+  "candidate_id": "seed_data_scientist_06",
+  "resume_id": null,
+  "resume_versions": [],
+  "name": "Mid-Level Data Scientist #7",
+  "email": "mid-level.datascientist7@talentgraph.dev",
+  "phone": "+1-555-102-1006",
+  "location": "Berlin, Germany",
+  "skills": [
+    "Python",
+    "Pandas",
+    "Scikit-learn",
+    "Spark",
+    "Payments"
+  ],
+  "technologies": [],
+  "projects": [
+    "Led Fintech platform rebuild (25% perf gain)",
+    "Shipped Data Scientist tooling for distributed teams"
+  ],
+  "experiences": [],
+  "certifications": [],
+  "achievements": [],
+  "domains": [
+    "Fintech"
+  ],
+  "timeline": [
+    {
+      "year": 2024,
+      "event": "Mid-Level Data Scientist at TechStartup"
+    },
+    {
+      "year": 2023,
+      "event": "Mid-Level Data Scientist at MegaCorp"
+    },
+    {
+      "year": 2022,
+      "event": "Mid-Level Data Scientist at ScaleAI"
+    },
+    {
+      "year": 2021,
+      "event": "Mid-Level Data Scientist at DevHouse"
+    }
+  ],
+  "evaluations_history": [],
+  "technical_depth": 57,
+  "learning_velocity": 92,
+  "leadership": 41,
+  "ownership": 99,
+  "communication": 86,
+  "project_complexity": 51,
+  "collaboration": 70,
+  "consistency": 50,
+  "leadership_readiness": 46,
+  "adaptability": 64,
+  "execution_speed": 74,
+  "business_acumen": 87,
+  "growth_stage": "Builder",
+  "strengths": [
+    "Strong Python skills",
+    "Fintech domain expertise"
+  ],
+  "weaknesses": [
+    "Limited public-speaking experience"
+  ],
+  "growth_signals": [],
+  "leadership_signals": [],
+  "career_progression_score": 50,
+  "risk_profile": "Low",
+  "recommended_roles": [],
+  "success_environments": [],
+  "confidence": 63,
+  "reasoning": [],
+  "generated_at": "2026-06-27T16:40:08.988954Z",
+  "processing_time_ms": 0,
+  "version": "candidate-twin-v1"
+}

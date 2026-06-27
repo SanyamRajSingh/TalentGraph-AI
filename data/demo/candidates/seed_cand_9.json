@@ -1,0 +1,43 @@
+{
+  "candidate_id": "seed_cand_9",
+  "name": "Candidate 9 (Intern Backend Engineer)",
+  "email": "cand9@example.com",
+  "phone": "+15550000000",
+  "experience": "2 years",
+  "skills": [
+    "Go",
+    "Redis",
+    "Python",
+    "AWS",
+    "gRPC",
+    "Kafka"
+  ],
+  "projects": [
+    "Built a scalable system for Fintech",
+    "Led initiative in backend engineer"
+  ],
+  "domains": [
+    "Fintech"
+  ],
+  "strengths": [
+    "Fast Learner",
+    "Deep Technical Expertise"
+  ],
+  "weaknesses": [
+    "Context Switching"
+  ],
+  "career_trajectory": "Rapid Promotion Track",
+  "growth_stage": "Explorer",
+  "risk_profile": "Medium",
+  "timeline": [
+    {
+      "event": "Started",
+      "year": "2020",
+      "role": "Engineer"
+    }
+  ],
+  "technical_depth": 58,
+  "learning_velocity": 65,
+  "ownership": 47,
+  "communication": 88
+}

@@ -1,0 +1,43 @@
+{
+  "candidate_id": "seed_cand_38",
+  "name": "Candidate 38 (Mid Product Analyst)",
+  "email": "cand38@example.com",
+  "phone": "+15550000000",
+  "experience": "5 years",
+  "skills": [
+    "SQL",
+    "Tableau",
+    "Product Sense",
+    "Looker",
+    "Python",
+    "Google Analytics"
+  ],
+  "projects": [
+    "Built a scalable system for Fintech",
+    "Led initiative in product analyst"
+  ],
+  "domains": [
+    "Fintech"
+  ],
+  "strengths": [
+    "Fast Learner",
+    "Deep Technical Expertise"
+  ],
+  "weaknesses": [
+    "Context Switching"
+  ],
+  "career_trajectory": "Emerging Leader",
+  "growth_stage": "Explorer",
+  "risk_profile": "Low",
+  "timeline": [
+    {
+      "event": "Started",
+      "year": "2020",
+      "role": "Engineer"
+    }
+  ],
+  "technical_depth": 64,
+  "learning_velocity": 80,
+  "ownership": 63,
+  "communication": 87
+}

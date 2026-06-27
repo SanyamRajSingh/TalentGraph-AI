@@ -1,0 +1,85 @@
+{
+  "candidate_id": "seed_data_scientist_07",
+  "resume_id": null,
+  "resume_versions": [],
+  "name": "Senior Data Scientist #8",
+  "email": "senior.datascientist8@talentgraph.dev",
+  "phone": "+1-555-102-1007",
+  "location": "Toronto, Canada",
+  "skills": [
+    "Python",
+    "Pandas",
+    "Scikit-learn",
+    "Spark",
+    "EHR Integration"
+  ],
+  "technologies": [],
+  "projects": [
+    "Led Healthcare platform rebuild (25% perf gain)",
+    "Shipped Data Scientist tooling for distributed teams"
+  ],
+  "experiences": [],
+  "certifications": [],
+  "achievements": [],
+  "domains": [
+    "Healthcare"
+  ],
+  "timeline": [
+    {
+      "year": 2024,
+      "event": "Senior Data Scientist at TechStartup"
+    },
+    {
+      "year": 2023,
+      "event": "Senior Data Scientist at MegaCorp"
+    },
+    {
+      "year": 2022,
+      "event": "Senior Data Scientist at ScaleAI"
+    },
+    {
+      "year": 2021,
+      "event": "Senior Data Scientist at DevHouse"
+    },
+    {
+      "year": 2020,
+      "event": "Senior Data Scientist at InnovateCo"
+    },
+    {
+      "year": 2019,
+      "event": "Senior Data Scientist at BuildFast"
+    }
+  ],
+  "evaluations_history": [],
+  "technical_depth": 64,
+  "learning_velocity": 63,
+  "leadership": 43,
+  "ownership": 71,
+  "communication": 66,
+  "project_complexity": 51,
+  "collaboration": 71,
+  "consistency": 50,
+  "leadership_readiness": 48,
+  "adaptability": 70,
+  "execution_speed": 81,
+  "business_acumen": 90,
+  "growth_stage": "Technical Specialist",
+  "strengths": [
+    "Strong Python skills",
+    "Healthcare domain expertise"
+  ],
+  "weaknesses": [
+    "Limited public-speaking experience"
+  ],
+  "growth_signals": [],
+  "leadership_signals": [],
+  "career_progression_score": 50,
+  "risk_profile": "Medium",
+  "recommended_roles": [],
+  "success_environments": [],
+  "confidence": 56,
+  "reasoning": [],
+  "generated_at": "2026-06-27T16:40:08.989018Z",
+  "processing_time_ms": 0,
+  "version": "candidate-twin-v1"
+}

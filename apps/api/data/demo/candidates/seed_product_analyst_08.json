@@ -1,0 +1,85 @@
+{
+  "candidate_id": "seed_product_analyst_08",
+  "resume_id": null,
+  "resume_versions": [],
+  "name": "Lead Product Analyst #9",
+  "email": "lead.productanalyst9@talentgraph.dev",
+  "phone": "+1-555-103-1008",
+  "location": "San Francisco, CA",
+  "skills": [
+    "SQL",
+    "Tableau",
+    "A/B Testing",
+    "Excel",
+    "Multi-tenancy"
+  ],
+  "technologies": [],
+  "projects": [
+    "Led SaaS platform rebuild (25% perf gain)",
+    "Shipped Product Analyst tooling for distributed teams"
+  ],
+  "experiences": [],
+  "certifications": [],
+  "achievements": [],
+  "domains": [
+    "SaaS"
+  ],
+  "timeline": [
+    {
+      "year": 2024,
+      "event": "Lead Product Analyst at TechStartup"
+    },
+    {
+      "year": 2023,
+      "event": "Lead Product Analyst at MegaCorp"
+    },
+    {
+      "year": 2022,
+      "event": "Lead Product Analyst at ScaleAI"
+    },
+    {
+      "year": 2021,
+      "event": "Lead Product Analyst at DevHouse"
+    },
+    {
+      "year": 2020,
+      "event": "Lead Product Analyst at InnovateCo"
+    },
+    {
+      "year": 2019,
+      "event": "Lead Product Analyst at BuildFast"
+    }
+  ],
+  "evaluations_history": [],
+  "technical_depth": 75,
+  "learning_velocity": 84,
+  "leadership": 48,
+  "ownership": 91,
+  "communication": 82,
+  "project_complexity": 80,
+  "collaboration": 86,
+  "consistency": 50,
+  "leadership_readiness": 53,
+  "adaptability": 63,
+  "execution_speed": 80,
+  "business_acumen": 58,
+  "growth_stage": "Emerging Leader",
+  "strengths": [
+    "Strong SQL skills",
+    "SaaS domain expertise"
+  ],
+  "weaknesses": [
+    "Limited public-speaking experience"
+  ],
+  "growth_signals": [],
+  "leadership_signals": [],
+  "career_progression_score": 50,
+  "risk_profile": "Low",
+  "recommended_roles": [],
+  "success_environments": [],
+  "confidence": 69,
+  "reasoning": [],
+  "generated_at": "2026-06-27T16:40:08.989743Z",
+  "processing_time_ms": 0,
+  "version": "candidate-twin-v1"
+}

@@ -1,0 +1,85 @@
+{
+  "candidate_id": "seed_full_stack_engineer_07",
+  "resume_id": null,
+  "resume_versions": [],
+  "name": "Senior Full Stack Engineer #8",
+  "email": "senior.fullstackengineer8@talentgraph.dev",
+  "phone": "+1-555-104-1007",
+  "location": "Toronto, Canada",
+  "skills": [
+    "React",
+    "TypeScript",
+    "Node.js",
+    "FastAPI",
+    "Pen Testing"
+  ],
+  "technologies": [],
+  "projects": [
+    "Led Cybersecurity platform rebuild (25% perf gain)",
+    "Shipped Full Stack Engineer tooling for distributed teams"
+  ],
+  "experiences": [],
+  "certifications": [],
+  "achievements": [],
+  "domains": [
+    "Cybersecurity"
+  ],
+  "timeline": [
+    {
+      "year": 2024,
+      "event": "Senior Full Stack Engineer at TechStartup"
+    },
+    {
+      "year": 2023,
+      "event": "Senior Full Stack Engineer at MegaCorp"
+    },
+    {
+      "year": 2022,
+      "event": "Senior Full Stack Engineer at ScaleAI"
+    },
+    {
+      "year": 2021,
+      "event": "Senior Full Stack Engineer at DevHouse"
+    },
+    {
+      "year": 2020,
+      "event": "Senior Full Stack Engineer at InnovateCo"
+    },
+    {
+      "year": 2019,
+      "event": "Senior Full Stack Engineer at BuildFast"
+    }
+  ],
+  "evaluations_history": [],
+  "technical_depth": 85,
+  "learning_velocity": 74,
+  "leadership": 52,
+  "ownership": 81,
+  "communication": 75,
+  "project_complexity": 67,
+  "collaboration": 94,
+  "consistency": 50,
+  "leadership_readiness": 57,
+  "adaptability": 78,
+  "execution_speed": 95,
+  "business_acumen": 69,
+  "growth_stage": "Technical Specialist",
+  "strengths": [
+    "Strong React skills",
+    "Cybersecurity domain expertise"
+  ],
+  "weaknesses": [
+    "Limited public-speaking experience"
+  ],
+  "growth_signals": [],
+  "leadership_signals": [],
+  "career_progression_score": 50,
+  "risk_profile": "Medium",
+  "recommended_roles": [],
+  "success_environments": [],
+  "confidence": 70,
+  "reasoning": [],
+  "generated_at": "2026-06-27T16:40:08.990366Z",
+  "processing_time_ms": 0,
+  "version": "candidate-twin-v1"
+}

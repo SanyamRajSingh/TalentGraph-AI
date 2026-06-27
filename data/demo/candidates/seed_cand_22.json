@@ -1,0 +1,43 @@
+{
+  "candidate_id": "seed_cand_22",
+  "name": "Candidate 22 (Junior Data Scientist)",
+  "email": "cand22@example.com",
+  "phone": "+15550000000",
+  "experience": "3 years",
+  "skills": [
+    "R",
+    "NumPy",
+    "Python",
+    "Tableau",
+    "Pandas",
+    "SQL"
+  ],
+  "projects": [
+    "Built a scalable system for Cloud",
+    "Led initiative in data scientist"
+  ],
+  "domains": [
+    "Cloud"
+  ],
+  "strengths": [
+    "Strong Communicator",
+    "Leadership"
+  ],
+  "weaknesses": [
+    "Impatience with Process"
+  ],
+  "career_trajectory": "Cross-Functional Contributor",
+  "growth_stage": "Explorer",
+  "risk_profile": "Medium",
+  "timeline": [
+    {
+      "event": "Started",
+      "year": "2020",
+      "role": "Engineer"
+    }
+  ],
+  "technical_depth": 60,
+  "learning_velocity": 86,
+  "ownership": 52,
+  "communication": 88
+}

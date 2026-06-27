@@ -1,0 +1,85 @@
+{
+  "candidate_id": "seed_backend_engineer_04",
+  "resume_id": null,
+  "resume_versions": [],
+  "name": "Principal Backend Engineer #5",
+  "email": "principal.backendengineer5@talentgraph.dev",
+  "phone": "+1-555-100-1004",
+  "location": "Remote",
+  "skills": [
+    "Python",
+    "FastAPI",
+    "PostgreSQL",
+    "Redis",
+    "Multi-tenancy"
+  ],
+  "technologies": [],
+  "projects": [
+    "Led SaaS platform rebuild (25% perf gain)",
+    "Shipped Backend Engineer tooling for distributed teams"
+  ],
+  "experiences": [],
+  "certifications": [],
+  "achievements": [],
+  "domains": [
+    "SaaS"
+  ],
+  "timeline": [
+    {
+      "year": 2024,
+      "event": "Principal Backend Engineer at TechStartup"
+    },
+    {
+      "year": 2023,
+      "event": "Principal Backend Engineer at MegaCorp"
+    },
+    {
+      "year": 2022,
+      "event": "Principal Backend Engineer at ScaleAI"
+    },
+    {
+      "year": 2021,
+      "event": "Principal Backend Engineer at DevHouse"
+    },
+    {
+      "year": 2020,
+      "event": "Principal Backend Engineer at InnovateCo"
+    },
+    {
+      "year": 2019,
+      "event": "Principal Backend Engineer at BuildFast"
+    }
+  ],
+  "evaluations_history": [],
+  "technical_depth": 100,
+  "learning_velocity": 82,
+  "leadership": 97,
+  "ownership": 90,
+  "communication": 86,
+  "project_complexity": 100,
+  "collaboration": 79,
+  "consistency": 50,
+  "leadership_readiness": 100,
+  "adaptability": 90,
+  "execution_speed": 84,
+  "business_acumen": 89,
+  "growth_stage": "Technical Specialist",
+  "strengths": [
+    "Strong Python skills",
+    "SaaS domain expertise"
+  ],
+  "weaknesses": [
+    "Limited public-speaking experience"
+  ],
+  "growth_signals": [],
+  "leadership_signals": [],
+  "career_progression_score": 50,
+  "risk_profile": "Low",
+  "recommended_roles": [],
+  "success_environments": [],
+  "confidence": 93,
+  "reasoning": [],
+  "generated_at": "2026-06-27T16:40:08.987256Z",
+  "processing_time_ms": 0,
+  "version": "candidate-twin-v1"
+}

@@ -1,0 +1,43 @@
+{
+  "candidate_id": "seed_cand_42",
+  "name": "Candidate 42 (Mid Full Stack Engineer)",
+  "email": "cand42@example.com",
+  "phone": "+15550000000",
+  "experience": "4 years",
+  "skills": [
+    "Next.js",
+    "TypeScript",
+    "GraphQL",
+    "Tailwind CSS",
+    "Express",
+    "PostgreSQL"
+  ],
+  "projects": [
+    "Built a scalable system for SaaS",
+    "Led initiative in full stack engineer"
+  ],
+  "domains": [
+    "SaaS"
+  ],
+  "strengths": [
+    "Leadership",
+    "Product Mindset"
+  ],
+  "weaknesses": [
+    "Impatience with Process"
+  ],
+  "career_trajectory": "Steady Specialist",
+  "growth_stage": "Explorer",
+  "risk_profile": "Low",
+  "timeline": [
+    {
+      "event": "Started",
+      "year": "2020",
+      "role": "Engineer"
+    }
+  ],
+  "technical_depth": 65,
+  "learning_velocity": 93,
+  "ownership": 55,
+  "communication": 80
+}

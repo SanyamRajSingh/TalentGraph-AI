@@ -1,0 +1,43 @@
+{
+  "candidate_id": "seed_cand_31",
+  "name": "Candidate 31 (Junior Product Analyst)",
+  "email": "cand31@example.com",
+  "phone": "+15550000000",
+  "experience": "3 years",
+  "skills": [
+    "Mixpanel",
+    "Excel",
+    "Tableau",
+    "SQL",
+    "Google Analytics",
+    "Python"
+  ],
+  "projects": [
+    "Built a scalable system for SaaS",
+    "Led initiative in product analyst"
+  ],
+  "domains": [
+    "SaaS"
+  ],
+  "strengths": [
+    "Product Mindset",
+    "Strong Communicator"
+  ],
+  "weaknesses": [
+    "Delegation"
+  ],
+  "career_trajectory": "Rapid Promotion Track",
+  "growth_stage": "Explorer",
+  "risk_profile": "Medium",
+  "timeline": [
+    {
+      "event": "Started",
+      "year": "2020",
+      "role": "Engineer"
+    }
+  ],
+  "technical_depth": 60,
+  "learning_velocity": 80,
+  "ownership": 43,
+  "communication": 85
+}

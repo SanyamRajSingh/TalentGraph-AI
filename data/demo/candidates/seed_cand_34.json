@@ -1,0 +1,43 @@
+{
+  "candidate_id": "seed_cand_34",
+  "name": "Candidate 34 (Senior Product Analyst)",
+  "email": "cand34@example.com",
+  "phone": "+15550000000",
+  "experience": "8 years",
+  "skills": [
+    "Looker",
+    "Tableau",
+    "Excel",
+    "SQL",
+    "Google Analytics",
+    "Product Sense"
+  ],
+  "projects": [
+    "Built a scalable system for E-commerce",
+    "Led initiative in product analyst"
+  ],
+  "domains": [
+    "E-commerce"
+  ],
+  "strengths": [
+    "Data-Driven",
+    "Fast Learner"
+  ],
+  "weaknesses": [
+    "Over-engineers solutions"
+  ],
+  "career_trajectory": "Cross-Functional Contributor",
+  "growth_stage": "Builder",
+  "risk_profile": "Low",
+  "timeline": [
+    {
+      "event": "Started",
+      "year": "2020",
+      "role": "Engineer"
+    }
+  ],
+  "technical_depth": 87,
+  "learning_velocity": 65,
+  "ownership": 83,
+  "communication": 77
+}

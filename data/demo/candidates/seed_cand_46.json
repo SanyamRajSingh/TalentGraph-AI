@@ -1,0 +1,43 @@
+{
+  "candidate_id": "seed_cand_46",
+  "name": "Candidate 46 (Mid Full Stack Engineer)",
+  "email": "cand46@example.com",
+  "phone": "+15550000000",
+  "experience": "4 years",
+  "skills": [
+    "TypeScript",
+    "GraphQL",
+    "Tailwind CSS",
+    "AWS",
+    "React",
+    "PostgreSQL"
+  ],
+  "projects": [
+    "Built a scalable system for Healthcare",
+    "Led initiative in full stack engineer"
+  ],
+  "domains": [
+    "Healthcare"
+  ],
+  "strengths": [
+    "Strong Communicator",
+    "Problem Solver"
+  ],
+  "weaknesses": [
+    "Delegation"
+  ],
+  "career_trajectory": "Cross-Functional Contributor",
+  "growth_stage": "Explorer",
+  "risk_profile": "Low",
+  "timeline": [
+    {
+      "event": "Started",
+      "year": "2020",
+      "role": "Engineer"
+    }
+  ],
+  "technical_depth": 60,
+  "learning_velocity": 73,
+  "ownership": 58,
+  "communication": 83
+}

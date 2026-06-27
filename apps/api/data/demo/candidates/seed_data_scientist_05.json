@@ -1,0 +1,69 @@
+{
+  "candidate_id": "seed_data_scientist_05",
+  "resume_id": null,
+  "resume_versions": [],
+  "name": "Junior Data Scientist #6",
+  "email": "junior.datascientist6@talentgraph.dev",
+  "phone": "+1-555-102-1005",
+  "location": "London, UK",
+  "skills": [
+    "Python",
+    "Pandas",
+    "Scikit-learn",
+    "Spark",
+    "ADAS"
+  ],
+  "technologies": [],
+  "projects": [
+    "Led Automotive platform rebuild (25% perf gain)",
+    "Shipped Data Scientist tooling for distributed teams"
+  ],
+  "experiences": [],
+  "certifications": [],
+  "achievements": [],
+  "domains": [
+    "Automotive"
+  ],
+  "timeline": [
+    {
+      "year": 2024,
+      "event": "Junior Data Scientist at TechStartup"
+    },
+    {
+      "year": 2023,
+      "event": "Junior Data Scientist at MegaCorp"
+    }
+  ],
+  "evaluations_history": [],
+  "technical_depth": 47,
+  "learning_velocity": 74,
+  "leadership": 32,
+  "ownership": 89,
+  "communication": 69,
+  "project_complexity": 26,
+  "collaboration": 81,
+  "consistency": 50,
+  "leadership_readiness": 37,
+  "adaptability": 67,
+  "execution_speed": 68,
+  "business_acumen": 85,
+  "growth_stage": "Builder",
+  "strengths": [
+    "Strong Python skills",
+    "Automotive domain expertise"
+  ],
+  "weaknesses": [
+    "Limited public-speaking experience"
+  ],
+  "growth_signals": [],
+  "leadership_signals": [],
+  "career_progression_score": 50,
+  "risk_profile": "Medium",
+  "recommended_roles": [],
+  "success_environments": [],
+  "confidence": 51,
+  "reasoning": [],
+  "generated_at": "2026-06-27T16:40:08.988888Z",
+  "processing_time_ms": 0,
+  "version": "candidate-twin-v1"
+}

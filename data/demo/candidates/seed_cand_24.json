@@ -1,0 +1,43 @@
+{
+  "candidate_id": "seed_cand_24",
+  "name": "Candidate 24 (Mid Data Scientist)",
+  "email": "cand24@example.com",
+  "phone": "+15550000000",
+  "experience": "5 years",
+  "skills": [
+    "SQL",
+    "NumPy",
+    "Stats",
+    "Pandas",
+    "Python",
+    "A/B Testing"
+  ],
+  "projects": [
+    "Built a scalable system for EdTech",
+    "Led initiative in data scientist"
+  ],
+  "domains": [
+    "EdTech"
+  ],
+  "strengths": [
+    "Leadership",
+    "Problem Solver"
+  ],
+  "weaknesses": [
+    "Over-engineers solutions"
+  ],
+  "career_trajectory": "Rapid Promotion Track",
+  "growth_stage": "Explorer",
+  "risk_profile": "Low",
+  "timeline": [
+    {
+      "event": "Started",
+      "year": "2020",
+      "role": "Engineer"
+    }
+  ],
+  "technical_depth": 64,
+  "learning_velocity": 88,
+  "ownership": 67,
+  "communication": 91
+}

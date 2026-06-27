@@ -27,6 +27,7 @@ INTENT_MAP: list[tuple[str, list[str]]] = [
     ("why_a_over_b",    ["why", "over", "better than", "compare to"]),
     ("transition_ml",   ["transition into ml", "move to ml", "learn ml", "switch to ml"]),
     ("draft_email",     ["draft outreach email", "draft email", "write email", "outreach"]),
+    ("fintech",         ["fintech", "finance", "banking", "financial"]),
     ("help",            ["help", "what can you do", "how do you work", "commands"]),
 ]
 
@@ -204,6 +205,9 @@ def _answer_why_a_over_b(candidate: CandidateDigitalTwin | None, role: RoleDNAPr
 def _answer_transition_ml(candidate: CandidateDigitalTwin | None, role: RoleDNAProfile | None) -> tuple[str, list[str]]:
     return ("Strong backend engineers with high learning velocity and problem-solving scores can often transition into ML smoothly.", ["Draft outreach email."])
 
+def _answer_fintech(candidate: CandidateDigitalTwin | None, role: RoleDNAProfile | None) -> tuple[str, list[str]]:
+    return ("Candidates with strong distributed systems, security, or strict compliance backgrounds are often great fits for fintech roles.", ["Which candidates are similar?"])
+
 def _answer_draft_email(candidate: CandidateDigitalTwin | None, role: RoleDNAProfile | None) -> tuple[str, list[str]]:
     name = candidate.name if candidate else "[Candidate]"
     return (f"Subject: Exploring opportunities at our company\n\nHi {name},\n\nI was impressed by your background and would love to chat about a potential fit for our open role. Let me know when you're free for a quick call.\n\nBest,\nRecruiting Team", ["What are their strengths?"])
@@ -228,6 +232,7 @@ _HANDLERS = {
     "why_a_over_b":   _answer_why_a_over_b,
     "transition_ml":  _answer_transition_ml,
     "draft_email":    _answer_draft_email,
+    "fintech":        _answer_fintech,
     "help":           _answer_help,
     "general":        _answer_general,
 }
@@ -245,21 +250,28 @@ class CopilotChatService:
         self.role_repository = role_repository
 
     def chat(self, request: CopilotChatRequest) -> CopilotChatResponse:
-        candidate: CandidateDigitalTwin | None = None
-        role: RoleDNAProfile | None = None
+        try:
+            candidate: CandidateDigitalTwin | None = None
+            role: RoleDNAProfile | None = None
 
-        if request.candidate_id and self.candidate_repository:
-            candidate = self.candidate_repository.get_by_candidate_id(request.candidate_id)
+            if request.candidate_id and self.candidate_repository:
+                candidate = self.candidate_repository.get_by_candidate_id(request.candidate_id)
 
-        if request.role_id and self.role_repository:
-            role = self.role_repository.get_by_role_id(request.role_id)
+            if request.role_id and self.role_repository:
+                role = self.role_repository.get_by_role_id(request.role_id)
 
-        intent = _classify_intent(request.message)
-        handler = _HANDLERS.get(intent, _answer_general)
-        answer, follow_ups = handler(candidate, role)
+            intent = _classify_intent(request.message)
+            handler = _HANDLERS.get(intent, _answer_general)
+            answer, follow_ups = handler(candidate, role)
 
-        return CopilotChatResponse(
-            intent=intent,
-            answer=answer,
-            follow_up_questions=follow_ups,
-        )
+            return CopilotChatResponse(
+                intent=intent,
+                answer=answer,
+                follow_up_questions=follow_ups,
+            )
+        except Exception:
+            return CopilotChatResponse(
+                intent="error",
+                answer="I do not yet have enough information to answer this question.",
+                follow_up_questions=[]
+            )

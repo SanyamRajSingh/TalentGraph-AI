@@ -1,0 +1,43 @@
+{
+  "candidate_id": "seed_cand_3",
+  "name": "Candidate 3 (Junior Backend Engineer)",
+  "email": "cand3@example.com",
+  "phone": "+15550000000",
+  "experience": "1 years",
+  "skills": [
+    "Java",
+    "AWS",
+    "Python",
+    "Kafka",
+    "gRPC",
+    "PostgreSQL"
+  ],
+  "projects": [
+    "Built a scalable system for AI/ML",
+    "Led initiative in backend engineer"
+  ],
+  "domains": [
+    "AI/ML"
+  ],
+  "strengths": [
+    "Strong Communicator",
+    "Leadership"
+  ],
+  "weaknesses": [
+    "Context Switching"
+  ],
+  "career_trajectory": "Rapid Promotion Track",
+  "growth_stage": "Explorer",
+  "risk_profile": "Medium",
+  "timeline": [
+    {
+      "event": "Started",
+      "year": "2020",
+      "role": "Engineer"
+    }
+  ],
+  "technical_depth": 51,
+  "learning_velocity": 69,
+  "ownership": 39,
+  "communication": 73
+}

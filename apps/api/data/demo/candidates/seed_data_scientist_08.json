@@ -1,0 +1,85 @@
+{
+  "candidate_id": "seed_data_scientist_08",
+  "resume_id": null,
+  "resume_versions": [],
+  "name": "Lead Data Scientist #9",
+  "email": "lead.datascientist9@talentgraph.dev",
+  "phone": "+1-555-102-1008",
+  "location": "San Francisco, CA",
+  "skills": [
+    "Python",
+    "Pandas",
+    "Scikit-learn",
+    "Spark",
+    "Inventory Systems"
+  ],
+  "technologies": [],
+  "projects": [
+    "Led E-commerce platform rebuild (25% perf gain)",
+    "Shipped Data Scientist tooling for distributed teams"
+  ],
+  "experiences": [],
+  "certifications": [],
+  "achievements": [],
+  "domains": [
+    "E-commerce"
+  ],
+  "timeline": [
+    {
+      "year": 2024,
+      "event": "Lead Data Scientist at TechStartup"
+    },
+    {
+      "year": 2023,
+      "event": "Lead Data Scientist at MegaCorp"
+    },
+    {
+      "year": 2022,
+      "event": "Lead Data Scientist at ScaleAI"
+    },
+    {
+      "year": 2021,
+      "event": "Lead Data Scientist at DevHouse"
+    },
+    {
+      "year": 2020,
+      "event": "Lead Data Scientist at InnovateCo"
+    },
+    {
+      "year": 2019,
+      "event": "Lead Data Scientist at BuildFast"
+    }
+  ],
+  "evaluations_history": [],
+  "technical_depth": 68,
+  "learning_velocity": 77,
+  "leadership": 53,
+  "ownership": 83,
+  "communication": 95,
+  "project_complexity": 74,
+  "collaboration": 80,
+  "consistency": 50,
+  "leadership_readiness": 58,
+  "adaptability": 74,
+  "execution_speed": 91,
+  "business_acumen": 86,
+  "growth_stage": "Emerging Leader",
+  "strengths": [
+    "Strong Python skills",
+    "E-commerce domain expertise"
+  ],
+  "weaknesses": [
+    "Limited public-speaking experience"
+  ],
+  "growth_signals": [],
+  "leadership_signals": [],
+  "career_progression_score": 50,
+  "risk_profile": "Medium",
+  "recommended_roles": [],
+  "success_environments": [],
+  "confidence": 66,
+  "reasoning": [],
+  "generated_at": "2026-06-27T16:40:08.989104Z",
+  "processing_time_ms": 0,
+  "version": "candidate-twin-v1"
+}

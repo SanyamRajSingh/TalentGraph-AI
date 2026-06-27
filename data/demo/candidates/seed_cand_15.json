@@ -1,0 +1,43 @@
+{
+  "candidate_id": "seed_cand_15",
+  "name": "Candidate 15 (Intern ML Engineer)",
+  "email": "cand15@example.com",
+  "phone": "+15550000000",
+  "experience": "2 years",
+  "skills": [
+    "Hugging Face",
+    "TensorFlow",
+    "CUDA",
+    "Ray",
+    "Python",
+    "scikit-learn"
+  ],
+  "projects": [
+    "Built a scalable system for E-commerce",
+    "Led initiative in ml engineer"
+  ],
+  "domains": [
+    "E-commerce"
+  ],
+  "strengths": [
+    "Strong Communicator",
+    "Problem Solver"
+  ],
+  "weaknesses": [
+    "Impatience with Process"
+  ],
+  "career_trajectory": "Emerging Leader",
+  "growth_stage": "Explorer",
+  "risk_profile": "Medium",
+  "timeline": [
+    {
+      "event": "Started",
+      "year": "2020",
+      "role": "Engineer"
+    }
+  ],
+  "technical_depth": 53,
+  "learning_velocity": 90,
+  "ownership": 51,
+  "communication": 70
+}

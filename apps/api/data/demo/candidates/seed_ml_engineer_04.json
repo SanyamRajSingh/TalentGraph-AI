@@ -1,0 +1,85 @@
+{
+  "candidate_id": "seed_ml_engineer_04",
+  "resume_id": null,
+  "resume_versions": [],
+  "name": "Principal ML Engineer #5",
+  "email": "principal.mlengineer5@talentgraph.dev",
+  "phone": "+1-555-101-1004",
+  "location": "Remote",
+  "skills": [
+    "Python",
+    "PyTorch",
+    "MLflow",
+    "Kubeflow",
+    "AWS"
+  ],
+  "technologies": [],
+  "projects": [
+    "Led Cloud platform rebuild (25% perf gain)",
+    "Shipped ML Engineer tooling for distributed teams"
+  ],
+  "experiences": [],
+  "certifications": [],
+  "achievements": [],
+  "domains": [
+    "Cloud"
+  ],
+  "timeline": [
+    {
+      "year": 2024,
+      "event": "Principal ML Engineer at TechStartup"
+    },
+    {
+      "year": 2023,
+      "event": "Principal ML Engineer at MegaCorp"
+    },
+    {
+      "year": 2022,
+      "event": "Principal ML Engineer at ScaleAI"
+    },
+    {
+      "year": 2021,
+      "event": "Principal ML Engineer at DevHouse"
+    },
+    {
+      "year": 2020,
+      "event": "Principal ML Engineer at InnovateCo"
+    },
+    {
+      "year": 2019,
+      "event": "Principal ML Engineer at BuildFast"
+    }
+  ],
+  "evaluations_history": [],
+  "technical_depth": 100,
+  "learning_velocity": 71,
+  "leadership": 87,
+  "ownership": 81,
+  "communication": 78,
+  "project_complexity": 100,
+  "collaboration": 70,
+  "consistency": 50,
+  "leadership_readiness": 92,
+  "adaptability": 64,
+  "execution_speed": 87,
+  "business_acumen": 87,
+  "growth_stage": "Technical Specialist",
+  "strengths": [
+    "Strong Python skills",
+    "Cloud domain expertise"
+  ],
+  "weaknesses": [
+    "Limited public-speaking experience"
+  ],
+  "growth_signals": [],
+  "leadership_signals": [],
+  "career_progression_score": 50,
+  "risk_profile": "Medium",
+  "recommended_roles": [],
+  "success_environments": [],
+  "confidence": 86,
+  "reasoning": [],
+  "generated_at": "2026-06-27T16:40:08.987937Z",
+  "processing_time_ms": 0,
+  "version": "candidate-twin-v1"
+}

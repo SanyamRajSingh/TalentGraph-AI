@@ -1,0 +1,85 @@
+{
+  "candidate_id": "seed_data_scientist_03",
+  "resume_id": null,
+  "resume_versions": [],
+  "name": "Lead Data Scientist #4",
+  "email": "lead.datascientist4@talentgraph.dev",
+  "phone": "+1-555-102-1003",
+  "location": "Seattle, WA",
+  "skills": [
+    "Python",
+    "Pandas",
+    "Scikit-learn",
+    "Spark",
+    "LLMs"
+  ],
+  "technologies": [],
+  "projects": [
+    "Led AI/ML platform rebuild (25% perf gain)",
+    "Shipped Data Scientist tooling for distributed teams"
+  ],
+  "experiences": [],
+  "certifications": [],
+  "achievements": [],
+  "domains": [
+    "AI/ML"
+  ],
+  "timeline": [
+    {
+      "year": 2024,
+      "event": "Lead Data Scientist at TechStartup"
+    },
+    {
+      "year": 2023,
+      "event": "Lead Data Scientist at MegaCorp"
+    },
+    {
+      "year": 2022,
+      "event": "Lead Data Scientist at ScaleAI"
+    },
+    {
+      "year": 2021,
+      "event": "Lead Data Scientist at DevHouse"
+    },
+    {
+      "year": 2020,
+      "event": "Lead Data Scientist at InnovateCo"
+    },
+    {
+      "year": 2019,
+      "event": "Lead Data Scientist at BuildFast"
+    }
+  ],
+  "evaluations_history": [],
+  "technical_depth": 73,
+  "learning_velocity": 60,
+  "leadership": 62,
+  "ownership": 73,
+  "communication": 61,
+  "project_complexity": 66,
+  "collaboration": 66,
+  "consistency": 50,
+  "leadership_readiness": 67,
+  "adaptability": 91,
+  "execution_speed": 75,
+  "business_acumen": 62,
+  "growth_stage": "Emerging Leader",
+  "strengths": [
+    "Strong Python skills",
+    "AI/ML domain expertise"
+  ],
+  "weaknesses": [
+    "Limited public-speaking experience"
+  ],
+  "growth_signals": [],
+  "leadership_signals": [],
+  "career_progression_score": 50,
+  "risk_profile": "Medium",
+  "recommended_roles": [],
+  "success_environments": [],
+  "confidence": 65,
+  "reasoning": [],
+  "generated_at": "2026-06-27T16:40:08.988751Z",
+  "processing_time_ms": 0,
+  "version": "candidate-twin-v1"
+}

@@ -1,0 +1,73 @@
+{
+  "candidate_id": "seed_ml_engineer_06",
+  "resume_id": null,
+  "resume_versions": [],
+  "name": "Mid-Level ML Engineer #7",
+  "email": "mid-level.mlengineer7@talentgraph.dev",
+  "phone": "+1-555-101-1006",
+  "location": "Berlin, Germany",
+  "skills": [
+    "Python",
+    "PyTorch",
+    "MLflow",
+    "Kubeflow",
+    "Unity"
+  ],
+  "technologies": [],
+  "projects": [
+    "Led Gaming platform rebuild (25% perf gain)",
+    "Shipped ML Engineer tooling for distributed teams"
+  ],
+  "experiences": [],
+  "certifications": [],
+  "achievements": [],
+  "domains": [
+    "Gaming"
+  ],
+  "timeline": [
+    {
+      "year": 2024,
+      "event": "Mid-Level ML Engineer at TechStartup"
+    },
+    {
+      "year": 2023,
+      "event": "Mid-Level ML Engineer at MegaCorp"
+    },
+    {
+      "year": 2022,
+      "event": "Mid-Level ML Engineer at ScaleAI"
+    }
+  ],
+  "evaluations_history": [],
+  "technical_depth": 47,
+  "learning_velocity": 73,
+  "leadership": 42,
+  "ownership": 82,
+  "communication": 81,
+  "project_complexity": 52,
+  "collaboration": 89,
+  "consistency": 50,
+  "leadership_readiness": 47,
+  "adaptability": 78,
+  "execution_speed": 78,
+  "business_acumen": 86,
+  "growth_stage": "Builder",
+  "strengths": [
+    "Strong Python skills",
+    "Gaming domain expertise"
+  ],
+  "weaknesses": [
+    "Limited public-speaking experience"
+  ],
+  "growth_signals": [],
+  "leadership_signals": [],
+  "career_progression_score": 50,
+  "risk_profile": "Medium",
+  "recommended_roles": [],
+  "success_environments": [],
+  "confidence": 54,
+  "reasoning": [],
+  "generated_at": "2026-06-27T16:40:08.988041Z",
+  "processing_time_ms": 0,
+  "version": "candidate-twin-v1"
+}

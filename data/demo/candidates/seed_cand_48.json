@@ -1,0 +1,43 @@
+{
+  "candidate_id": "seed_cand_48",
+  "name": "Candidate 48 (Lead Full Stack Engineer)",
+  "email": "cand48@example.com",
+  "phone": "+15550000000",
+  "experience": "11 years",
+  "skills": [
+    "Express",
+    "React",
+    "PostgreSQL",
+    "Node.js",
+    "Tailwind CSS",
+    "TypeScript"
+  ],
+  "projects": [
+    "Built a scalable system for Fintech",
+    "Led initiative in full stack engineer"
+  ],
+  "domains": [
+    "Fintech"
+  ],
+  "strengths": [
+    "Deep Technical Expertise",
+    "Product Mindset"
+  ],
+  "weaknesses": [
+    "Context Switching"
+  ],
+  "career_trajectory": "Emerging Leader",
+  "growth_stage": "Builder",
+  "risk_profile": "Low",
+  "timeline": [
+    {
+      "event": "Started",
+      "year": "2020",
+      "role": "Engineer"
+    }
+  ],
+  "technical_depth": 100,
+  "learning_velocity": 83,
+  "ownership": 96,
+  "communication": 88
+}

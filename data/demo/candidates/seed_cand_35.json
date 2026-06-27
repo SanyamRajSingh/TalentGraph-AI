@@ -1,0 +1,43 @@
+{
+  "candidate_id": "seed_cand_35",
+  "name": "Candidate 35 (Intern Product Analyst)",
+  "email": "cand35@example.com",
+  "phone": "+15550000000",
+  "experience": "2 years",
+  "skills": [
+    "Python",
+    "Looker",
+    "Mixpanel",
+    "SQL",
+    "Excel",
+    "Product Sense"
+  ],
+  "projects": [
+    "Built a scalable system for AI/ML",
+    "Led initiative in product analyst"
+  ],
+  "domains": [
+    "AI/ML"
+  ],
+  "strengths": [
+    "Strong Communicator",
+    "Fast Learner"
+  ],
+  "weaknesses": [
+    "Impatience with Process"
+  ],
+  "career_trajectory": "Emerging Leader",
+  "growth_stage": "Explorer",
+  "risk_profile": "Medium",
+  "timeline": [
+    {
+      "event": "Started",
+      "year": "2020",
+      "role": "Engineer"
+    }
+  ],
+  "technical_depth": 60,
+  "learning_velocity": 65,
+  "ownership": 43,
+  "communication": 58
+}

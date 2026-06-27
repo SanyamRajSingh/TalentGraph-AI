@@ -1,0 +1,85 @@
+{
+  "candidate_id": "seed_product_analyst_09",
+  "resume_id": null,
+  "resume_versions": [],
+  "name": "Principal Product Analyst #10",
+  "email": "principal.productanalyst10@talentgraph.dev",
+  "phone": "+1-555-103-1009",
+  "location": "New York, NY",
+  "skills": [
+    "SQL",
+    "Tableau",
+    "A/B Testing",
+    "Excel",
+    "Pen Testing"
+  ],
+  "technologies": [],
+  "projects": [
+    "Led Cybersecurity platform rebuild (25% perf gain)",
+    "Shipped Product Analyst tooling for distributed teams"
+  ],
+  "experiences": [],
+  "certifications": [],
+  "achievements": [],
+  "domains": [
+    "Cybersecurity"
+  ],
+  "timeline": [
+    {
+      "year": 2024,
+      "event": "Principal Product Analyst at TechStartup"
+    },
+    {
+      "year": 2023,
+      "event": "Principal Product Analyst at MegaCorp"
+    },
+    {
+      "year": 2022,
+      "event": "Principal Product Analyst at ScaleAI"
+    },
+    {
+      "year": 2021,
+      "event": "Principal Product Analyst at DevHouse"
+    },
+    {
+      "year": 2020,
+      "event": "Principal Product Analyst at InnovateCo"
+    },
+    {
+      "year": 2019,
+      "event": "Principal Product Analyst at BuildFast"
+    }
+  ],
+  "evaluations_history": [],
+  "technical_depth": 100,
+  "learning_velocity": 70,
+  "leadership": 88,
+  "ownership": 76,
+  "communication": 81,
+  "project_complexity": 94,
+  "collaboration": 82,
+  "consistency": 50,
+  "leadership_readiness": 93,
+  "adaptability": 77,
+  "execution_speed": 69,
+  "business_acumen": 72,
+  "growth_stage": "Technical Specialist",
+  "strengths": [
+    "Strong SQL skills",
+    "Cybersecurity domain expertise"
+  ],
+  "weaknesses": [
+    "Limited public-speaking experience"
+  ],
+  "growth_signals": [],
+  "leadership_signals": [],
+  "career_progression_score": 50,
+  "risk_profile": "Medium",
+  "recommended_roles": [],
+  "success_environments": [],
+  "confidence": 86,
+  "reasoning": [],
+  "generated_at": "2026-06-27T16:40:08.989860Z",
+  "processing_time_ms": 0,
+  "version": "candidate-twin-v1"
+}

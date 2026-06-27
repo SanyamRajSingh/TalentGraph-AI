@@ -1,0 +1,38 @@
+{
+  "role_id": "seed_role_05",
+  "job_id": null,
+  "role_title": "Lead Data Scientist",
+  "domain": "Technology",
+  "seniority": "Lead",
+  "role_archetype": "Team Lead",
+  "fingerprint": "lead_data_scientist_5",
+  "required_skills": [
+    "Python",
+    "Pandas",
+    "Scikit-learn"
+  ],
+  "preferred_skills": [
+    "Spark",
+    "SQL"
+  ],
+  "skill_importance": {},
+  "technical_depth": 85,
+  "problem_solving": 85,
+  "communication": 70,
+  "ownership": 80,
+  "leadership": 70,
+  "learning_agility": 75,
+  "ambiguity_tolerance": 65,
+  "collaboration": 75,
+  "startup_vs_enterprise_environment": 60,
+  "work_environment": {
+    "startup_vs_enterprise": 50,
+    "ambiguity_tolerance": 50,
+    "collaboration": 75,
+    "ownership": 80,
+    "communication": 70
+  },
+  "weight_distribution": {},
+  "reasoning": [],
+  "confidence": 80
+}

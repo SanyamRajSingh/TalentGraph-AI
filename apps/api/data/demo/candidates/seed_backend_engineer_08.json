@@ -1,0 +1,85 @@
+{
+  "candidate_id": "seed_backend_engineer_08",
+  "resume_id": null,
+  "resume_versions": [],
+  "name": "Lead Backend Engineer #9",
+  "email": "lead.backendengineer9@talentgraph.dev",
+  "phone": "+1-555-100-1008",
+  "location": "San Francisco, CA",
+  "skills": [
+    "Python",
+    "FastAPI",
+    "PostgreSQL",
+    "Redis",
+    "Unity"
+  ],
+  "technologies": [],
+  "projects": [
+    "Led Gaming platform rebuild (25% perf gain)",
+    "Shipped Backend Engineer tooling for distributed teams"
+  ],
+  "experiences": [],
+  "certifications": [],
+  "achievements": [],
+  "domains": [
+    "Gaming"
+  ],
+  "timeline": [
+    {
+      "year": 2024,
+      "event": "Lead Backend Engineer at TechStartup"
+    },
+    {
+      "year": 2023,
+      "event": "Lead Backend Engineer at MegaCorp"
+    },
+    {
+      "year": 2022,
+      "event": "Lead Backend Engineer at ScaleAI"
+    },
+    {
+      "year": 2021,
+      "event": "Lead Backend Engineer at DevHouse"
+    },
+    {
+      "year": 2020,
+      "event": "Lead Backend Engineer at InnovateCo"
+    },
+    {
+      "year": 2019,
+      "event": "Lead Backend Engineer at BuildFast"
+    }
+  ],
+  "evaluations_history": [],
+  "technical_depth": 94,
+  "learning_velocity": 88,
+  "leadership": 67,
+  "ownership": 100,
+  "communication": 94,
+  "project_complexity": 72,
+  "collaboration": 74,
+  "consistency": 50,
+  "leadership_readiness": 72,
+  "adaptability": 71,
+  "execution_speed": 68,
+  "business_acumen": 69,
+  "growth_stage": "Emerging Leader",
+  "strengths": [
+    "Strong Python skills",
+    "Gaming domain expertise"
+  ],
+  "weaknesses": [
+    "Limited public-speaking experience"
+  ],
+  "growth_signals": [],
+  "leadership_signals": [],
+  "career_progression_score": 50,
+  "risk_profile": "Low",
+  "recommended_roles": [],
+  "success_environments": [],
+  "confidence": 83,
+  "reasoning": [],
+  "generated_at": "2026-06-27T16:40:08.987535Z",
+  "processing_time_ms": 0,
+  "version": "candidate-twin-v1"
+}

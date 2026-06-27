@@ -1,0 +1,73 @@
+{
+  "candidate_id": "seed_backend_engineer_00",
+  "resume_id": null,
+  "resume_versions": [],
+  "name": "Junior Backend Engineer #1",
+  "email": "junior.backendengineer1@talentgraph.dev",
+  "phone": "+1-555-100-1000",
+  "location": "San Francisco, CA",
+  "skills": [
+    "Python",
+    "FastAPI",
+    "PostgreSQL",
+    "Redis",
+    "Payments"
+  ],
+  "technologies": [],
+  "projects": [
+    "Led Fintech platform rebuild (25% perf gain)",
+    "Shipped Backend Engineer tooling for distributed teams"
+  ],
+  "experiences": [],
+  "certifications": [],
+  "achievements": [],
+  "domains": [
+    "Fintech"
+  ],
+  "timeline": [
+    {
+      "year": 2024,
+      "event": "Junior Backend Engineer at TechStartup"
+    },
+    {
+      "year": 2023,
+      "event": "Junior Backend Engineer at MegaCorp"
+    },
+    {
+      "year": 2022,
+      "event": "Junior Backend Engineer at ScaleAI"
+    }
+  ],
+  "evaluations_history": [],
+  "technical_depth": 55,
+  "learning_velocity": 72,
+  "leadership": 33,
+  "ownership": 85,
+  "communication": 70,
+  "project_complexity": 53,
+  "collaboration": 65,
+  "consistency": 50,
+  "leadership_readiness": 38,
+  "adaptability": 93,
+  "execution_speed": 68,
+  "business_acumen": 62,
+  "growth_stage": "Builder",
+  "strengths": [
+    "Strong Python skills",
+    "Fintech domain expertise"
+  ],
+  "weaknesses": [
+    "Limited public-speaking experience"
+  ],
+  "growth_signals": [],
+  "leadership_signals": [],
+  "career_progression_score": 50,
+  "risk_profile": "Medium",
+  "recommended_roles": [],
+  "success_environments": [],
+  "confidence": 53,
+  "reasoning": [],
+  "generated_at": "2026-06-27T16:40:08.986900Z",
+  "processing_time_ms": 0,
+  "version": "candidate-twin-v1"
+}

@@ -1,0 +1,85 @@
+{
+  "candidate_id": "seed_product_analyst_03",
+  "resume_id": null,
+  "resume_versions": [],
+  "name": "Lead Product Analyst #4",
+  "email": "lead.productanalyst4@talentgraph.dev",
+  "phone": "+1-555-103-1003",
+  "location": "Seattle, WA",
+  "skills": [
+    "SQL",
+    "Tableau",
+    "A/B Testing",
+    "Excel",
+    "ADAS"
+  ],
+  "technologies": [],
+  "projects": [
+    "Led Automotive platform rebuild (25% perf gain)",
+    "Shipped Product Analyst tooling for distributed teams"
+  ],
+  "experiences": [],
+  "certifications": [],
+  "achievements": [],
+  "domains": [
+    "Automotive"
+  ],
+  "timeline": [
+    {
+      "year": 2024,
+      "event": "Lead Product Analyst at TechStartup"
+    },
+    {
+      "year": 2023,
+      "event": "Lead Product Analyst at MegaCorp"
+    },
+    {
+      "year": 2022,
+      "event": "Lead Product Analyst at ScaleAI"
+    },
+    {
+      "year": 2021,
+      "event": "Lead Product Analyst at DevHouse"
+    },
+    {
+      "year": 2020,
+      "event": "Lead Product Analyst at InnovateCo"
+    },
+    {
+      "year": 2019,
+      "event": "Lead Product Analyst at BuildFast"
+    }
+  ],
+  "evaluations_history": [],
+  "technical_depth": 80,
+  "learning_velocity": 88,
+  "leadership": 57,
+  "ownership": 99,
+  "communication": 84,
+  "project_complexity": 77,
+  "collaboration": 88,
+  "consistency": 50,
+  "leadership_readiness": 62,
+  "adaptability": 66,
+  "execution_speed": 94,
+  "business_acumen": 66,
+  "growth_stage": "Emerging Leader",
+  "strengths": [
+    "Strong SQL skills",
+    "Automotive domain expertise"
+  ],
+  "weaknesses": [
+    "Limited public-speaking experience"
+  ],
+  "growth_signals": [],
+  "leadership_signals": [],
+  "career_progression_score": 50,
+  "risk_profile": "Low",
+  "recommended_roles": [],
+  "success_environments": [],
+  "confidence": 75,
+  "reasoning": [],
+  "generated_at": "2026-06-27T16:40:08.989428Z",
+  "processing_time_ms": 0,
+  "version": "candidate-twin-v1"
+}

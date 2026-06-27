@@ -1,0 +1,85 @@
+{
+  "candidate_id": "seed_full_stack_engineer_02",
+  "resume_id": null,
+  "resume_versions": [],
+  "name": "Senior Full Stack Engineer #3",
+  "email": "senior.fullstackengineer3@talentgraph.dev",
+  "phone": "+1-555-104-1002",
+  "location": "Austin, TX",
+  "skills": [
+    "React",
+    "TypeScript",
+    "Node.js",
+    "FastAPI",
+    "Payments"
+  ],
+  "technologies": [],
+  "projects": [
+    "Led Fintech platform rebuild (25% perf gain)",
+    "Shipped Full Stack Engineer tooling for distributed teams"
+  ],
+  "experiences": [],
+  "certifications": [],
+  "achievements": [],
+  "domains": [
+    "Fintech"
+  ],
+  "timeline": [
+    {
+      "year": 2024,
+      "event": "Senior Full Stack Engineer at TechStartup"
+    },
+    {
+      "year": 2023,
+      "event": "Senior Full Stack Engineer at MegaCorp"
+    },
+    {
+      "year": 2022,
+      "event": "Senior Full Stack Engineer at ScaleAI"
+    },
+    {
+      "year": 2021,
+      "event": "Senior Full Stack Engineer at DevHouse"
+    },
+    {
+      "year": 2020,
+      "event": "Senior Full Stack Engineer at InnovateCo"
+    },
+    {
+      "year": 2019,
+      "event": "Senior Full Stack Engineer at BuildFast"
+    }
+  ],
+  "evaluations_history": [],
+  "technical_depth": 74,
+  "learning_velocity": 55,
+  "leadership": 46,
+  "ownership": 69,
+  "communication": 67,
+  "project_complexity": 56,
+  "collaboration": 70,
+  "consistency": 50,
+  "leadership_readiness": 51,
+  "adaptability": 86,
+  "execution_speed": 69,
+  "business_acumen": 70,
+  "growth_stage": "Technical Specialist",
+  "strengths": [
+    "Strong React skills",
+    "Fintech domain expertise"
+  ],
+  "weaknesses": [
+    "Limited public-speaking experience"
+  ],
+  "growth_signals": [],
+  "leadership_signals": [],
+  "career_progression_score": 50,
+  "risk_profile": "High",
+  "recommended_roles": [],
+  "success_environments": [],
+  "confidence": 58,
+  "reasoning": [],
+  "generated_at": "2026-06-27T16:40:08.990044Z",
+  "processing_time_ms": 0,
+  "version": "candidate-twin-v1"
+}

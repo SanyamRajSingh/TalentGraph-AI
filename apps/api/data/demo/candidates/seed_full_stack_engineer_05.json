@@ -1,0 +1,73 @@
+{
+  "candidate_id": "seed_full_stack_engineer_05",
+  "resume_id": null,
+  "resume_versions": [],
+  "name": "Junior Full Stack Engineer #6",
+  "email": "junior.fullstackengineer6@talentgraph.dev",
+  "phone": "+1-555-104-1005",
+  "location": "London, UK",
+  "skills": [
+    "React",
+    "TypeScript",
+    "Node.js",
+    "FastAPI",
+    "LMS"
+  ],
+  "technologies": [],
+  "projects": [
+    "Led EdTech platform rebuild (25% perf gain)",
+    "Shipped Full Stack Engineer tooling for distributed teams"
+  ],
+  "experiences": [],
+  "certifications": [],
+  "achievements": [],
+  "domains": [
+    "EdTech"
+  ],
+  "timeline": [
+    {
+      "year": 2024,
+      "event": "Junior Full Stack Engineer at TechStartup"
+    },
+    {
+      "year": 2023,
+      "event": "Junior Full Stack Engineer at MegaCorp"
+    },
+    {
+      "year": 2022,
+      "event": "Junior Full Stack Engineer at ScaleAI"
+    }
+  ],
+  "evaluations_history": [],
+  "technical_depth": 45,
+  "learning_velocity": 82,
+  "leadership": 32,
+  "ownership": 91,
+  "communication": 82,
+  "project_complexity": 42,
+  "collaboration": 80,
+  "consistency": 50,
+  "leadership_readiness": 37,
+  "adaptability": 82,
+  "execution_speed": 89,
+  "business_acumen": 61,
+  "growth_stage": "Builder",
+  "strengths": [
+    "Strong React skills",
+    "EdTech domain expertise"
+  ],
+  "weaknesses": [
+    "Limited public-speaking experience"
+  ],
+  "growth_signals": [],
+  "leadership_signals": [],
+  "career_progression_score": 50,
+  "risk_profile": "Low",
+  "recommended_roles": [],
+  "success_environments": [],
+  "confidence": 53,
+  "reasoning": [],
+  "generated_at": "2026-06-27T16:40:08.990233Z",
+  "processing_time_ms": 0,
+  "version": "candidate-twin-v1"
+}

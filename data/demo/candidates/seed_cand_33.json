@@ -1,0 +1,43 @@
+{
+  "candidate_id": "seed_cand_33",
+  "name": "Candidate 33 (Mid Product Analyst)",
+  "email": "cand33@example.com",
+  "phone": "+15550000000",
+  "experience": "5 years",
+  "skills": [
+    "Python",
+    "Looker",
+    "Product Sense",
+    "Google Analytics",
+    "Excel",
+    "Tableau"
+  ],
+  "projects": [
+    "Built a scalable system for AI/ML",
+    "Led initiative in product analyst"
+  ],
+  "domains": [
+    "AI/ML"
+  ],
+  "strengths": [
+    "Leadership",
+    "Deep Technical Expertise"
+  ],
+  "weaknesses": [
+    "Over-engineers solutions"
+  ],
+  "career_trajectory": "Rapid Promotion Track",
+  "growth_stage": "Explorer",
+  "risk_profile": "Low",
+  "timeline": [
+    {
+      "event": "Started",
+      "year": "2020",
+      "role": "Engineer"
+    }
+  ],
+  "technical_depth": 66,
+  "learning_velocity": 67,
+  "ownership": 56,
+  "communication": 57
+}

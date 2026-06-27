@@ -1,0 +1,85 @@
+{
+  "candidate_id": "seed_full_stack_engineer_03",
+  "resume_id": null,
+  "resume_versions": [],
+  "name": "Lead Full Stack Engineer #4",
+  "email": "lead.fullstackengineer4@talentgraph.dev",
+  "phone": "+1-555-104-1003",
+  "location": "Seattle, WA",
+  "skills": [
+    "React",
+    "TypeScript",
+    "Node.js",
+    "FastAPI",
+    "EHR Integration"
+  ],
+  "technologies": [],
+  "projects": [
+    "Led Healthcare platform rebuild (25% perf gain)",
+    "Shipped Full Stack Engineer tooling for distributed teams"
+  ],
+  "experiences": [],
+  "certifications": [],
+  "achievements": [],
+  "domains": [
+    "Healthcare"
+  ],
+  "timeline": [
+    {
+      "year": 2024,
+      "event": "Lead Full Stack Engineer at TechStartup"
+    },
+    {
+      "year": 2023,
+      "event": "Lead Full Stack Engineer at MegaCorp"
+    },
+    {
+      "year": 2022,
+      "event": "Lead Full Stack Engineer at ScaleAI"
+    },
+    {
+      "year": 2021,
+      "event": "Lead Full Stack Engineer at DevHouse"
+    },
+    {
+      "year": 2020,
+      "event": "Lead Full Stack Engineer at InnovateCo"
+    },
+    {
+      "year": 2019,
+      "event": "Lead Full Stack Engineer at BuildFast"
+    }
+  ],
+  "evaluations_history": [],
+  "technical_depth": 100,
+  "learning_velocity": 71,
+  "leadership": 85,
+  "ownership": 78,
+  "communication": 86,
+  "project_complexity": 98,
+  "collaboration": 85,
+  "consistency": 50,
+  "leadership_readiness": 90,
+  "adaptability": 95,
+  "execution_speed": 64,
+  "business_acumen": 72,
+  "growth_stage": "Emerging Leader",
+  "strengths": [
+    "Strong React skills",
+    "Healthcare domain expertise"
+  ],
+  "weaknesses": [
+    "Limited public-speaking experience"
+  ],
+  "growth_signals": [],
+  "leadership_signals": [],
+  "career_progression_score": 50,
+  "risk_profile": "Medium",
+  "recommended_roles": [],
+  "success_environments": [],
+  "confidence": 85,
+  "reasoning": [],
+  "generated_at": "2026-06-27T16:40:08.990112Z",
+  "processing_time_ms": 0,
+  "version": "candidate-twin-v1"
+}

@@ -1,0 +1,38 @@
+{
+  "role_id": "seed_role_02",
+  "job_id": null,
+  "role_title": "Senior ML Engineer",
+  "domain": "Technology",
+  "seniority": "Senior",
+  "role_archetype": "Individual Contributor",
+  "fingerprint": "senior_ml_engineer_2",
+  "required_skills": [
+    "Python",
+    "PyTorch",
+    "MLflow"
+  ],
+  "preferred_skills": [
+    "Kubeflow",
+    "SQL"
+  ],
+  "skill_importance": {},
+  "technical_depth": 75,
+  "problem_solving": 75,
+  "communication": 70,
+  "ownership": 80,
+  "leadership": 50,
+  "learning_agility": 75,
+  "ambiguity_tolerance": 65,
+  "collaboration": 75,
+  "startup_vs_enterprise_environment": 60,
+  "work_environment": {
+    "startup_vs_enterprise": 50,
+    "ambiguity_tolerance": 50,
+    "collaboration": 75,
+    "ownership": 80,
+    "communication": 70
+  },
+  "weight_distribution": {},
+  "reasoning": [],
+  "confidence": 80
+}

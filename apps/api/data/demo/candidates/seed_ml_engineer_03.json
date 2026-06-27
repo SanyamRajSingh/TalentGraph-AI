@@ -1,0 +1,85 @@
+{
+  "candidate_id": "seed_ml_engineer_03",
+  "resume_id": null,
+  "resume_versions": [],
+  "name": "Lead ML Engineer #4",
+  "email": "lead.mlengineer4@talentgraph.dev",
+  "phone": "+1-555-101-1003",
+  "location": "Seattle, WA",
+  "skills": [
+    "Python",
+    "PyTorch",
+    "MLflow",
+    "Kubeflow",
+    "Pen Testing"
+  ],
+  "technologies": [],
+  "projects": [
+    "Led Cybersecurity platform rebuild (25% perf gain)",
+    "Shipped ML Engineer tooling for distributed teams"
+  ],
+  "experiences": [],
+  "certifications": [],
+  "achievements": [],
+  "domains": [
+    "Cybersecurity"
+  ],
+  "timeline": [
+    {
+      "year": 2024,
+      "event": "Lead ML Engineer at TechStartup"
+    },
+    {
+      "year": 2023,
+      "event": "Lead ML Engineer at MegaCorp"
+    },
+    {
+      "year": 2022,
+      "event": "Lead ML Engineer at ScaleAI"
+    },
+    {
+      "year": 2021,
+      "event": "Lead ML Engineer at DevHouse"
+    },
+    {
+      "year": 2020,
+      "event": "Lead ML Engineer at InnovateCo"
+    },
+    {
+      "year": 2019,
+      "event": "Lead ML Engineer at BuildFast"
+    }
+  ],
+  "evaluations_history": [],
+  "technical_depth": 82,
+  "learning_velocity": 61,
+  "leadership": 52,
+  "ownership": 67,
+  "communication": 73,
+  "project_complexity": 67,
+  "collaboration": 82,
+  "consistency": 50,
+  "leadership_readiness": 57,
+  "adaptability": 86,
+  "execution_speed": 82,
+  "business_acumen": 87,
+  "growth_stage": "Emerging Leader",
+  "strengths": [
+    "Strong Python skills",
+    "Cybersecurity domain expertise"
+  ],
+  "weaknesses": [
+    "Limited public-speaking experience"
+  ],
+  "growth_signals": [],
+  "leadership_signals": [],
+  "career_progression_score": 50,
+  "risk_profile": "Medium",
+  "recommended_roles": [],
+  "success_environments": [],
+  "confidence": 65,
+  "reasoning": [],
+  "generated_at": "2026-06-27T16:40:08.987869Z",
+  "processing_time_ms": 0,
+  "version": "candidate-twin-v1"
+}

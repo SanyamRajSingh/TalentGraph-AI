@@ -1,0 +1,43 @@
+{
+  "candidate_id": "seed_cand_40",
+  "name": "Candidate 40 (Mid Product Analyst)",
+  "email": "cand40@example.com",
+  "phone": "+15550000000",
+  "experience": "4 years",
+  "skills": [
+    "Excel",
+    "SQL",
+    "Looker",
+    "Python",
+    "Mixpanel",
+    "Product Sense"
+  ],
+  "projects": [
+    "Built a scalable system for AI/ML",
+    "Led initiative in product analyst"
+  ],
+  "domains": [
+    "AI/ML"
+  ],
+  "strengths": [
+    "Leadership",
+    "Data-Driven"
+  ],
+  "weaknesses": [
+    "Delegation"
+  ],
+  "career_trajectory": "Cross-Functional Contributor",
+  "growth_stage": "Explorer",
+  "risk_profile": "Low",
+  "timeline": [
+    {
+      "event": "Started",
+      "year": "2020",
+      "role": "Engineer"
+    }
+  ],
+  "technical_depth": 55,
+  "learning_velocity": 79,
+  "ownership": 53,
+  "communication": 80
+}

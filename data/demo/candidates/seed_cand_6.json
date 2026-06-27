@@ -1,0 +1,43 @@
+{
+  "candidate_id": "seed_cand_6",
+  "name": "Candidate 6 (Intern Backend Engineer)",
+  "email": "cand6@example.com",
+  "phone": "+15550000000",
+  "experience": "2 years",
+  "skills": [
+    "PostgreSQL",
+    "Python",
+    "Kafka",
+    "Java",
+    "AWS",
+    "Docker"
+  ],
+  "projects": [
+    "Built a scalable system for Fintech",
+    "Led initiative in backend engineer"
+  ],
+  "domains": [
+    "Fintech"
+  ],
+  "strengths": [
+    "Strong Communicator",
+    "Fast Learner"
+  ],
+  "weaknesses": [
+    "Public Speaking"
+  ],
+  "career_trajectory": "Emerging Leader",
+  "growth_stage": "Explorer",
+  "risk_profile": "Medium",
+  "timeline": [
+    {
+      "event": "Started",
+      "year": "2020",
+      "role": "Engineer"
+    }
+  ],
+  "technical_depth": 45,
+  "learning_velocity": 75,
+  "ownership": 45,
+  "communication": 91
+}

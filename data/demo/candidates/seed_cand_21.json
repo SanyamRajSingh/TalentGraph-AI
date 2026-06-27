@@ -1,0 +1,43 @@
+{
+  "candidate_id": "seed_cand_21",
+  "name": "Candidate 21 (Mid Data Scientist)",
+  "email": "cand21@example.com",
+  "phone": "+15550000000",
+  "experience": "5 years",
+  "skills": [
+    "Pandas",
+    "R",
+    "Tableau",
+    "NumPy",
+    "SQL",
+    "A/B Testing"
+  ],
+  "projects": [
+    "Built a scalable system for AI/ML",
+    "Led initiative in data scientist"
+  ],
+  "domains": [
+    "AI/ML"
+  ],
+  "strengths": [
+    "Strong Communicator",
+    "Product Mindset"
+  ],
+  "weaknesses": [
+    "Over-engineers solutions"
+  ],
+  "career_trajectory": "Emerging Leader",
+  "growth_stage": "Explorer",
+  "risk_profile": "Low",
+  "timeline": [
+    {
+      "event": "Started",
+      "year": "2020",
+      "role": "Engineer"
+    }
+  ],
+  "technical_depth": 75,
+  "learning_velocity": 69,
+  "ownership": 62,
+  "communication": 60
+}

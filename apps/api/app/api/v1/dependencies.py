@@ -271,6 +271,7 @@ def get_ranking_export_service() -> RankingExportService:
         ranking_repository=get_ranking_repository(),
         candidate_repository=get_candidate_repository(),
         explanation_repository=get_explanation_repository(),
+        evaluation_repository=get_evaluation_repository(),
     )
 
 

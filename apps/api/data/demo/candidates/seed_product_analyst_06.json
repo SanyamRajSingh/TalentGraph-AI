@@ -1,0 +1,85 @@
+{
+  "candidate_id": "seed_product_analyst_06",
+  "resume_id": null,
+  "resume_versions": [],
+  "name": "Mid-Level Product Analyst #7",
+  "email": "mid-level.productanalyst7@talentgraph.dev",
+  "phone": "+1-555-103-1006",
+  "location": "Berlin, Germany",
+  "skills": [
+    "SQL",
+    "Tableau",
+    "A/B Testing",
+    "Excel",
+    "Inventory Systems"
+  ],
+  "technologies": [],
+  "projects": [
+    "Led E-commerce platform rebuild (25% perf gain)",
+    "Shipped Product Analyst tooling for distributed teams"
+  ],
+  "experiences": [],
+  "certifications": [],
+  "achievements": [],
+  "domains": [
+    "E-commerce"
+  ],
+  "timeline": [
+    {
+      "year": 2024,
+      "event": "Mid-Level Product Analyst at TechStartup"
+    },
+    {
+      "year": 2023,
+      "event": "Mid-Level Product Analyst at MegaCorp"
+    },
+    {
+      "year": 2022,
+      "event": "Mid-Level Product Analyst at ScaleAI"
+    },
+    {
+      "year": 2021,
+      "event": "Mid-Level Product Analyst at DevHouse"
+    },
+    {
+      "year": 2020,
+      "event": "Mid-Level Product Analyst at InnovateCo"
+    },
+    {
+      "year": 2019,
+      "event": "Mid-Level Product Analyst at BuildFast"
+    }
+  ],
+  "evaluations_history": [],
+  "technical_depth": 62,
+  "learning_velocity": 64,
+  "leadership": 51,
+  "ownership": 78,
+  "communication": 90,
+  "project_complexity": 67,
+  "collaboration": 89,
+  "consistency": 50,
+  "leadership_readiness": 56,
+  "adaptability": 78,
+  "execution_speed": 60,
+  "business_acumen": 79,
+  "growth_stage": "Builder",
+  "strengths": [
+    "Strong SQL skills",
+    "E-commerce domain expertise"
+  ],
+  "weaknesses": [
+    "Limited public-speaking experience"
+  ],
+  "growth_signals": [],
+  "leadership_signals": [],
+  "career_progression_score": 50,
+  "risk_profile": "Medium",
+  "recommended_roles": [],
+  "success_environments": [],
+  "confidence": 59,
+  "reasoning": [],
+  "generated_at": "2026-06-27T16:40:08.989610Z",
+  "processing_time_ms": 0,
+  "version": "candidate-twin-v1"
+}
