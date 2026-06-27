@@ -6,7 +6,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
     app_name: str = "TalentGraph AI"
-    app_env: str = "development"
+    app_env: str = Field(default="development", alias="ENVIRONMENT")
     database_url: str = Field(default="", alias="DATABASE_URL")
     neo4j_uri: str = Field(default="bolt://localhost:7687", alias="NEO4J_URI")
     neo4j_user: str = Field(default="neo4j", alias="NEO4J_USER")
@@ -20,7 +20,7 @@ class Settings(BaseSettings):
     )
     backend_cors_origins: str = Field(
         default="http://localhost:3000",
-        alias="BACKEND_CORS_ORIGINS",
+        alias="CORS_ORIGINS",
     )
 
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")

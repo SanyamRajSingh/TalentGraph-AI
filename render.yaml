@@ -13,3 +13,5 @@ services:
         value: production
       - key: CORS_ORIGINS
         value: "*"
+      - key: OPENAI_API_KEY
+        sync: false

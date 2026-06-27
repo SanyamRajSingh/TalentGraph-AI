@@ -197,7 +197,7 @@ export default function Home() {
   const [exportLoading, setExportLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const apiBaseUrl = useMemo(() => process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:8000", []);
+  const apiBaseUrl = useMemo(() => process.env.NEXT_PUBLIC_API_BASE_URL || "", []);
   const currentRanking = useMemo(
     () => rankings.find((ranking) => ranking.candidate_id === candidateTwin?.candidate_id) ?? null,
     [candidateTwin?.candidate_id, rankings]
