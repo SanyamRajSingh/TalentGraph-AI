@@ -45,7 +45,8 @@ The backend can be deployed effortlessly on Render using the provided Blueprint 
 | `CORS_ORIGINS` | Comma-separated list of allowed origins | `*` (or your frontend URL) |
 | `OPENAI_API_KEY` | Your OpenAI API key | `sk-proj-...` |
 
-*(Note: v1.1 uses in-memory persistence so PostgreSQL, Neo4j, and ChromaDB are not required).*
+### Known Limitations
+**IMPORTANT**: Current persistence is entirely **in-memory**. Application state (Role DNA, Candidates, Graph nodes) completely resets if the backend process restarts or the deployment goes to sleep. v1.1 does not require PostgreSQL, Neo4j, or ChromaDB.
 
 ### Deployment Steps (Render Blueprint)
 1. In the Render Dashboard, click **New +** and select **Blueprint**.
