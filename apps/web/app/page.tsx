@@ -1084,14 +1084,25 @@ function ForceGraphViz({ graph }: { graph: ApiGraph }) {
        .attr("viewBox", `0 0 ${W} ${H}`)
        .selectAll("*").remove();
 
-    // Arrow marker
-    svg.append("defs").append("marker")
-      .attr("id", "tg-arrow")
-      .attr("viewBox", "0 -5 10 10")
-      .attr("refX", 26).attr("refY", 0)
-      .attr("markerWidth", 5).attr("markerHeight", 5)
-      .attr("orient", "auto")
-      .append("path").attr("d", "M0,-5L10,0L0,5").attr("fill", "#94a3b8");
+    const getRadius = (label: string) => {
+      if (label === "Role") return 28;
+      if (label === "Candidate") return 24;
+      if (label === "Skill") return 20;
+      return 16;
+    };
+
+    // Arrow markers per size to prevent hiding under nodes
+    const defs = svg.append("defs");
+    [16, 20, 24, 28].forEach(r => {
+      defs.append("marker")
+        .attr("id", `tg-arrow-${r}`)
+        .attr("viewBox", "0 -5 10 10")
+        .attr("refX", r + 9) // radius + stroke width + padding
+        .attr("refY", 0)
+        .attr("markerWidth", 5).attr("markerHeight", 5)
+        .attr("orient", "auto")
+        .append("path").attr("d", "M0,-5L10,0L0,5").attr("fill", "#94a3b8");
+    });
 
     const g = svg.append("g");
     gRef.current = g.node();
@@ -1110,17 +1121,32 @@ function ForceGraphViz({ graph }: { graph: ApiGraph }) {
       .map(r => ({ source: r.source_id, target: r.target_id, type: r.type }));
 
     const sim = d3.forceSimulation<ForceNode>(nodes)
-      .force("link", d3.forceLink<ForceNode, ForceLink>(links).id(d => d.id).distance(110))
-      .force("charge", d3.forceManyBody().strength(-260))
-      .force("center", d3.forceCenter(W / 2, H / 2))
-      .force("collision", d3.forceCollide(38));
+      .force("link", d3.forceLink<ForceNode, ForceLink>(links).id(d => d.id).distance(40).strength(0.1))
+      .force("charge", d3.forceManyBody().strength(-150))
+      .force("y", d3.forceY<ForceNode>(d => {
+        switch (d.label) {
+          case "Role": return H * 0.15;
+          case "Candidate": return H * 0.30;
+          case "Skill": return H * 0.50;
+          case "Technology": return H * 0.70;
+          case "Project":
+          case "Domain": return H * 0.85;
+          default: return H / 2;
+        }
+      }).strength(1.2))
+      .force("x", d3.forceX<ForceNode>(W / 2).strength(0.08))
+      .force("collision", d3.forceCollide<ForceNode>(d => getRadius(d.label) + 24).strength(1));
 
     // Edges
     const link = g.append("g").selectAll<SVGPathElement, ForceLink>("path")
       .data(links).join("path")
       .attr("fill", "none")
       .attr("stroke", "#cbd5e1").attr("stroke-width", 1.5)
-      .attr("marker-end", "url(#tg-arrow)");
+      .attr("marker-end", d => {
+        const tId = typeof d.target === "string" ? d.target : (d.target as ForceNode).id;
+        const tNode = nodeById.get(tId);
+        return `url(#tg-arrow-${getRadius(tNode?.label ?? "")})`;
+      });
 
     // Edge label groups (shown on hover)
     const linkLabel = g.append("g").selectAll<SVGTextElement, ForceLink>("text")
@@ -1142,13 +1168,14 @@ function ForceGraphViz({ graph }: { graph: ApiGraph }) {
 
     // Shadow for depth
     node.append("circle")
-      .attr("r", 20).attr("fill", d => NODE_COLORS[d.label] ?? "#6b7280")
+      .attr("r", d => getRadius(d.label) + 2)
+      .attr("fill", d => NODE_COLORS[d.label] ?? "#6b7280")
       .attr("class", "node-shadow")
       .attr("opacity", 0.15).attr("cy", 2);
 
     // Main circle
     node.append("circle")
-      .attr("r", 18)
+      .attr("r", d => getRadius(d.label))
       .attr("class", "node-main")
       .attr("fill", d => NODE_COLORS[d.label] ?? "#6b7280")
       .attr("stroke", "#fff").attr("stroke-width", 2.5);
@@ -1156,12 +1183,14 @@ function ForceGraphViz({ graph }: { graph: ApiGraph }) {
     // Icon letter inside
     node.append("text")
       .attr("text-anchor", "middle").attr("dominant-baseline", "central")
-      .attr("font-size", "11px").attr("font-weight", "700").attr("fill", "#fff")
+      .attr("font-size", d => d.label === "Role" ? "14px" : d.label === "Candidate" ? "12px" : "10px")
+      .attr("font-weight", "700").attr("fill", "#fff")
       .text(d => NODE_ICONS[d.label] ?? d.label[0] ?? "?");
 
     // Name label below
     node.append("text")
-      .attr("text-anchor", "middle").attr("dy", 30)
+      .attr("text-anchor", "middle")
+      .attr("dy", d => getRadius(d.label) + 12)
       .attr("font-size", "10px").attr("fill", "#374151")
       .attr("font-weight", "500")
       .text(d => {
@@ -1222,10 +1251,9 @@ function ForceGraphViz({ graph }: { graph: ApiGraph }) {
       link.attr("d", (d) => {
         const s = d.source as ForceNode;
         const t = d.target as ForceNode;
-        const dx = (t.x ?? 0) - (s.x ?? 0);
         const dy = (t.y ?? 0) - (s.y ?? 0);
-        const dr = Math.sqrt(dx * dx + dy * dy) * 1.4;
-        return `M${s.x},${s.y}A${dr},${dr} 0 0,1 ${t.x},${t.y}`;
+        // Soft vertical curve for layered layout
+        return `M${s.x},${s.y} C${s.x},${(s.y ?? 0) + dy / 3} ${t.x},${(t.y ?? 0) - dy / 3} ${t.x},${t.y}`;
       });
       linkLabel.attr("x", d => {
         const s = d.source as ForceNode; const t = d.target as ForceNode;
