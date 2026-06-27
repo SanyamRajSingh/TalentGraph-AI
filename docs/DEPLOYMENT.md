@@ -1,4 +1,4 @@
-﻿# Deployment Guide
+# Deployment Guide
 
 This document outlines the production deployment strategy for TalentGraph AI v1.0.
 
@@ -33,33 +33,27 @@ Vercel is the recommended hosting provider for Next.js applications, offering ze
 
 ## 2. Backend (FastAPI)
 
-**Target Platform:** Render, Railway, or any Docker-compatible PaaS.
+**Target Platform:** Render
 
-The backend is fully containerized using infra/docker/api.Dockerfile.
+The backend can be deployed effortlessly on Render using the provided Blueprint (`render.yaml`), which installs the API natively using Python.
 
-### Environment Variables
+### Environment Variables Required
 | Variable | Description | Example |
 |---|---|---|
-| APP_ENV | Application environment mode | production |
-| APP_NAME | Name of the application | TalentGraph AI |
-| BACKEND_CORS_ORIGINS | Comma-separated list of allowed origins | https://talentgraph.app |
-| OPENAI_API_KEY | Your OpenAI API key | sk-proj-... |
-| DATABASE_URL | PostgreSQL connection string | postgresql+psycopg://user:pass@host/db |
-| NEO4J_URI | Neo4j Bolt URI | bolt://neo4j:7687 |
-| NEO4J_USER | Neo4j username | neo4j |
-| NEO4J_PASSWORD | Neo4j password | my-secret-password |
-| CHROMA_HOST | ChromaDB host | chromadb-service |
-| CHROMA_PORT | ChromaDB port | 8000 |
+| `PYTHON_VERSION` | Python runtime version | `3.12` |
+| `ENVIRONMENT` | Application environment mode | `production` |
+| `CORS_ORIGINS` | Comma-separated list of allowed origins | `*` (or your frontend URL) |
+| `OPENAI_API_KEY` | Your OpenAI API key | `sk-proj-...` |
 
-### Deployment Steps (Render/Railway)
-1. In your PaaS dashboard, create a new **Web Service** or **App**.
+*(Note: v1.1 uses in-memory persistence so PostgreSQL, Neo4j, and ChromaDB are not required).*
+
+### Deployment Steps (Render Blueprint)
+1. In the Render Dashboard, click **New +** and select **Blueprint**.
 2. Connect your GitHub repository.
-3. **Build Settings:**
-   - **Source Directory:** / (Root of the repository)
-   - **Dockerfile Path:** infra/docker/api.Dockerfile
-4. Add all the required Environment Variables.
-5. Deploy the service.
-6. The service will expose port 8000. Make sure the health check points to GET /health.
+3. Render will automatically detect the `render.yaml` file in the root.
+4. Provide a value for `OPENAI_API_KEY` when prompted in the environment variables sync step.
+5. Click **Apply**.
+6. Render will run the `buildCommand` (`pip install -r requirements/dev.txt && pip install -e apps/api`) and start the server using `uvicorn`. The health check is mapped to `/health`.
 
 ---
 

@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: talentgraph-api
+    env: python
+    region: ohio
+    buildCommand: "pip install -r requirements/dev.txt && pip install -e apps/api"
+    startCommand: "uvicorn app.main:app --app-dir apps/api --host 0.0.0.0 --port $PORT"
+    healthCheckPath: "/health"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12
+      - key: ENVIRONMENT
+        value: production
+      - key: CORS_ORIGINS
+        value: "*"
