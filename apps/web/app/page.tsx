@@ -1,8 +1,9 @@
 "use client";
 
-import { FormEvent, useMemo, useState } from "react";
+import { FormEvent, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { ReactNode } from "react";
-import { Brain, BriefcaseBusiness, ClipboardCheck, Download, FileText, GitBranch, Layers3, Lightbulb, ListOrdered, Loader2, Sparkles, UserRound } from "lucide-react";
+import * as d3 from "d3";
+import { Brain, BriefcaseBusiness, ClipboardCheck, Download, FileText, GitBranch, Layers3, Lightbulb, ListOrdered, Loader2, Maximize2, Sparkles, UserRound } from "lucide-react";
 
 type ApiRoleDNA = {
   role_id: string;
@@ -664,20 +665,16 @@ export default function Home() {
           }
         >
           {graph ? (
-            <div className="space-y-5">
-              <div className="grid gap-3 sm:grid-cols-3">
-                <Summary label="Graph" value={graph.graph_id} />
+            <div className="space-y-4">
+              <div className="grid gap-3 grid-cols-3">
                 <Summary label="Nodes" value={String(graph.nodes.length)} />
-                <Summary label="Relationships" value={String(graph.relationships.length)} />
+                <Summary label="Edges" value={String(graph.relationships.length)} />
+                <Summary label="Graph ID" value={graph.graph_id.slice(6, 18) + "…"} />
               </div>
-              <GraphList title="Nodes" items={graph.nodes.map((node) => `${node.label}: ${node.name}`)} />
-              <GraphList
-                title="Relationships"
-                items={graph.relationships.map((relationship) => `${relationship.source_id} ${relationship.type} ${relationship.target_id}`)}
-              />
+              <ForceGraphViz graph={graph} />
             </div>
           ) : (
-            <EmptyState text="Generate Role DNA or a Candidate Twin, then build a semantic graph of nodes and relationships." />
+            <EmptyState text="Generate Role DNA or a Candidate Twin, then build an interactive semantic graph." />
           )}
         </ModulePanel>
 
@@ -698,31 +695,9 @@ export default function Home() {
           }
         >
           {embeddingCollection ? (
-            <div className="space-y-5">
-              <div className="grid gap-3 sm:grid-cols-3">
-                <Summary label="Collection" value={embeddingCollection.collection_id} />
-                <Summary label="Summaries" value={String(embeddingCollection.summaries.length)} />
-                <Summary label="Vectors" value={String(embeddingCollection.embeddings.length)} />
-              </div>
-              <div>
-                <h3 className="text-sm font-semibold uppercase tracking-wide text-graphite">Summaries</h3>
-                <ul className="mt-3 space-y-2">
-                  {embeddingCollection.summaries.map((summary) => (
-                    <li key={summary.id} className="rounded border border-gray-200 p-3 text-sm leading-6">
-                      <span className="font-semibold">{summary.kind}</span>: {summary.text}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <GraphList
-                title="Embedding Metadata"
-                items={embeddingCollection.embeddings.map(
-                  (embedding) => `${embedding.kind} | dimensions ${embedding.vector.length} | ${embedding.source_id}`
-                )}
-              />
-            </div>
+            <SemanticEmbeddingPanel collection={embeddingCollection} />
           ) : (
-            <EmptyState text="Generate deterministic summary, skill, and project embeddings for inspection." />
+            <EmptyState text="Generate semantic embeddings to inspect role and candidate concept overlap." />
           )}
         </ModulePanel>
       </section>
@@ -1063,6 +1038,416 @@ function EmptyState({ text }: { text: string }) {
         <UserRound className="mx-auto mb-3 h-6 w-6 text-gray-400" aria-hidden="true" />
         {text}
       </div>
+    </div>
+  );
+}
+
+// ─── Knowledge Graph Visualization ───────────────────────────────────────────
+
+interface ForceNode extends d3.SimulationNodeDatum {
+  id: string;
+  label: string;
+  name: string;
+}
+
+interface ForceLink extends d3.SimulationLinkDatum<ForceNode> {
+  type: string;
+}
+
+const NODE_COLORS: Record<string, string> = {
+  Role:       "#7c3aed",
+  Candidate:  "#2563eb",
+  Skill:      "#16a34a",
+  Technology: "#ea580c",
+  Project:    "#0d9488",
+  Domain:     "#db2777",
+};
+
+const NODE_ICONS: Record<string, string> = {
+  Role: "R", Candidate: "C", Skill: "S", Technology: "T", Project: "P", Domain: "D",
+};
+
+function ForceGraphViz({ graph }: { graph: ApiGraph }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const svgRef       = useRef<SVGSVGElement>(null);
+  const tooltipRef   = useRef<HTMLDivElement>(null);
+  const zoomRef      = useRef<d3.ZoomBehavior<SVGSVGElement, unknown> | null>(null);
+  const gRef         = useRef<SVGGElement | null>(null);
+
+  useEffect(() => {
+    const svg = d3.select(svgRef.current!);
+    const container = containerRef.current!;
+    const W = container.clientWidth || 600;
+    const H = 460;
+
+    svg.attr("width", W).attr("height", H).selectAll("*").remove();
+
+    // Arrow marker
+    svg.append("defs").append("marker")
+      .attr("id", "tg-arrow")
+      .attr("viewBox", "0 -5 10 10")
+      .attr("refX", 26).attr("refY", 0)
+      .attr("markerWidth", 5).attr("markerHeight", 5)
+      .attr("orient", "auto")
+      .append("path").attr("d", "M0,-5L10,0L0,5").attr("fill", "#94a3b8");
+
+    const g = svg.append("g");
+    gRef.current = g.node();
+
+    const zoom = d3.zoom<SVGSVGElement, unknown>()
+      .scaleExtent([0.15, 4])
+      .on("zoom", (ev) => g.attr("transform", ev.transform));
+    zoomRef.current = zoom;
+    svg.call(zoom);
+
+    // Nodes & links
+    const nodes: ForceNode[] = graph.nodes.map(n => ({ ...n }));
+    const nodeById = new Map(nodes.map(n => [n.id, n]));
+    const links: ForceLink[] = graph.relationships
+      .filter(r => nodeById.has(r.source_id) && nodeById.has(r.target_id))
+      .map(r => ({ source: r.source_id, target: r.target_id, type: r.type }));
+
+    const sim = d3.forceSimulation<ForceNode>(nodes)
+      .force("link", d3.forceLink<ForceNode, ForceLink>(links).id(d => d.id).distance(110))
+      .force("charge", d3.forceManyBody().strength(-260))
+      .force("center", d3.forceCenter(W / 2, H / 2))
+      .force("collision", d3.forceCollide(38));
+
+    // Edges
+    const link = g.append("g").selectAll<SVGPathElement, ForceLink>("path")
+      .data(links).join("path")
+      .attr("fill", "none")
+      .attr("stroke", "#cbd5e1").attr("stroke-width", 1.5)
+      .attr("marker-end", "url(#tg-arrow)");
+
+    // Edge label groups (shown on hover)
+    const linkLabel = g.append("g").selectAll<SVGTextElement, ForceLink>("text")
+      .data(links).join("text")
+      .attr("text-anchor", "middle")
+      .attr("font-size", "9px")
+      .attr("fill", "#6b7280")
+      .attr("opacity", 0)
+      .text(d => d.type.replace(/_/g, " "));
+
+    // Node groups
+    const drag = d3.drag<SVGGElement, ForceNode>()
+      .on("start", (ev, d) => { if (!ev.active) sim.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
+      .on("drag",  (ev, d) => { d.fx = ev.x; d.fy = ev.y; })
+      .on("end",   (ev, d) => { if (!ev.active) sim.alphaTarget(0); d.fx = null; d.fy = null; });
+
+    const node = g.append("g").selectAll<SVGGElement, ForceNode>("g")
+      .data(nodes).join("g").call(drag).style("cursor", "grab");
+
+    // Shadow for depth
+    node.append("circle")
+      .attr("r", 20).attr("fill", d => NODE_COLORS[d.label] ?? "#6b7280")
+      .attr("opacity", 0.15).attr("cy", 2);
+
+    // Main circle
+    node.append("circle")
+      .attr("r", 18)
+      .attr("fill", d => NODE_COLORS[d.label] ?? "#6b7280")
+      .attr("stroke", "#fff").attr("stroke-width", 2.5);
+
+    // Icon letter inside
+    node.append("text")
+      .attr("text-anchor", "middle").attr("dominant-baseline", "central")
+      .attr("font-size", "11px").attr("font-weight", "700").attr("fill", "#fff")
+      .text(d => NODE_ICONS[d.label] ?? d.label[0] ?? "?");
+
+    // Name label below
+    node.append("text")
+      .attr("text-anchor", "middle").attr("dy", 30)
+      .attr("font-size", "10px").attr("fill", "#374151")
+      .attr("font-weight", "500")
+      .text(d => d.name.length > 14 ? d.name.slice(0, 13) + "\u2026" : d.name);
+
+    // Tooltip interactions
+    const tooltip = tooltipRef.current!;
+    node
+      .on("mouseover", (_ev, d) => {
+        tooltip.innerHTML = `<strong>${d.name}</strong><br/><span style="opacity:0.65;font-size:10px">${d.label}</span>`;
+        tooltip.style.opacity = "1";
+      })
+      .on("mousemove", (ev: MouseEvent) => {
+        const rect = container.getBoundingClientRect();
+        tooltip.style.left = `${ev.clientX - rect.left + 14}px`;
+        tooltip.style.top  = `${ev.clientY - rect.top  - 10}px`;
+      })
+      .on("mouseout", () => { tooltip.style.opacity = "0"; })
+      .on("click", (_ev, clicked) => {
+        const neighborIds = new Set<string>();
+        links.forEach(l => {
+          const s = (l.source as ForceNode).id;
+          const t = (l.target as ForceNode).id;
+          if (s === clicked.id) neighborIds.add(t);
+          if (t === clicked.id) neighborIds.add(s);
+        });
+        node.select("circle:nth-child(2)")
+          .attr("opacity", d => d.id === clicked.id || neighborIds.has(d.id) ? 1 : 0.2);
+        link.attr("opacity", l => {
+          const s = (l.source as ForceNode).id;
+          const t = (l.target as ForceNode).id;
+          return s === clicked.id || t === clicked.id ? 1 : 0.1;
+        });
+      });
+
+    link
+      .on("mouseover", function(_ev, d) {
+        d3.select(this).attr("stroke", "#7c3aed").attr("stroke-width", 2.5);
+        linkLabel.filter(l => l === d).attr("opacity", 1);
+      })
+      .on("mouseout", function(_ev, d) {
+        d3.select(this).attr("stroke", "#cbd5e1").attr("stroke-width", 1.5);
+        linkLabel.filter(l => l === d).attr("opacity", 0);
+      });
+
+    // Reset dimming on svg background click
+    svg.on("click.reset", (ev) => {
+      if (ev.target === svg.node()) {
+        node.select("circle:nth-child(2)").attr("opacity", 1);
+        link.attr("opacity", 1);
+      }
+    });
+
+    sim.on("tick", () => {
+      link.attr("d", (d) => {
+        const s = d.source as ForceNode;
+        const t = d.target as ForceNode;
+        const dx = (t.x ?? 0) - (s.x ?? 0);
+        const dy = (t.y ?? 0) - (s.y ?? 0);
+        const dr = Math.sqrt(dx * dx + dy * dy) * 1.4;
+        return `M${s.x},${s.y}A${dr},${dr} 0 0,1 ${t.x},${t.y}`;
+      });
+      linkLabel.attr("x", d => {
+        const s = d.source as ForceNode; const t = d.target as ForceNode;
+        return ((s.x ?? 0) + (t.x ?? 0)) / 2;
+      }).attr("y", d => {
+        const s = d.source as ForceNode; const t = d.target as ForceNode;
+        return ((s.y ?? 0) + (t.y ?? 0)) / 2 - 6;
+      });
+      node.attr("transform", d => `translate(${d.x ?? 0},${d.y ?? 0})`);
+    });
+
+    return () => { sim.stop(); };
+  }, [graph]);
+
+  const handleFit = useCallback(() => {
+    const svgEl = svgRef.current;
+    const gEl   = gRef.current;
+    const zb    = zoomRef.current;
+    if (!svgEl || !gEl || !zb) return;
+    const bounds = gEl.getBBox();
+    const W = svgEl.clientWidth;
+    const H = svgEl.clientHeight;
+    if (!bounds.width || !bounds.height) return;
+    const scale = Math.min(0.9 * W / bounds.width, 0.9 * H / bounds.height, 2);
+    const tx = W / 2 - scale * (bounds.x + bounds.width  / 2);
+    const ty = H / 2 - scale * (bounds.y + bounds.height / 2);
+    d3.select(svgEl).transition().duration(700)
+      .call(zb.transform, d3.zoomIdentity.translate(tx, ty).scale(scale));
+  }, []);
+
+  const legendEntries = Object.entries(NODE_COLORS);
+
+  return (
+    <div className="space-y-3">
+      {/* Legend + controls */}
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <div className="flex flex-wrap gap-x-3 gap-y-1">
+          {legendEntries.map(([label, color]) => (
+            <span key={label} className="flex items-center gap-1.5 text-xs text-gray-600">
+              <span className="inline-block h-2.5 w-2.5 rounded-full" style={{ background: color }} />
+              {label}
+            </span>
+          ))}
+        </div>
+        <button
+          onClick={handleFit}
+          className="inline-flex items-center gap-1.5 rounded border border-gray-200 bg-white px-2.5 py-1 text-xs font-medium text-graphite hover:border-signal hover:text-signal transition-colors"
+        >
+          <Maximize2 className="h-3 w-3" />
+          Fit
+        </button>
+      </div>
+      {/* Canvas */}
+      <div
+        ref={containerRef}
+        className="relative overflow-hidden rounded-xl border border-gray-200 bg-gradient-to-br from-slate-50 to-gray-100"
+        style={{ height: 460 }}
+      >
+        <svg ref={svgRef} className="w-full h-full select-none" />
+        {/* Tooltip */}
+        <div
+          ref={tooltipRef}
+          className="pointer-events-none absolute rounded-lg bg-gray-900/90 px-3 py-2 text-xs text-white shadow-xl transition-opacity duration-150"
+          style={{ opacity: 0, top: 0, left: 0, maxWidth: 180, lineHeight: 1.5 }}
+        />
+        {/* Hint */}
+        <p className="absolute bottom-2 right-3 text-[10px] text-gray-400 select-none">
+          Drag nodes · Scroll to zoom · Click to focus
+        </p>
+      </div>
+    </div>
+  );
+}
+
+// ─── Semantic Embedding Visualization ────────────────────────────────────────
+
+const STOP_WORDS = new Set([
+  "that","this","with","from","have","been","will","they","their","which","also","more",
+  "into","than","when","what","over","some","each","your","about","other","these","those",
+  "using","through","across","within","between","during","because","where","would","could",
+]);
+
+function extractKeywords(text: string): string[] {
+  return [...new Set(
+    text.split(/[\s,;.:()[\]]+/)
+      .map(w => w.replace(/[^a-zA-Z0-9+#.-]/g, "").trim())
+      .filter(w => w.length > 3 && !/^\d+$/.test(w) && !STOP_WORDS.has(w.toLowerCase()))
+  )].slice(0, 10);
+}
+
+const KIND_META: Record<string, { label: string; bg: string; border: string; text: string }> = {
+  skill:      { label: "Skill",      bg: "bg-green-50",  border: "border-green-200",  text: "text-green-700" },
+  project:    { label: "Project",    bg: "bg-teal-50",   border: "border-teal-200",   text: "text-teal-700"  },
+  experience: { label: "Experience", bg: "bg-blue-50",   border: "border-blue-200",   text: "text-blue-700"  },
+  summary:    { label: "Summary",    bg: "bg-purple-50", border: "border-purple-200", text: "text-purple-700"},
+  role:       { label: "Role",       bg: "bg-purple-50", border: "border-purple-200", text: "text-purple-700"},
+  candidate:  { label: "Candidate",  bg: "bg-blue-50",   border: "border-blue-200",   text: "text-blue-700"  },
+};
+
+function kindStyle(kind: string) {
+  const key = kind.toLowerCase().split("_")[0];
+  return KIND_META[key] ?? { label: kind, bg: "bg-gray-50", border: "border-gray-200", text: "text-gray-700" };
+}
+
+function SemanticEmbeddingPanel({ collection }: { collection: ApiEmbeddingCollection }) {
+  const { summaries, embeddings } = collection;
+
+  // Group summaries by owner (role vs candidate)
+  const roleSummaries = summaries.filter(s =>
+    s.owner_id?.startsWith("role") || s.kind?.toLowerCase().includes("role")
+  );
+  const candidateSummaries = summaries.filter(s =>
+    s.owner_id?.startsWith("candidate") || s.kind?.toLowerCase().includes("candidate")
+  );
+  const otherSummaries = summaries.filter(s => !roleSummaries.includes(s) && !candidateSummaries.includes(s));
+
+  // Keywords per group
+  const roleKws      = [...new Set(roleSummaries.flatMap(s => extractKeywords(s.text)))];
+  const candidateKws = [...new Set(candidateSummaries.flatMap(s => extractKeywords(s.text)))];
+  const otherKws     = [...new Set(otherSummaries.flatMap(s => extractKeywords(s.text)))];
+  const sharedKws    = roleKws.filter(w => candidateKws.some(c => c.toLowerCase() === w.toLowerCase()));
+
+  // Embedding kind groups
+  const embKindCounts = embeddings.reduce<Record<string, number>>((acc, e) => {
+    acc[e.kind] = (acc[e.kind] ?? 0) + 1; return acc;
+  }, {});
+  const vectorDim = embeddings[0]?.vector?.length ?? 0;
+
+  return (
+    <div className="space-y-6">
+      {/* Stats row */}
+      <div className="grid grid-cols-3 gap-3">
+        {[
+          { value: summaries.length, label: "Summaries",  color: "text-signal"   },
+          { value: embeddings.length, label: "Vectors",    color: "text-mint"     },
+          { value: vectorDim,        label: "Dimensions", color: "text-amber"    },
+        ].map(({ value, label, color }) => (
+          <div key={label} className="rounded-xl border border-gray-200 bg-white p-4 text-center shadow-sm">
+            <p className={`text-2xl font-bold ${color}`}>{value}</p>
+            <p className="mt-0.5 text-xs font-semibold uppercase tracking-wide text-graphite">{label}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* Concept columns */}
+      <div className="grid gap-4 sm:grid-cols-2">
+        {roleSummaries.length > 0 && (
+          <ConceptCard title="Role Embeddings" color="purple" keywords={roleKws} summaries={roleSummaries} />
+        )}
+        {candidateSummaries.length > 0 && (
+          <ConceptCard title="Candidate Embeddings" color="blue" keywords={candidateKws} summaries={candidateSummaries} />
+        )}
+        {otherSummaries.length > 0 && (
+          <ConceptCard title="General Embeddings" color="green" keywords={otherKws} summaries={otherSummaries} />
+        )}
+      </div>
+
+      {/* Semantic Overlap */}
+      {sharedKws.length > 0 && (
+        <div className="rounded-xl border border-purple-100 bg-gradient-to-br from-purple-50 to-blue-50 p-4">
+          <p className="text-xs font-semibold uppercase tracking-wide text-purple-600 mb-3">
+            ✦ Semantic Overlap — {sharedKws.length} shared concepts
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {sharedKws.map(kw => (
+              <span
+                key={kw}
+                className="rounded-full border border-purple-200 bg-white px-3 py-1 text-xs font-medium text-purple-700 shadow-sm"
+              >
+                {kw}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Embedding kinds breakdown */}
+      {Object.keys(embKindCounts).length > 0 && (
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-wide text-graphite mb-3">Embedding Kinds</p>
+          <div className="flex flex-wrap gap-2">
+            {Object.entries(embKindCounts).map(([kind, count]) => {
+              const s = kindStyle(kind);
+              return (
+                <span key={kind} className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium ${s.bg} ${s.border} ${s.text}`}>
+                  {kind}
+                  <span className="rounded-full bg-white/70 px-1.5 text-[10px] font-bold">{count}</span>
+                </span>
+              );
+            })}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function ConceptCard({
+  title, color, keywords, summaries
+}: {
+  title: string;
+  color: "purple" | "blue" | "green";
+  keywords: string[];
+  summaries: ApiEmbeddingCollection["summaries"];
+}) {
+  const colorMap = {
+    purple: { header: "text-purple-700", chip: "border-purple-200 bg-purple-50 text-purple-700", bar: "bg-purple-500" },
+    blue:   { header: "text-blue-700",   chip: "border-blue-200 bg-blue-50 text-blue-700",       bar: "bg-blue-500"   },
+    green:  { header: "text-green-700",  chip: "border-green-200 bg-green-50 text-green-700",    bar: "bg-green-500"  },
+  };
+  const c = colorMap[color];
+
+  return (
+    <div className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm space-y-3">
+      <div className="flex items-center justify-between">
+        <p className={`text-sm font-semibold ${c.header}`}>{title}</p>
+        <span className="text-xs text-graphite">{summaries.length} summaries</span>
+      </div>
+      <div className="flex flex-wrap gap-1.5">
+        {keywords.slice(0, 12).map(kw => (
+          <span key={kw} className={`rounded-full border px-2.5 py-0.5 text-xs font-medium ${c.chip}`}>
+            {kw}
+          </span>
+        ))}
+      </div>
+      {summaries[0] && (
+        <p className="text-xs text-gray-500 leading-5 line-clamp-2 border-t border-gray-100 pt-2">
+          {summaries[0].text}
+        </p>
+      )}
     </div>
   );
 }
