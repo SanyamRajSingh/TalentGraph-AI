@@ -95,6 +95,24 @@ def upload_candidates(
     return UploadCandidateResponse(resume_id=resume.resume_id, resume=resume)
 
 
+from fastapi import File, UploadFile
+
+@api_router.post("/upload-file", response_model=CandidateTwinResponse, tags=["candidates"])
+async def upload_file(
+    file: UploadFile = File(...),
+    pipeline: CandidatePipeline = Depends(get_candidate_pipeline),
+) -> CandidateTwinResponse:
+    """Upload a PDF, DOCX, or TXT resume file to build a Digital Twin."""
+    file_bytes = await file.read()
+    twin, _event = pipeline.upload_from_file(
+        file_bytes=file_bytes,
+        filename=file.filename or "unknown",
+        content_type=file.content_type or "application/octet-stream",
+    )
+    return CandidateTwinResponse(candidate_id=twin.candidate_id, twin=twin)
+
+
+
 @api_router.post("/generate-role-dna", response_model=RoleDNAResponse, tags=["role-dna"])
 def generate_role_dna(
     request: GenerateRoleDNARequest,

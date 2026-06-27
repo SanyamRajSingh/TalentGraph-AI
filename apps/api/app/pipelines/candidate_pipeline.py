@@ -38,6 +38,35 @@ class CandidatePipeline:
         )
         return resume, CandidateUploaded(candidate_id=resume.resume_id)
 
+    def upload_from_file(
+        self,
+        file_bytes: bytes,
+        filename: str,
+        content_type: str = "application/octet-stream",
+    ) -> tuple[CandidateDigitalTwin, DigitalTwinBuilt]:
+        """Parse an uploaded file (PDF, DOCX, or TXT) and build a Digital Twin.
+
+        Dispatches to the correct parser based on file extension / content-type.
+        Falls back to plain-text parsing for .txt and unknown types.
+        """
+        name_lower = filename.lower()
+        is_pdf = name_lower.endswith(".pdf") or "pdf" in content_type
+        is_docx = name_lower.endswith(".docx") or "wordprocessingml" in content_type
+
+        if is_pdf:
+            from app.providers.pdf_parser_provider import PdfParserProvider
+            parsed = PdfParserProvider().parse_resume(file_bytes, filename)
+        elif is_docx:
+            from app.providers.docx_parser_provider import DocxParserProvider
+            parsed = DocxParserProvider().parse_resume(file_bytes, filename)
+        else:
+            # TXT or unknown — decode bytes as UTF-8
+            raw_text = file_bytes.decode("utf-8", errors="replace")
+            from app.modules.candidates.local_parser_provider import LocalResumeParserProvider
+            parsed = LocalResumeParserProvider().parse_resume_text(raw_text, source_name=filename)
+
+        return self.run(resume_text=parsed.raw_text, source_name=filename)
+
     def run(
         self,
         resume_text: str | None = None,
@@ -63,3 +92,4 @@ class CandidatePipeline:
         )
         saved = self.candidate_repository.save(twin)
         return saved, DigitalTwinBuilt(candidate_id=saved.candidate_id)
+
