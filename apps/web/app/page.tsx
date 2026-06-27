@@ -513,7 +513,7 @@ export default function Home() {
     if (!roleDNA || !candidateTwin) return;
     setCopilotLoading(true);
     try {
-      const response = await fetch("/api/v1/copilot/draft-email", {
+      const response = await fetch(`${apiBaseUrl}/api/v1/copilot/draft-email`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ role_id: roleDNA.role_id, candidate_id: candidateTwin.candidate_id }),
@@ -1644,6 +1644,9 @@ function ForceGraphViz({ graph }: { graph: ApiGraph }) {
         return `url(#tg-arrow-${getRadius(tNode?.label ?? "")})`;
       });
 
+    // Render Nodes (Hoist nodeData above updateEdges to prevent Temporal Dead Zone crash during minification)
+    const nodeData = gDagre.nodes().map(v => gDagre.node(v) as { id: string; label: string; name: string; x: number; y: number; width: number; height: number });
+
     // Helper to draw edges
     const updateEdges = () => {
       link.attr("d", (d: any) => {
@@ -1656,9 +1659,6 @@ function ForceGraphViz({ graph }: { graph: ApiGraph }) {
       });
     };
     updateEdges(); // initial draw
-
-    // Render Nodes
-    const nodeData = gDagre.nodes().map(v => gDagre.node(v) as { id: string; label: string; name: string; x: number; y: number; width: number; height: number });
 
     const node = g.append("g").selectAll("g")
       .data(nodeData).join("g")
