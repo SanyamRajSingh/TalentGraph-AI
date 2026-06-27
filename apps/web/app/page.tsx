@@ -5,6 +5,7 @@ import type { ReactNode } from "react";
 import * as d3 from "d3";
 import dagre from "dagre";
 import { Brain, BriefcaseBusiness, ClipboardCheck, Download, FileText, GitBranch, Layers3, Lightbulb, ListOrdered, Loader2, Maximize2, Sparkles, UserRound } from "lucide-react";
+import CandidateLibrary from "../components/CandidateLibrary";
 
 type ApiRoleDNA = {
   role_id: string;
@@ -196,6 +197,7 @@ export default function Home() {
   const [explanationLoading, setExplanationLoading] = useState(false);
   const [exportLoading, setExportLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState<"workflow" | "library">("workflow");
 
   const apiBaseUrl = useMemo(() => process.env.NEXT_PUBLIC_API_BASE_URL || "", []);
   const currentRanking = useMemo(
@@ -430,9 +432,28 @@ export default function Home() {
         </div>
       </header>
 
-      <section className="mx-auto max-w-7xl px-6 py-6">
-        <ProgressSteps completed={completedSteps} />
-      </section>
+      <div className="mx-auto max-w-7xl px-6 py-4">
+        <nav className="flex gap-4 border-b border-gray-200" aria-label="Tabs">
+          <button
+            onClick={() => setActiveTab("workflow")}
+            className={`border-b-2 py-2 px-1 text-sm font-medium ${activeTab === "workflow" ? "border-signal text-signal" : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"}`}
+          >
+            Workflow
+          </button>
+          <button
+            onClick={() => setActiveTab("library")}
+            className={`border-b-2 py-2 px-1 text-sm font-medium ${activeTab === "library" ? "border-signal text-signal" : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"}`}
+          >
+            Candidate Library
+          </button>
+        </nav>
+      </div>
+
+      {activeTab === "workflow" ? (
+        <>
+          <section className="mx-auto max-w-7xl px-6 py-6">
+            <ProgressSteps completed={completedSteps} />
+          </section>
 
       <section className="mx-auto grid max-w-7xl gap-6 px-6 pb-8 lg:grid-cols-2">
         <ModulePanel
@@ -702,6 +723,12 @@ export default function Home() {
           )}
         </ModulePanel>
       </section>
+        </>
+      ) : (
+        <section className="mx-auto max-w-7xl px-6 pb-8">
+          <CandidateLibrary apiBaseUrl={apiBaseUrl} />
+        </section>
+      )}
 
       {error ? (
         <div className="mx-auto mb-8 max-w-7xl px-6">

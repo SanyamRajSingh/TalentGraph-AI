@@ -1,6 +1,26 @@
+import dataclasses
 from abc import ABC, abstractmethod
 
 from app.domain.candidate_twin import CandidateDigitalTwin, CandidateResume
+
+
+@dataclasses.dataclass
+class CandidateFilter:
+    search: str | None = None
+    skills: list[str] | None = None
+    growth_stage: str | None = None
+    min_confidence: int | None = None
+    sort_by: str = "created_at"  # 'created_at', 'confidence', 'name'
+    page: int = 1
+    page_size: int = 20
+
+
+@dataclasses.dataclass
+class PaginatedCandidateList:
+    items: list[CandidateDigitalTwin]
+    total: int
+    page: int
+    page_size: int
 
 
 class CandidateRepository(ABC):
@@ -25,3 +45,8 @@ class CandidateRepository(ABC):
     @abstractmethod
     def list_candidates(self) -> list[CandidateDigitalTwin]:
         """List persisted candidate digital twins."""
+
+    @abstractmethod
+    def search_candidates(self, filters: CandidateFilter) -> PaginatedCandidateList:
+        """Search and filter candidate digital twins."""
+

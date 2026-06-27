@@ -21,3 +21,13 @@ class CandidateListResponse(BaseModel):
     """API response for generated candidate digital twins."""
 
     items: list[CandidateDigitalTwin]
+
+
+class PaginatedCandidateListResponse(BaseModel):
+    """API response for paginated candidate digital twins."""
+
+    items: list[CandidateDigitalTwin]
+    total: int
+    page: int
+    page_size: int
+

@@ -307,11 +307,37 @@ def get_rankings_legacy() -> None:
     not_implemented("Legacy rankings read model")
 
 
-@api_router.get("/candidates", response_model=CandidateListResponse, tags=["candidates"])
+from fastapi import Query
+from app.contracts.responses.candidate_responses import PaginatedCandidateListResponse
+from app.repositories.candidate_repository import CandidateFilter
+
+@api_router.get("/candidates", response_model=PaginatedCandidateListResponse, tags=["candidates"])
 def list_candidates(
+    search: str | None = Query(None, description="Search by name or current role"),
+    skills: list[str] = Query(None, description="Filter by skills (must have all)"),
+    growth_stage: str | None = Query(None, description="Filter by growth stage"),
+    min_confidence: int | None = Query(None, description="Minimum confidence score"),
+    sort_by: str = Query("created_at", description="Sort by field: name, confidence, created_at"),
+    page: int = Query(1, description="Page number"),
+    page_size: int = Query(20, description="Page size"),
     repository: CandidateRepository = Depends(get_candidate_repository),
-) -> CandidateListResponse:
-    return CandidateListResponse(items=repository.list_candidates())
+) -> PaginatedCandidateListResponse:
+    filters = CandidateFilter(
+        search=search,
+        skills=skills,
+        growth_stage=growth_stage,
+        min_confidence=min_confidence,
+        sort_by=sort_by,
+        page=page,
+        page_size=page_size,
+    )
+    result = repository.search_candidates(filters)
+    return PaginatedCandidateListResponse(
+        items=result.items,
+        total=result.total,
+        page=result.page,
+        page_size=result.page_size,
+    )
 
 
 @api_router.get("/candidate/{candidate_id}", response_model=CandidateTwinResponse, tags=["candidates"])
