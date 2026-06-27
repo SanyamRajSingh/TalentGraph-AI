@@ -647,7 +647,7 @@ export default function Home() {
         </ModulePanel>
       </section>
 
-      <section className="mx-auto grid max-w-7xl gap-6 px-6 pb-8 lg:grid-cols-2">
+      <section className="mx-auto max-w-7xl space-y-6 px-6 pb-8">
         <ModulePanel
           eyebrow="Semantic Foundation"
           title="Knowledge Graph"
@@ -1078,9 +1078,11 @@ function ForceGraphViz({ graph }: { graph: ApiGraph }) {
     const svg = d3.select(svgRef.current!);
     const container = containerRef.current!;
     const W = container.clientWidth || 600;
-    const H = 460;
+    const H = 520;
 
-    svg.attr("width", W).attr("height", H).selectAll("*").remove();
+    svg.attr("width", W).attr("height", H)
+       .attr("viewBox", `0 0 ${W} ${H}`)
+       .selectAll("*").remove();
 
     // Arrow marker
     svg.append("defs").append("marker")
@@ -1141,11 +1143,13 @@ function ForceGraphViz({ graph }: { graph: ApiGraph }) {
     // Shadow for depth
     node.append("circle")
       .attr("r", 20).attr("fill", d => NODE_COLORS[d.label] ?? "#6b7280")
+      .attr("class", "node-shadow")
       .attr("opacity", 0.15).attr("cy", 2);
 
     // Main circle
     node.append("circle")
       .attr("r", 18)
+      .attr("class", "node-main")
       .attr("fill", d => NODE_COLORS[d.label] ?? "#6b7280")
       .attr("stroke", "#fff").attr("stroke-width", 2.5);
 
@@ -1160,7 +1164,10 @@ function ForceGraphViz({ graph }: { graph: ApiGraph }) {
       .attr("text-anchor", "middle").attr("dy", 30)
       .attr("font-size", "10px").attr("fill", "#374151")
       .attr("font-weight", "500")
-      .text(d => d.name.length > 14 ? d.name.slice(0, 13) + "\u2026" : d.name);
+      .text(d => {
+        const n = d.name ?? d.id ?? "?";
+        return n.length > 14 ? n.slice(0, 13) + "\u2026" : n;
+      });
 
     // Tooltip interactions
     const tooltip = tooltipRef.current!;
@@ -1178,17 +1185,18 @@ function ForceGraphViz({ graph }: { graph: ApiGraph }) {
       .on("click", (_ev, clicked) => {
         const neighborIds = new Set<string>();
         links.forEach(l => {
-          const s = (l.source as ForceNode).id;
-          const t = (l.target as ForceNode).id;
-          if (s === clicked.id) neighborIds.add(t);
-          if (t === clicked.id) neighborIds.add(s);
+          // After first tick, source/target are node objects; before that, strings
+          const sId = typeof l.source === "string" ? l.source : (l.source as ForceNode).id;
+          const tId = typeof l.target === "string" ? l.target : (l.target as ForceNode).id;
+          if (sId === clicked.id) neighborIds.add(tId);
+          if (tId === clicked.id) neighborIds.add(sId);
         });
-        node.select("circle:nth-child(2)")
+        node.select(".node-main")
           .attr("opacity", d => d.id === clicked.id || neighborIds.has(d.id) ? 1 : 0.2);
         link.attr("opacity", l => {
-          const s = (l.source as ForceNode).id;
-          const t = (l.target as ForceNode).id;
-          return s === clicked.id || t === clicked.id ? 1 : 0.1;
+          const sId = typeof l.source === "string" ? l.source : (l.source as ForceNode).id;
+          const tId = typeof l.target === "string" ? l.target : (l.target as ForceNode).id;
+          return sId === clicked.id || tId === clicked.id ? 1 : 0.1;
         });
       });
 
@@ -1205,7 +1213,7 @@ function ForceGraphViz({ graph }: { graph: ApiGraph }) {
     // Reset dimming on svg background click
     svg.on("click.reset", (ev) => {
       if (ev.target === svg.node()) {
-        node.select("circle:nth-child(2)").attr("opacity", 1);
+        node.select(".node-main").attr("opacity", 1);
         link.attr("opacity", 1);
       }
     });
@@ -1229,7 +1237,12 @@ function ForceGraphViz({ graph }: { graph: ApiGraph }) {
       node.attr("transform", d => `translate(${d.x ?? 0},${d.y ?? 0})`);
     });
 
-    return () => { sim.stop(); };
+    return () => {
+      sim.stop();
+      // Explicitly remove SVG-level event listeners to prevent accumulation
+      svg.on(".zoom", null);
+      svg.on("click.reset", null);
+    };
   }, [graph]);
 
   const handleFit = useCallback(() => {
@@ -1274,7 +1287,7 @@ function ForceGraphViz({ graph }: { graph: ApiGraph }) {
       <div
         ref={containerRef}
         className="relative overflow-hidden rounded-xl border border-gray-200 bg-gradient-to-br from-slate-50 to-gray-100"
-        style={{ height: 460 }}
+        style={{ height: 520 }}
       >
         <svg ref={svgRef} className="w-full h-full select-none" />
         {/* Tooltip */}
