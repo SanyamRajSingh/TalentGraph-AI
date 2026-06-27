@@ -12,6 +12,9 @@ class EvaluatorResult(BaseModel):
     confidence: Score = Field(ge=0, le=100)
     strengths: list[str] = Field(default_factory=list)
     risks: list[str] = Field(default_factory=list)
+    evidence: list[str] = Field(default_factory=list)
+    missing_signals: list[str] = Field(default_factory=list)
+    ramp_up_estimate: str | None = None
     explanation: str = ""
 
 
@@ -27,3 +30,4 @@ class EvaluationBundle(BaseModel):
     culture: EvaluatorResult | None = None
     overall_match: Score = Field(default=0, ge=0, le=100)
     overall_confidence: Score = Field(default=0, ge=0, le=100)
+    narrative: str = ""

@@ -6,6 +6,10 @@ from app.modules.candidates.normalizer import (
     clamp_score,
     infer_growth_stage,
     normalize_list,
+    infer_strengths,
+    infer_weaknesses,
+    infer_risk_profile,
+    recommend_roles,
 )
 from app.providers.parser_provider import ParserProvider
 
@@ -34,8 +38,18 @@ class CandidateDigitalTwinService:
         achievements = normalize_list(fields.get("achievements"))
         domains = normalize_list(fields.get("domains"))
         timeline = build_timeline(parsed.raw_text, fields)
-        metrics = self._derive_metrics(parsed.raw_text, skills, projects, experiences, achievements, timeline)
+        metrics = self._derive_metrics(parsed.raw_text, skills, projects, experiences, achievements, domains, timeline)
         growth_stage = infer_growth_stage(metrics, skills, projects, domains)
+
+        strengths = infer_strengths(metrics)
+        weaknesses = infer_weaknesses(metrics)
+        risk_profile = infer_risk_profile(metrics)
+        recommended_roles = recommend_roles(growth_stage)
+        
+        growth_signals = [f"Learning velocity score is {metrics['learning_velocity']}/100."]
+        leadership_signals = [f"Leadership score is {metrics['leadership']}/100.", f"Ownership score is {metrics['ownership']}/100."]
+        success_environments = ["Fast-paced startups", "Agile teams"] if metrics['ownership'] >= 60 else ["Structured enterprise environments"]
+        career_progression_score = clamp_score(50 + len(timeline) * 5 + int(metrics['leadership'] * 0.2))
 
         processing_time_ms = int((perf_counter() - started) * 1000)
         return CandidateDigitalTwin(
@@ -53,6 +67,14 @@ class CandidateDigitalTwinService:
             domains=domains or ["General Technology"],
             timeline=timeline,
             growth_stage=growth_stage,
+            strengths=strengths,
+            weaknesses=weaknesses,
+            growth_signals=growth_signals,
+            leadership_signals=leadership_signals,
+            career_progression_score=career_progression_score,
+            risk_profile=risk_profile,
+            recommended_roles=recommended_roles,
+            success_environments=success_environments,
             reasoning=self._build_reasoning(metrics, growth_stage.value, skills, projects, timeline),
             processing_time_ms=processing_time_ms,
             **metrics,
@@ -65,6 +87,7 @@ class CandidateDigitalTwinService:
         projects: list[str],
         experiences: list[str],
         achievements: list[str],
+        domains: list[str],
         timeline: list[object],
     ) -> dict[str, int]:
         text = raw_text.casefold()
@@ -76,6 +99,13 @@ class CandidateDigitalTwinService:
         project_complexity = clamp_score(35 + len(projects) * 10 + keyword_count(text, ("distributed", "ml", "scale", "pipeline")) * 8)
         collaboration = clamp_score(45 + keyword_count(text, ("team", "cross-functional", "partnered", "collaborated")) * 9)
         consistency = clamp_score(45 + len(experiences) * 8 + len(achievements) * 5 + min(len(timeline), 5) * 5)
+        
+        # New Intelligence Indices
+        leadership_readiness = clamp_score(30 + leadership * 0.4 + communication * 0.3 + project_complexity * 0.3)
+        adaptability = clamp_score(40 + len(set(skills)) * 2 + len(domains) * 10)
+        execution_speed = clamp_score(45 + keyword_count(text, ("shipped", "delivered", "accelerated", "reduced", "faster")) * 12)
+        business_acumen = clamp_score(35 + keyword_count(text, ("revenue", "cost", "conversion", "stakeholder", "strategy", "roi")) * 12)
+        
         confidence = clamp_score(50 + min(len(raw_text) // 250, 20) + len(skills) * 3 + min(len(timeline), 4) * 5)
 
         return {
@@ -87,6 +117,10 @@ class CandidateDigitalTwinService:
             "project_complexity": project_complexity,
             "collaboration": collaboration,
             "consistency": consistency,
+            "leadership_readiness": leadership_readiness,
+            "adaptability": adaptability,
+            "execution_speed": execution_speed,
+            "business_acumen": business_acumen,
             "confidence": confidence,
         }
 

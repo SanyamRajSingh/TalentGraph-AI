@@ -172,9 +172,16 @@ def get_graph_pipeline() -> GraphPipeline:
 
 @lru_cache
 def get_embedding_foundation_service() -> EmbeddingFoundationService:
+    settings = get_settings()
+    try:
+        from app.providers.sentence_transformer_provider import SentenceTransformerEmbeddingProvider
+        provider = SentenceTransformerEmbeddingProvider(model_name=settings.sentence_transformers_model)
+    except ImportError:
+        provider = LocalEmbeddingProvider()
+
     return EmbeddingFoundationService(
         summary_service=SummaryService(),
-        embedding_provider=LocalEmbeddingProvider(),
+        embedding_provider=provider,
     )
 
 
@@ -239,4 +246,62 @@ def get_ranking_export_service() -> RankingExportService:
         ranking_repository=get_ranking_repository(),
         candidate_repository=get_candidate_repository(),
         explanation_repository=get_explanation_repository(),
+    )
+
+
+@lru_cache
+def get_search_service():
+    from app.modules.search.search_service import SearchService
+    return SearchService(
+        candidate_repository=get_candidate_repository(),
+        role_repository=get_role_dna_repository(),
+        embedding_provider=get_embedding_foundation_service().embedding_provider,
+    )
+
+
+@lru_cache
+def get_recommendation_service():
+    from app.modules.recommendation.service import RecommendationService
+    return RecommendationService()
+
+@lru_cache
+def get_copilot_service():
+    from app.modules.copilot.service import CopilotService
+    return CopilotService()
+
+def get_copilot_pipeline():
+    from app.pipelines.copilot_pipeline import CopilotPipeline
+    return CopilotPipeline(
+        copilot_service=get_copilot_service(),
+        candidate_repository=get_candidate_repository(),
+        role_repository=get_role_dna_repository(),
+        evaluation_repository=get_evaluation_repository(),
+    )
+
+
+@lru_cache
+def get_batch_pipeline():
+    from app.pipelines.batch_pipeline import BatchPipeline
+    return BatchPipeline(candidate_pipeline=get_candidate_pipeline())
+
+
+def get_copilot_chat_service():
+    from app.modules.copilot.chat_service import CopilotChatService
+    return CopilotChatService(
+        candidate_repository=get_candidate_repository(),
+        role_repository=get_role_dna_repository(),
+    )
+
+
+def get_comparison_service():
+    from app.modules.comparison.service import ComparisonService
+    return ComparisonService()
+
+
+def get_analytics_service():
+    from app.modules.analytics.service import AnalyticsService
+    return AnalyticsService(
+        candidate_repository=get_candidate_repository(),
+        role_repository=get_role_dna_repository(),
+        evaluation_repository=get_evaluation_repository(),
     )

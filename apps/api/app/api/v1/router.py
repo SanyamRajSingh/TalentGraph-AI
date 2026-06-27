@@ -16,6 +16,12 @@ from app.api.v1.dependencies import (
     get_role_dna_repository,
     get_role_pipeline,
     get_vector_repository,
+    get_search_service,
+    get_recommendation_service,
+    get_copilot_pipeline,
+    get_copilot_chat_service,
+    get_comparison_service,
+    get_analytics_service,
 )
 from app.contracts.requests import (
     BuildDigitalTwinRequest,
@@ -29,6 +35,7 @@ from app.contracts.requests import (
     UploadCandidateRequest,
     UploadJobRequest,
 )
+from app.contracts.requests.recommend_requests import RecommendRequest
 from app.contracts.responses.candidate_responses import (
     CandidateListResponse,
     CandidateTwinResponse,
@@ -112,6 +119,32 @@ async def upload_file(
     return CandidateTwinResponse(candidate_id=twin.candidate_id, twin=twin)
 
 
+from app.pipelines.batch_pipeline import BatchPipeline
+from app.api.v1.dependencies import get_batch_pipeline
+
+@api_router.post("/batch/upload-zip", tags=["batch"])
+async def batch_upload_zip(
+    file: UploadFile = File(...),
+    pipeline: BatchPipeline = Depends(get_batch_pipeline),
+):
+    """Upload a ZIP file of resumes to be parsed and converted to Digital Twins asynchronously."""
+    if not file.filename or not file.filename.endswith(".zip"):
+        raise HTTPException(status_code=400, detail="Must be a .zip file")
+    file_bytes = await file.read()
+    job_id = await pipeline.upload_zip_async(file_bytes=file_bytes)
+    return {"job_id": job_id, "message": "Batch processing started"}
+
+@api_router.get("/batch/status/{job_id}", tags=["batch"])
+def get_batch_status(
+    job_id: str,
+    pipeline: BatchPipeline = Depends(get_batch_pipeline),
+):
+    status = pipeline.get_job_status(job_id)
+    if not status:
+        raise HTTPException(status_code=404, detail="Job not found")
+    return status
+
+
 
 @api_router.post("/generate-role-dna", response_model=RoleDNAResponse, tags=["role-dna"])
 def generate_role_dna(
@@ -176,6 +209,13 @@ def build_digital_twin(
     return CandidateTwinResponse(candidate_id=twin.candidate_id, twin=twin)
 
 
+@api_router.get("/candidates", response_model=CandidateListResponse, tags=["candidates"])
+def list_candidates(
+    repository: CandidateRepository = Depends(get_candidate_repository),
+) -> CandidateListResponse:
+    return CandidateListResponse(items=repository.list_candidates())
+
+
 @api_router.post("/rank-candidates", tags=["ranking"])
 def rank_candidates() -> None:
     not_implemented("Ranking pipeline")
@@ -234,6 +274,23 @@ def evaluate_candidate(
     except ValueError as exc:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(exc)) from exc
     return EvaluationResponse(evaluation_id=evaluation.evaluation_id, evaluation=evaluation)
+
+
+from app.contracts.responses.recommend_responses import RecommendResponse
+from app.modules.recommendation.service import RecommendationService
+
+@api_router.post("/recommend", response_model=RecommendResponse, tags=["recommendation"])
+def recommend_candidate(
+    request: RecommendRequest,
+    pipeline: EvaluationPipeline = Depends(get_evaluation_pipeline),
+    recommendation_service: RecommendationService = Depends(get_recommendation_service),
+) -> RecommendResponse:
+    try:
+        evaluation = pipeline.run(role_id=request.role_id, candidate_id=request.candidate_id)
+        recommendation = recommendation_service.recommend(evaluation)
+    except ValueError as exc:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(exc)) from exc
+    return RecommendResponse(recommendation=recommendation)
 
 
 @api_router.post("/generate-explanations", response_model=ExplanationResponse, tags=["explanations"])
@@ -354,6 +411,55 @@ def get_candidate(
     return CandidateTwinResponse(candidate_id=twin.candidate_id, twin=twin)
 
 
+from app.modules.search.search_service import SearchService, SearchResult
+
+@api_router.get("/search/candidates", response_model=list[SearchResult], tags=["search"])
+def search_candidates(
+    query: str | None = Query(None),
+    candidate_id: str | None = Query(None),
+    role_id: str | None = Query(None),
+    limit: int = Query(10),
+    match_type: str = Query("similar"),
+    search_service: SearchService = Depends(get_search_service),
+) -> list[SearchResult]:
+    try:
+        if query:
+            return search_service.find_candidates(query=query, limit=limit)
+        elif candidate_id:
+            return search_service.find_similar_candidates(candidate_id=candidate_id, limit=limit, match_type=match_type)
+        elif role_id:
+            return search_service.find_candidates_for_role(role_id=role_id, limit=limit)
+        else:
+            raise HTTPException(
+                status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                detail="Must provide one of: query, candidate_id, or role_id",
+            )
+    except ValueError as exc:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(exc)) from exc
+
+
+@api_router.get("/search/roles", response_model=list[SearchResult], tags=["search"])
+def search_roles(
+    query: str | None = Query(None),
+    role_id: str | None = Query(None),
+    limit: int = Query(10),
+    search_service: SearchService = Depends(get_search_service),
+) -> list[SearchResult]:
+    try:
+        if query:
+            return search_service.find_roles(query=query, limit=limit)
+        elif role_id:
+            return search_service.find_similar_roles(role_id=role_id, limit=limit)
+        else:
+            raise HTTPException(
+                status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                detail="Must provide one of: query or role_id",
+            )
+    except ValueError as exc:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(exc)) from exc
+
+
+
 @api_router.get("/graph/{graph_id}", response_model=GraphResponse, tags=["graph"])
 def get_graph(
     graph_id: str,
@@ -391,3 +497,72 @@ def get_evaluation(
             detail=f"Evaluation {evaluation_id} not found.",
         )
     return EvaluationResponse(evaluation_id=evaluation.evaluation_id, evaluation=evaluation)
+
+
+from app.contracts.requests.copilot_requests import CopilotDraftRequest
+from app.contracts.responses.copilot_responses import CopilotDraftResponse
+from app.pipelines.copilot_pipeline import CopilotPipeline
+
+@api_router.post("/copilot/draft-email", response_model=CopilotDraftResponse, tags=["copilot"])
+def draft_copilot_email(
+    request: CopilotDraftRequest,
+    pipeline: CopilotPipeline = Depends(get_copilot_pipeline),
+) -> CopilotDraftResponse:
+    try:
+        response = pipeline.draft_email(role_id=request.role_id, candidate_id=request.candidate_id)
+        return response
+    except ValueError as exc:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=str(exc)) from exc
+
+
+from app.domain.copilot import CopilotChatRequest, CopilotChatResponse
+from app.modules.copilot.chat_service import CopilotChatService
+
+@api_router.post("/copilot/chat", response_model=CopilotChatResponse, tags=["copilot"])
+def copilot_chat(
+    request: CopilotChatRequest,
+    chat_service: CopilotChatService = Depends(get_copilot_chat_service),
+) -> CopilotChatResponse:
+    """Free-form recruiter chat with deterministic intent matching."""
+    return chat_service.chat(request)
+
+
+from pydantic import BaseModel as _BaseModel
+from app.domain.comparison import ComparisonMatrix
+from app.modules.comparison.service import ComparisonService
+from app.repositories import CandidateRepository, RoleDNARepository
+
+class CompareRequest(_BaseModel):
+    candidate_a_id: str
+    candidate_b_id: str
+    role_id: str
+
+@api_router.post("/compare", response_model=ComparisonMatrix, tags=["comparison"])
+def compare_candidates(
+    request: CompareRequest,
+    comparison_service: ComparisonService = Depends(get_comparison_service),
+    candidate_repository: CandidateRepository = Depends(get_candidate_repository),
+    role_repository: RoleDNARepository = Depends(get_role_dna_repository),
+) -> ComparisonMatrix:
+    """Generate a side-by-side comparison matrix for two candidates against a role."""
+    candidate_a = candidate_repository.get_by_candidate_id(request.candidate_a_id)
+    candidate_b = candidate_repository.get_by_candidate_id(request.candidate_b_id)
+    role = role_repository.get_by_role_id(request.role_id)
+    if candidate_a is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Candidate A '{request.candidate_a_id}' not found.")
+    if candidate_b is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Candidate B '{request.candidate_b_id}' not found.")
+    if role is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Role '{request.role_id}' not found.")
+    return comparison_service.compare(candidate_a, candidate_b, role)
+
+
+from app.domain.analytics import AnalyticsOverview
+from app.modules.analytics.service import AnalyticsService
+
+@api_router.get("/analytics/overview", response_model=AnalyticsOverview, tags=["analytics"])
+def get_analytics_overview(
+    analytics_service: AnalyticsService = Depends(get_analytics_service),
+) -> AnalyticsOverview:
+    """Get high-level analytics overview for the dashboard."""
+    return analytics_service.get_overview()

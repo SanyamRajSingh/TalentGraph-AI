@@ -89,3 +89,53 @@ def infer_growth_stage(metrics: dict[str, int], skills: list[str], projects: lis
     if metrics["communication"] >= 75 and metrics["collaboration"] >= 70:
         return GrowthStage.OPERATOR
     return GrowthStage.EXPLORER
+
+
+def infer_strengths(metrics: dict[str, int]) -> list[str]:
+    strengths = []
+    if metrics.get("technical_depth", 0) >= 75:
+        strengths.append("Deep technical expertise")
+    if metrics.get("learning_velocity", 0) >= 75:
+        strengths.append("Fast learner")
+    if metrics.get("leadership", 0) >= 75:
+        strengths.append("Strong leadership potential")
+    if metrics.get("ownership", 0) >= 75:
+        strengths.append("High accountability and ownership")
+    if metrics.get("communication", 0) >= 75:
+        strengths.append("Excellent communicator")
+    return strengths
+
+
+def infer_weaknesses(metrics: dict[str, int]) -> list[str]:
+    weaknesses = []
+    if metrics.get("technical_depth", 50) < 50:
+        weaknesses.append("Needs technical upskilling")
+    if metrics.get("leadership", 50) < 50:
+        weaknesses.append("Limited leadership experience")
+    if metrics.get("communication", 50) < 50:
+        weaknesses.append("Communication could be improved")
+    if metrics.get("collaboration", 50) < 50:
+        weaknesses.append("May prefer solitary work")
+    return weaknesses
+
+
+def infer_risk_profile(metrics: dict[str, int]) -> str:
+    if metrics.get("consistency", 50) < 40 or metrics.get("ownership", 50) < 40:
+        return "High"
+    if metrics.get("consistency", 50) >= 70 and metrics.get("ownership", 50) >= 70:
+        return "Low"
+    return "Medium"
+
+
+def recommend_roles(growth_stage: GrowthStage) -> list[str]:
+    if growth_stage == GrowthStage.EMERGING_LEADER:
+        return ["Tech Lead", "Engineering Manager"]
+    elif growth_stage == GrowthStage.TECHNICAL_SPECIALIST:
+        return ["Senior Software Engineer", "Staff Engineer"]
+    elif growth_stage == GrowthStage.BUILDER:
+        return ["Software Engineer", "Full Stack Developer"]
+    elif growth_stage == GrowthStage.RESEARCHER:
+        return ["Machine Learning Engineer", "Data Scientist"]
+    elif growth_stage == GrowthStage.OPERATOR:
+        return ["Site Reliability Engineer", "DevOps Engineer"]
+    return ["Junior Developer", "Associate Engineer"]

@@ -81,6 +81,13 @@ class PostgresCandidateRepository(CandidateRepository):
         rows = self.session.query(CandidateRow).order_by(CandidateRow.created_at.desc()).all()
         return [CandidateDigitalTwin.model_validate(r.payload) for r in rows]
 
+    def get_by_email(self, email: str) -> CandidateDigitalTwin | None:
+        # A simple in-memory filter of all rows for DB independence
+        for twin in self.list_candidates():
+            if twin.email and twin.email.lower() == email.lower():
+                return twin
+        return None
+
     def search_candidates(self, filters) -> object:
         """Search and filter candidate digital twins (PostgreSQL)."""
         from app.repositories.candidate_repository import PaginatedCandidateList

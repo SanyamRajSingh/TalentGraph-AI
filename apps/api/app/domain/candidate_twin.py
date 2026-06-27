@@ -37,6 +37,7 @@ class CandidateDigitalTwin(BaseModel):
 
     candidate_id: str = Field(default_factory=lambda: f"candidate_{uuid4().hex[:12]}")
     resume_id: str | None = None
+    resume_versions: list[CandidateResume] = Field(default_factory=list)
     name: str = "Unknown Candidate"
     email: str | None = None
     phone: str | None = None
@@ -49,6 +50,7 @@ class CandidateDigitalTwin(BaseModel):
     achievements: list[str] = Field(default_factory=list)
     domains: list[str] = Field(default_factory=list)
     timeline: list[CandidateTimelineEntry] = Field(default_factory=list)
+    evaluations_history: list[str] = Field(default_factory=list)
     technical_depth: Score = Field(default=50, ge=0, le=100)
     learning_velocity: Score = Field(default=50, ge=0, le=100)
     leadership: Score = Field(default=50, ge=0, le=100)
@@ -57,7 +59,19 @@ class CandidateDigitalTwin(BaseModel):
     project_complexity: Score = Field(default=50, ge=0, le=100)
     collaboration: Score = Field(default=50, ge=0, le=100)
     consistency: Score = Field(default=50, ge=0, le=100)
+    leadership_readiness: Score = Field(default=50, ge=0, le=100)
+    adaptability: Score = Field(default=50, ge=0, le=100)
+    execution_speed: Score = Field(default=50, ge=0, le=100)
+    business_acumen: Score = Field(default=50, ge=0, le=100)
     growth_stage: GrowthStage = GrowthStage.EXPLORER
+    strengths: list[str] = Field(default_factory=list)
+    weaknesses: list[str] = Field(default_factory=list)
+    growth_signals: list[str] = Field(default_factory=list)
+    leadership_signals: list[str] = Field(default_factory=list)
+    career_progression_score: Score = Field(default=50, ge=0, le=100)
+    risk_profile: str = "Unknown"
+    recommended_roles: list[str] = Field(default_factory=list)
+    success_environments: list[str] = Field(default_factory=list)
     confidence: Score = Field(default=70, ge=0, le=100)
     reasoning: list[str] = Field(default_factory=list)
     generated_at: datetime = Field(default_factory=lambda: datetime.now(UTC))

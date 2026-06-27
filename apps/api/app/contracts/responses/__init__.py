@@ -10,6 +10,8 @@ from app.contracts.responses.evaluation_responses import EvaluationResponse
 from app.contracts.responses.explanation_responses import ExplanationResponse
 from app.contracts.responses.foundation_responses import EmbeddingCollectionResponse, GraphResponse
 from app.contracts.responses.rank_responses import RankingResponse
+from app.contracts.responses.recommend_responses import RecommendResponse
+from app.contracts.responses.copilot_responses import CopilotDraftResponse
 from app.contracts.responses.role_dna_responses import (
     RoleDNAListResponse,
     RoleDNAResponse,
@@ -23,8 +25,10 @@ __all__ = [
     "ExplanationResponse",
     "CandidateListResponse",
     "CandidateTwinResponse",
+    "CopilotDraftResponse",
     "GraphResponse",
     "RankingResponse",
+    "RecommendResponse",
     "RoleDNAListResponse",
     "RoleDNAResponse",
     "UploadJobResponse",

@@ -4,7 +4,7 @@ import { FormEvent, useCallback, useEffect, useMemo, useRef, useState } from "re
 import type { ReactNode } from "react";
 import * as d3 from "d3";
 import dagre from "dagre";
-import { Brain, BriefcaseBusiness, ClipboardCheck, Download, FileText, GitBranch, Layers3, Lightbulb, ListOrdered, Loader2, Maximize2, Sparkles, UserRound, BarChart3, Send } from "lucide-react";
+import { Brain, BriefcaseBusiness, ClipboardCheck, Download, FileText, GitBranch, Layers3, Lightbulb, ListOrdered, Loader2, Maximize2, Sparkles, UserRound, BarChart3, Send, Moon, Sun } from "lucide-react";
 import CandidateLibrary from "../components/CandidateLibrary";
 import CopilotChatPanel from "../components/CopilotChatPanel";
 
@@ -273,6 +273,21 @@ export default function Home() {
   const [copilotDraft, setCopilotDraft] = useState<ApiCopilotDraftResult | null>(null);
   const [copilotLoading, setCopilotLoading] = useState(false);
   const [analyticsOverview, setAnalyticsOverview] = useState<ApiAnalyticsOverview | null>(null);
+
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  useEffect(() => {
+    if (isDarkMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [isDarkMode]);
+
+  useEffect(() => {
+    // Initial data loading
+  }, []);
+
   const [analyticsLoading, setAnalyticsLoading] = useState(false);
   const [compareCandidateId, setCompareCandidateId] = useState<string>("");
   const [comparisonMatrix, setComparisonMatrix] = useState<ApiComparisonMatrix | null>(null);
@@ -559,39 +574,48 @@ export default function Home() {
   }, [activeTab]);
 
   return (
-    <main className="min-h-screen bg-[#f7f8fb] text-ink">
-      <header className="border-b border-gray-200 bg-white">
+    <main className="min-h-screen bg-[#f7f8fb] text-ink dark:text-slate-50 dark:bg-slate-900 dark:text-slate-50 transition-colors duration-300">
+      <header className="border-b border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-900 dark:border-slate-800 dark:bg-slate-950 transition-colors duration-300">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-wide text-mint">
+            <p className="text-sm font-semibold uppercase tracking-wide text-mint dark:text-teal-400">
               Explainable Hiring Intelligence Platform
             </p>
-            <h1 className="mt-1 text-3xl font-semibold">TalentGraph AI</h1>
+            <h1 className="mt-1 text-3xl font-semibold dark:text-white">TalentGraph AI</h1>
           </div>
-          <div className="flex items-center gap-2 rounded border border-gray-200 px-3 py-2 text-sm text-graphite">
-            <Sparkles className="h-4 w-4 text-amber" aria-hidden="true" />
-            Demo Modules 1-7
+          <div className="flex items-center gap-4">
+            <button 
+              onClick={() => setIsDarkMode(!isDarkMode)}
+              className="p-2 rounded-full hover:bg-gray-100 dark:bg-slate-800 dark:hover:bg-slate-800 transition-colors text-gray-500 dark:text-gray-400"
+              aria-label="Toggle dark mode"
+            >
+              {isDarkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+            </button>
+            <div className="flex items-center gap-2 rounded border border-gray-200 dark:border-slate-800 px-3 py-2 text-sm text-graphite dark:text-slate-400 dark:border-slate-800 dark:text-slate-300 bg-white dark:bg-slate-900">
+              <Sparkles className="h-4 w-4 text-amber dark:text-amber-500" aria-hidden="true" />
+              Demo Modules 1-8
+            </div>
           </div>
         </div>
       </header>
 
       <div className="mx-auto max-w-7xl px-6 py-4">
-        <nav className="flex gap-4 border-b border-gray-200" aria-label="Tabs">
+        <nav className="flex gap-4 border-b border-gray-200 dark:border-slate-800" aria-label="Tabs">
           <button
             onClick={() => setActiveTab("workflow")}
-            className={`border-b-2 py-2 px-1 text-sm font-medium ${activeTab === "workflow" ? "border-signal text-signal" : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"}`}
+            className={`border-b-2 py-2 px-1 text-sm font-medium ${activeTab === "workflow" ? "border-signal text-signal" : "border-transparent text-gray-500 dark:text-slate-400 hover:border-gray-300 dark:border-slate-700 hover:text-gray-700 dark:text-slate-300"}`}
           >
             Workflow
           </button>
           <button
             onClick={() => setActiveTab("library")}
-            className={`border-b-2 py-2 px-1 text-sm font-medium ${activeTab === "library" ? "border-signal text-signal" : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"}`}
+            className={`border-b-2 py-2 px-1 text-sm font-medium ${activeTab === "library" ? "border-signal text-signal" : "border-transparent text-gray-500 dark:text-slate-400 hover:border-gray-300 dark:border-slate-700 hover:text-gray-700 dark:text-slate-300"}`}
           >
             Candidate Library
           </button>
           <button
             onClick={() => setActiveTab("analytics")}
-            className={`border-b-2 py-2 px-1 text-sm font-medium ${activeTab === "analytics" ? "border-signal text-signal" : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"}`}
+            className={`border-b-2 py-2 px-1 text-sm font-medium ${activeTab === "analytics" ? "border-signal text-signal" : "border-transparent text-gray-500 dark:text-slate-400 hover:border-gray-300 dark:border-slate-700 hover:text-gray-700 dark:text-slate-300"}`}
           >
             Analytics
           </button>
@@ -679,7 +703,7 @@ export default function Home() {
                 <select
                   value={compareCandidateId}
                   onChange={(e) => setCompareCandidateId(e.target.value)}
-                  className="h-10 rounded border border-gray-300 bg-white px-3 text-sm outline-none focus:border-signal focus:ring-2 focus:ring-blue-100 min-w-[200px]"
+                  className="h-10 rounded border border-gray-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 text-sm outline-none focus:border-signal focus:ring-2 focus:ring-blue-100 min-w-[200px]"
                 >
                   <option value="">Select Candidate to Compare</option>
                   {libraryCandidates
@@ -704,34 +728,34 @@ export default function Home() {
           >
             {comparisonMatrix ? (
               <div className="space-y-6">
-                <div className="rounded-lg bg-gray-50 border border-gray-200 p-5">
-                  <h4 className="font-semibold text-gray-900 mb-2">Comparison Summary</h4>
-                  <p className="text-sm text-gray-700 leading-relaxed mb-4">{comparisonMatrix.summary}</p>
-                  <h4 className="font-semibold text-gray-900 mb-2">Recommendation</h4>
-                  <p className="text-sm text-gray-700 leading-relaxed">{comparisonMatrix.recommendation}</p>
+                <div className="rounded-lg bg-gray-50 dark:bg-slate-800/50 border border-gray-200 dark:border-slate-800 p-5">
+                  <h4 className="font-semibold text-gray-900 dark:text-slate-100 mb-2">Comparison Summary</h4>
+                  <p className="text-sm text-gray-700 dark:text-slate-300 leading-relaxed mb-4">{comparisonMatrix.summary}</p>
+                  <h4 className="font-semibold text-gray-900 dark:text-slate-100 mb-2">Recommendation</h4>
+                  <p className="text-sm text-gray-700 dark:text-slate-300 leading-relaxed">{comparisonMatrix.recommendation}</p>
                 </div>
 
-                <div className="overflow-x-auto border rounded border-gray-200">
+                <div className="overflow-x-auto border rounded border-gray-200 dark:border-slate-800">
                   <table className="w-full text-left text-sm border-collapse whitespace-nowrap">
                     <thead>
-                      <tr className="border-b border-gray-200 bg-gray-50">
-                        <th className="py-3 px-4 font-semibold text-gray-600">Dimension</th>
-                        <th className="py-3 px-4 font-semibold text-gray-900">{comparisonMatrix.candidate_a_name}</th>
-                        <th className="py-3 px-4 font-semibold text-gray-900">{comparisonMatrix.candidate_b_name}</th>
-                        <th className="py-3 px-4 font-semibold text-gray-600">Delta</th>
+                      <tr className="border-b border-gray-200 dark:border-slate-800 bg-gray-50 dark:bg-slate-800/50">
+                        <th className="py-3 px-4 font-semibold text-gray-600 dark:text-slate-400">Dimension</th>
+                        <th className="py-3 px-4 font-semibold text-gray-900 dark:text-slate-100">{comparisonMatrix.candidate_a_name}</th>
+                        <th className="py-3 px-4 font-semibold text-gray-900 dark:text-slate-100">{comparisonMatrix.candidate_b_name}</th>
+                        <th className="py-3 px-4 font-semibold text-gray-600 dark:text-slate-400">Delta</th>
                       </tr>
                     </thead>
                     <tbody>
                       {comparisonMatrix.dimensions.map((dim, idx) => (
-                        <tr key={idx} className="border-b border-gray-100 hover:bg-gray-50/50">
-                          <td className="py-3 px-4 font-medium text-gray-700">{dim.dimension}</td>
-                          <td className={`py-3 px-4 ${dim.winner === 'A' ? 'text-green-700 font-semibold bg-green-50/50' : 'text-gray-600'}`}>
+                        <tr key={idx} className="border-b border-gray-100 hover:bg-gray-50 dark:bg-slate-800/50/50">
+                          <td className="py-3 px-4 font-medium text-gray-700 dark:text-slate-300">{dim.dimension}</td>
+                          <td className={`py-3 px-4 ${dim.winner === 'A' ? 'text-green-700 font-semibold bg-green-50/50' : 'text-gray-600 dark:text-slate-400'}`}>
                             {dim.candidate_a_score}
                           </td>
-                          <td className={`py-3 px-4 ${dim.winner === 'B' ? 'text-green-700 font-semibold bg-green-50/50' : 'text-gray-600'}`}>
+                          <td className={`py-3 px-4 ${dim.winner === 'B' ? 'text-green-700 font-semibold bg-green-50/50' : 'text-gray-600 dark:text-slate-400'}`}>
                             {dim.candidate_b_score}
                           </td>
-                          <td className="py-3 px-4 text-gray-500">
+                          <td className="py-3 px-4 text-gray-500 dark:text-slate-400">
                             {Math.abs(dim.delta) > 0 ? (dim.delta > 0 ? `+${dim.delta} (A)` : `+${Math.abs(dim.delta)} (B)`) : 'TIE'}
                           </td>
                         </tr>
@@ -741,12 +765,12 @@ export default function Home() {
                 </div>
 
                 <div className="grid md:grid-cols-3 gap-4">
-                  <div className="rounded border border-gray-200 bg-white p-4 shadow-sm">
-                    <h4 className="text-sm font-semibold text-gray-800 mb-3">Shared Skills</h4>
+                  <div className="rounded border border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 shadow-sm">
+                    <h4 className="text-sm font-semibold text-gray-800 dark:text-slate-200 mb-3">Shared Skills</h4>
                     <div className="flex flex-wrap gap-1.5">
                       {comparisonMatrix.skill_overlap.length > 0 ? comparisonMatrix.skill_overlap.map((s, i) => (
-                        <span key={i} className="inline-block rounded-sm bg-gray-100 px-2 py-0.5 text-xs text-gray-600">{s}</span>
-                      )) : <span className="text-xs text-gray-500">None detected</span>}
+                        <span key={i} className="inline-block rounded-sm bg-gray-100 dark:bg-slate-800 px-2 py-0.5 text-xs text-gray-600 dark:text-slate-400">{s}</span>
+                      )) : <span className="text-xs text-gray-500 dark:text-slate-400">None detected</span>}
                     </div>
                   </div>
                   <div className="rounded border border-blue-100 bg-blue-50/30 p-4 shadow-sm">
@@ -754,7 +778,7 @@ export default function Home() {
                     <div className="flex flex-wrap gap-1.5">
                       {comparisonMatrix.a_unique_skills.length > 0 ? comparisonMatrix.a_unique_skills.map((s, i) => (
                         <span key={i} className="inline-block rounded-sm bg-blue-100 px-2 py-0.5 text-xs text-blue-700">{s}</span>
-                      )) : <span className="text-xs text-gray-500">None detected</span>}
+                      )) : <span className="text-xs text-gray-500 dark:text-slate-400">None detected</span>}
                     </div>
                   </div>
                   <div className="rounded border border-purple-100 bg-purple-50/30 p-4 shadow-sm">
@@ -762,7 +786,7 @@ export default function Home() {
                     <div className="flex flex-wrap gap-1.5">
                       {comparisonMatrix.b_unique_skills.length > 0 ? comparisonMatrix.b_unique_skills.map((s, i) => (
                         <span key={i} className="inline-block rounded-sm bg-purple-100 px-2 py-0.5 text-xs text-purple-700">{s}</span>
-                      )) : <span className="text-xs text-gray-500">None detected</span>}
+                      )) : <span className="text-xs text-gray-500 dark:text-slate-400">None detected</span>}
                     </div>
                   </div>
                 </div>
@@ -809,18 +833,18 @@ export default function Home() {
               
               {/* Recommendation Card */}
               {recommendation && (
-                <div className="mt-4 p-4 rounded bg-emerald-50 border border-emerald-100 shadow-sm transition-all duration-300 text-ink">
+                <div className="mt-4 p-4 rounded bg-emerald-50 border border-emerald-100 shadow-sm transition-all duration-300 text-ink dark:text-slate-50">
                   <h4 className="text-sm font-semibold text-emerald-800 mb-3 flex items-center gap-2">
                     <Sparkles className="h-4 w-4 text-emerald-600" />
                     Final Recommendation
                   </h4>
                   <div className="flex items-start gap-4">
-                    <div className="shrink-0 flex flex-col items-center justify-center h-16 w-16 rounded-full bg-white border-4 border-emerald-200 shadow-inner">
-                      <span className="text-[10px] uppercase font-bold text-gray-500 mb-0.5">Decision</span>
+                    <div className="shrink-0 flex flex-col items-center justify-center h-16 w-16 rounded-full bg-white dark:bg-slate-900 border-4 border-emerald-200 shadow-inner">
+                      <span className="text-[10px] uppercase font-bold text-gray-500 dark:text-slate-400 mb-0.5">Decision</span>
                       <span className="text-sm font-extrabold text-emerald-600">{recommendation.label === 'STRONG_HIRE' ? 'A+' : recommendation.label === 'HIRE' ? 'A' : recommendation.label === 'GROWTH_HIRE' ? 'B' : recommendation.label === 'BORDERLINE' ? 'C' : 'D'}</span>
                     </div>
                     <div>
-                      <p className="text-sm text-gray-800 font-medium">{recommendation.reason}</p>
+                      <p className="text-sm text-gray-800 dark:text-slate-200 font-medium">{recommendation.reason}</p>
                       <ul className="mt-2 space-y-1">
                         {recommendation.supporting_evidence.map((ev, i) => (
                           <li key={i} className="text-xs text-emerald-700 flex items-start gap-1.5">
@@ -846,14 +870,14 @@ export default function Home() {
           icon={<ListOrdered className="h-6 w-6 text-amber" aria-hidden="true" />}
           form={
             <div className="flex flex-wrap items-center gap-3">
-              <label htmlFor="persona" className="text-sm font-medium text-graphite">
+              <label htmlFor="persona" className="text-sm font-medium text-graphite dark:text-slate-400">
                 Persona
               </label>
               <select
                 id="persona"
                 value={persona}
                 onChange={(event) => void handlePersonaChange(event.target.value as HiringPersona)}
-                className="h-10 rounded border border-gray-300 bg-white px-3 text-sm outline-none focus:border-signal focus:ring-2 focus:ring-blue-100"
+                className="h-10 rounded border border-gray-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 text-sm outline-none focus:border-signal focus:ring-2 focus:ring-blue-100"
               >
                 {Object.entries(personaLabels).map(([value, label]) => (
                   <option key={value} value={value}>
@@ -874,7 +898,7 @@ export default function Home() {
                 type="button"
                 onClick={handleExportRankings}
                 disabled={exportLoading || !rankings.length}
-                className="inline-flex h-10 items-center justify-center gap-2 rounded border border-gray-300 bg-white px-4 text-sm font-semibold text-ink disabled:cursor-not-allowed disabled:text-gray-400"
+                className="inline-flex h-10 items-center justify-center gap-2 rounded border border-gray-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-4 text-sm font-semibold text-ink dark:text-slate-50 disabled:cursor-not-allowed disabled:text-gray-400"
               >
                 {exportLoading ? <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" /> : <Download className="h-4 w-4" aria-hidden="true" />}
                 XLSX
@@ -886,7 +910,7 @@ export default function Home() {
             <div className="overflow-x-auto w-full">
               <table className="min-w-[600px] w-full border-collapse text-left text-sm">
                 <thead>
-                  <tr className="border-b border-gray-200 text-xs uppercase tracking-wide text-graphite">
+                  <tr className="border-b border-gray-200 dark:border-slate-800 text-xs uppercase tracking-wide text-graphite dark:text-slate-400">
                     <th className="py-2 pr-3">Rank</th>
                     <th className="py-2 pr-3">Candidate</th>
                     <th className="py-2 pr-3">Score</th>
@@ -931,7 +955,7 @@ export default function Home() {
                 type="button"
                 onClick={handleCopilotDraft}
                 disabled={copilotLoading || !candidateTwin}
-                className="inline-flex h-11 items-center justify-center gap-2 rounded border border-gray-300 bg-white px-4 text-sm font-semibold text-ink disabled:cursor-not-allowed disabled:text-gray-400"
+                className="inline-flex h-11 items-center justify-center gap-2 rounded border border-gray-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-4 text-sm font-semibold text-ink dark:text-slate-50 disabled:cursor-not-allowed disabled:text-gray-400"
               >
                 {copilotLoading ? <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" /> : <Send className="h-4 w-4" aria-hidden="true" />}
                 Draft Outreach
@@ -942,20 +966,20 @@ export default function Home() {
           {explanation && currentRanking ? (
             <div className="space-y-5">
               {copilotDraft && (
-                <div className="rounded-lg border border-gray-200 bg-white shadow-sm overflow-hidden animate-fade-in">
-                  <div className="bg-gray-50 px-4 py-3 border-b border-gray-200 flex justify-between items-center">
-                    <span className="text-xs font-bold uppercase text-gray-500 flex items-center gap-2">
+                <div className="rounded-lg border border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm overflow-hidden animate-fade-in">
+                  <div className="bg-gray-50 dark:bg-slate-800/50 px-4 py-3 border-b border-gray-200 dark:border-slate-800 flex justify-between items-center">
+                    <span className="text-xs font-bold uppercase text-gray-500 dark:text-slate-400 flex items-center gap-2">
                       <Send className="h-3 w-3" /> Outreach Draft
                     </span>
                   </div>
                   <div className="p-4 space-y-3">
                     <div>
                       <span className="text-xs font-semibold text-gray-400 uppercase">Subject</span>
-                      <p className="text-sm font-medium text-gray-900">{copilotDraft.subject}</p>
+                      <p className="text-sm font-medium text-gray-900 dark:text-slate-100">{copilotDraft.subject}</p>
                     </div>
                     <div>
                       <span className="text-xs font-semibold text-gray-400 uppercase">Body</span>
-                      <div className="mt-1 p-3 bg-gray-50 rounded text-sm text-gray-800 whitespace-pre-wrap border border-gray-100">
+                      <div className="mt-1 p-3 bg-gray-50 dark:bg-slate-800/50 rounded text-sm text-gray-800 dark:text-slate-200 whitespace-pre-wrap border border-gray-100">
                         {copilotDraft.body}
                       </div>
                     </div>
@@ -1059,34 +1083,34 @@ export default function Home() {
       {activeTab === "analytics" && (
         <section className="mx-auto max-w-7xl px-6 pb-8">
           {analyticsLoading ? (
-            <div className="flex items-center justify-center py-20 text-graphite gap-2">
+            <div className="flex items-center justify-center py-20 text-graphite dark:text-slate-400 gap-2">
               <Loader2 className="h-5 w-5 animate-spin" />
               Loading analytics...
             </div>
           ) : analyticsOverview ? (
             <div className="space-y-6 animate-fade-in">
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
-                <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
-                  <p className="text-sm font-semibold text-gray-500">Total Candidates</p>
-                  <p className="mt-2 text-3xl font-bold text-gray-900">{analyticsOverview.total_candidates}</p>
+                <div className="rounded-xl border border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm">
+                  <p className="text-sm font-semibold text-gray-500 dark:text-slate-400">Total Candidates</p>
+                  <p className="mt-2 text-3xl font-bold text-gray-900 dark:text-slate-100">{analyticsOverview.total_candidates}</p>
                 </div>
-                <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
-                  <p className="text-sm font-semibold text-gray-500">Total Roles</p>
-                  <p className="mt-2 text-3xl font-bold text-gray-900">{analyticsOverview.total_roles}</p>
+                <div className="rounded-xl border border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm">
+                  <p className="text-sm font-semibold text-gray-500 dark:text-slate-400">Total Roles</p>
+                  <p className="mt-2 text-3xl font-bold text-gray-900 dark:text-slate-100">{analyticsOverview.total_roles}</p>
                 </div>
-                <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
-                  <p className="text-sm font-semibold text-gray-500">Evaluations Run</p>
-                  <p className="mt-2 text-3xl font-bold text-gray-900">{analyticsOverview.total_evaluations}</p>
+                <div className="rounded-xl border border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm">
+                  <p className="text-sm font-semibold text-gray-500 dark:text-slate-400">Evaluations Run</p>
+                  <p className="mt-2 text-3xl font-bold text-gray-900 dark:text-slate-100">{analyticsOverview.total_evaluations}</p>
                 </div>
-                <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
-                  <p className="text-sm font-semibold text-gray-500">Avg Confidence</p>
-                  <p className="mt-2 text-3xl font-bold text-gray-900">{analyticsOverview.average_confidence}%</p>
+                <div className="rounded-xl border border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-sm">
+                  <p className="text-sm font-semibold text-gray-500 dark:text-slate-400">Avg Confidence</p>
+                  <p className="mt-2 text-3xl font-bold text-gray-900 dark:text-slate-100">{analyticsOverview.average_confidence}%</p>
                 </div>
               </div>
 
               <div className="grid lg:grid-cols-2 gap-6">
-                <div className="rounded border border-gray-200 bg-white p-6 shadow-sm">
-                  <h3 className="font-semibold text-gray-800 mb-4 flex items-center gap-2">
+                <div className="rounded border border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm">
+                  <h3 className="font-semibold text-gray-800 dark:text-slate-200 mb-4 flex items-center gap-2">
                     <BarChart3 className="h-5 w-5 text-signal" />
                     Growth Stage Distribution
                   </h3>
@@ -1094,34 +1118,34 @@ export default function Home() {
                     {analyticsOverview.growth_stage_distribution.length > 0 ? (
                       analyticsOverview.growth_stage_distribution.map((dist, idx) => (
                         <div key={idx} className="flex items-center gap-3">
-                          <span className="w-24 shrink-0 text-sm font-medium text-gray-700 truncate">{dist.growth_stage}</span>
-                          <div className="flex-1 h-2.5 rounded bg-gray-100">
+                          <span className="w-24 shrink-0 text-sm font-medium text-gray-700 dark:text-slate-300 truncate">{dist.growth_stage}</span>
+                          <div className="flex-1 h-2.5 rounded bg-gray-100 dark:bg-slate-800">
                             <div className="h-2.5 rounded bg-signal" style={{ width: `${(dist.count / Math.max(1, analyticsOverview.total_candidates)) * 100}%` }} />
                           </div>
-                          <span className="w-8 text-right text-xs text-gray-500 font-semibold">{dist.count}</span>
+                          <span className="w-8 text-right text-xs text-gray-500 dark:text-slate-400 font-semibold">{dist.count}</span>
                         </div>
                       ))
                     ) : (
-                      <p className="text-sm text-gray-500">No data available.</p>
+                      <p className="text-sm text-gray-500 dark:text-slate-400">No data available.</p>
                     )}
                   </div>
                 </div>
 
-                <div className="rounded border border-gray-200 bg-white p-6 shadow-sm">
-                  <h3 className="font-semibold text-gray-800 mb-4 flex items-center gap-2">
+                <div className="rounded border border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm">
+                  <h3 className="font-semibold text-gray-800 dark:text-slate-200 mb-4 flex items-center gap-2">
                     <Brain className="h-5 w-5 text-mint" />
                     Top Required Skills
                   </h3>
                   <div className="flex flex-wrap gap-2">
                     {analyticsOverview.top_skills.length > 0 ? (
                       analyticsOverview.top_skills.map((skill, idx) => (
-                        <div key={idx} className="inline-flex items-center gap-1.5 rounded-full border border-gray-200 bg-gray-50 px-3 py-1 text-sm font-medium text-gray-700">
+                        <div key={idx} className="inline-flex items-center gap-1.5 rounded-full border border-gray-200 dark:border-slate-800 bg-gray-50 dark:bg-slate-800/50 px-3 py-1 text-sm font-medium text-gray-700 dark:text-slate-300">
                           {skill.skill}
-                          <span className="rounded-full bg-gray-200 px-1.5 py-0.5 text-[10px] font-bold text-gray-600">{skill.count}</span>
+                          <span className="rounded-full bg-gray-200 px-1.5 py-0.5 text-[10px] font-bold text-gray-600 dark:text-slate-400">{skill.count}</span>
                         </div>
                       ))
                     ) : (
-                      <p className="text-sm text-gray-500">No skills extracted yet.</p>
+                      <p className="text-sm text-gray-500 dark:text-slate-400">No skills extracted yet.</p>
                     )}
                   </div>
                 </div>
@@ -1156,12 +1180,12 @@ function ModulePanel({
   children: ReactNode;
 }) {
   return (
-    <section className="rounded border border-gray-200 bg-white p-6">
+    <section className="rounded border border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-900 dark:border-slate-800 dark:bg-slate-900 p-6 transition-colors duration-300">
       <div className="flex items-center gap-3">
         {icon}
         <div>
-          {eyebrow ? <p className="text-xs font-semibold uppercase tracking-wide text-graphite">{eyebrow}</p> : null}
-          <h2 className="text-xl font-semibold">{title}</h2>
+          {eyebrow ? <p className="text-xs font-semibold uppercase tracking-wide text-graphite dark:text-slate-400">{eyebrow}</p> : null}
+          <h2 className="text-xl font-semibold dark:text-white">{title}</h2>
         </div>
       </div>
       <div className="mt-5">{form}</div>
@@ -1173,23 +1197,23 @@ function ModulePanel({
 function ProgressSteps({ completed }: { completed: boolean[] }) {
   const labels = ["Role DNA", "Candidate Twins", "Evaluate", "Rank", "Explain"];
   return (
-    <div className="flex flex-col sm:flex-row justify-between gap-4 rounded border border-gray-200 bg-white p-6 relative overflow-hidden">
-      <div className="hidden sm:block absolute top-[44px] left-[10%] right-[10%] h-[2px] bg-gray-100 -z-10" />
+    <div className="flex flex-col sm:flex-row justify-between gap-4 rounded border border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 relative overflow-hidden">
+      <div className="hidden sm:block absolute top-[44px] left-[10%] right-[10%] h-[2px] bg-gray-100 dark:bg-slate-800 -z-10" />
       {labels.map((label, index) => {
         const isComplete = completed[index];
         const isCurrent = (index === 0 && !completed[0]) || (index > 0 && completed[index - 1] && !completed[index]);
         return (
-          <div key={label} className="flex flex-row sm:flex-col items-center gap-3 bg-white z-10 px-2 flex-1">
+          <div key={label} className="flex flex-row sm:flex-col items-center gap-3 bg-white dark:bg-slate-900 z-10 px-2 flex-1">
             <div
               className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-semibold transition-all duration-300 ${
-                isComplete ? "bg-mint text-white ring-4 ring-mint/20" : isCurrent ? "bg-signal text-white ring-4 ring-signal/20 scale-110" : "bg-gray-100 text-graphite"
+                isComplete ? "bg-mint text-white ring-4 ring-mint/20" : isCurrent ? "bg-signal text-white ring-4 ring-signal/20 scale-110" : "bg-gray-100 dark:bg-slate-800 text-graphite dark:text-slate-400"
               }`}
             >
               {index + 1}
             </div>
             <div className="text-left sm:text-center">
-              <p className={`text-sm font-semibold transition-colors ${isComplete || isCurrent ? "text-ink" : "text-graphite"}`}>{label}</p>
-              <p className="text-xs text-graphite">{isComplete ? "Complete" : isCurrent ? "In Progress" : "Pending"}</p>
+              <p className={`text-sm font-semibold transition-colors ${isComplete || isCurrent ? "text-ink dark:text-slate-50" : "text-graphite dark:text-slate-400"}`}>{label}</p>
+              <p className="text-xs text-graphite dark:text-slate-400">{isComplete ? "Complete" : isCurrent ? "In Progress" : "Pending"}</p>
             </div>
           </div>
         );
@@ -1211,14 +1235,14 @@ function Textarea({
 }) {
   return (
     <>
-      <label htmlFor={id} className="block text-sm font-medium text-graphite">
+      <label htmlFor={id} className="block text-sm font-medium text-graphite dark:text-slate-400">
         {label}
       </label>
       <textarea
         id={id}
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        className="mt-2 min-h-[260px] w-full resize-y rounded border border-gray-300 bg-white p-4 text-sm leading-6 outline-none focus:border-signal focus:ring-2 focus:ring-blue-100"
+        className="mt-2 min-h-[260px] w-full resize-y rounded border border-gray-300 dark:border-slate-700 bg-white dark:bg-slate-900 p-4 text-sm leading-6 outline-none focus:border-signal focus:ring-2 focus:ring-blue-100"
       />
     </>
   );
@@ -1239,8 +1263,8 @@ function SubmitButton({ loading, disabled, label }: { loading: boolean; disabled
 
 function Summary({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded border border-gray-200 p-4">
-      <p className="text-xs font-semibold uppercase tracking-wide text-graphite">{label}</p>
+    <div className="rounded border border-gray-200 dark:border-slate-800 p-4">
+      <p className="text-xs font-semibold uppercase tracking-wide text-graphite dark:text-slate-400">{label}</p>
       <p className="mt-2 text-base font-semibold break-words">{value}</p>
     </div>
   );
@@ -1261,9 +1285,9 @@ function ScoreBar({ label, value }: { label: string; value: number }) {
     <div>
       <div className="flex items-center justify-between text-sm">
         <span className="font-medium">{label}</span>
-        <span className="text-graphite">{value}</span>
+        <span className="text-graphite dark:text-slate-400">{value}</span>
       </div>
-      <div className="mt-1 h-2 rounded bg-gray-100">
+      <div className="mt-1 h-2 rounded bg-gray-100 dark:bg-slate-800">
         <div className="h-2 rounded bg-mint" style={{ width: `${Math.max(0, Math.min(100, value))}%` }} />
       </div>
     </div>
@@ -1291,7 +1315,7 @@ function RadarChart({ role }: { role: ApiRoleDNA }) {
 
   return (
     <div>
-      <h3 className="text-sm font-semibold uppercase tracking-wide text-graphite">Role Radar</h3>
+      <h3 className="text-sm font-semibold uppercase tracking-wide text-graphite dark:text-slate-400">Role Radar</h3>
       <div className="mt-3 grid gap-4 md:grid-cols-[220px_1fr]">
         <svg viewBox="0 0 180 180" className="h-52 w-full max-w-56">
           {[0.35, 0.7, 1].map((scale) => {
@@ -1339,16 +1363,16 @@ function MetricCards<T extends Record<string, unknown>>({ rows, source }: { rows
 function SkillList({ title, skills }: { title: string; skills: string[] }) {
   return (
     <div>
-      <h3 className="text-sm font-semibold uppercase tracking-wide text-graphite">{title}</h3>
+      <h3 className="text-sm font-semibold uppercase tracking-wide text-graphite dark:text-slate-400">{title}</h3>
       <div className="mt-3 flex flex-wrap gap-2">
         {skills.length ? (
           skills.map((skill) => (
-            <span key={skill} className="rounded border border-gray-200 px-3 py-1 text-sm">
+            <span key={skill} className="rounded border border-gray-200 dark:border-slate-800 px-3 py-1 text-sm">
               {skill}
             </span>
           ))
         ) : (
-          <span className="text-sm text-graphite">No skills extracted</span>
+          <span className="text-sm text-graphite dark:text-slate-400">No skills extracted</span>
         )}
       </div>
     </div>
@@ -1358,10 +1382,10 @@ function SkillList({ title, skills }: { title: string; skills: string[] }) {
 function Timeline({ entries }: { entries: Array<{ year: number; event: string }> }) {
   return (
     <div>
-      <h3 className="text-sm font-semibold uppercase tracking-wide text-graphite">Timeline</h3>
+      <h3 className="text-sm font-semibold uppercase tracking-wide text-graphite dark:text-slate-400">Timeline</h3>
       <ol className="mt-3 space-y-2">
         {entries.map((entry) => (
-          <li key={`${entry.year}-${entry.event}`} className="flex gap-3 rounded border border-gray-200 p-3 text-sm">
+          <li key={`${entry.year}-${entry.event}`} className="flex gap-3 rounded border border-gray-200 dark:border-slate-800 p-3 text-sm">
             <span className="font-semibold text-signal">{entry.year}</span>
             <span>{entry.event}</span>
           </li>
@@ -1374,10 +1398,10 @@ function Timeline({ entries }: { entries: Array<{ year: number; event: string }>
 function GraphList({ title, items }: { title: string; items: string[] }) {
   return (
     <div>
-      <h3 className="text-sm font-semibold uppercase tracking-wide text-graphite">{title}</h3>
+      <h3 className="text-sm font-semibold uppercase tracking-wide text-graphite dark:text-slate-400">{title}</h3>
       <ul className="mt-3 max-h-72 space-y-2 overflow-auto">
         {items.map((item) => (
-          <li key={item} className="rounded border border-gray-200 p-3 text-sm break-words">
+          <li key={item} className="rounded border border-gray-200 dark:border-slate-800 p-3 text-sm break-words">
             {item}
           </li>
         ))}
@@ -1389,10 +1413,10 @@ function GraphList({ title, items }: { title: string; items: string[] }) {
 function ReasoningList({ items }: { items: string[] }) {
   return (
     <div>
-      <h3 className="text-sm font-semibold uppercase tracking-wide text-graphite">Reasoning</h3>
+      <h3 className="text-sm font-semibold uppercase tracking-wide text-graphite dark:text-slate-400">Reasoning</h3>
       <ul className="mt-3 space-y-2">
         {items.map((item) => (
-          <li key={item} className="rounded border border-gray-200 p-3 text-sm leading-6 break-words">
+          <li key={item} className="rounded border border-gray-200 dark:border-slate-800 p-3 text-sm leading-6 break-words">
             {item}
           </li>
         ))}
@@ -1405,10 +1429,10 @@ function InsightList({ title, items, fallback }: { title: string; items: string[
   const visibleItems = items.length ? items : [fallback];
   return (
     <div>
-      <h3 className="text-sm font-semibold uppercase tracking-wide text-graphite">{title}</h3>
+      <h3 className="text-sm font-semibold uppercase tracking-wide text-graphite dark:text-slate-400">{title}</h3>
       <ul className="mt-3 space-y-2">
         {visibleItems.map((item) => (
-          <li key={item} className="rounded border border-gray-200 p-3 text-sm leading-6 break-words">
+          <li key={item} className="rounded border border-gray-200 dark:border-slate-800 p-3 text-sm leading-6 break-words">
             {item}
           </li>
         ))}
@@ -1421,7 +1445,7 @@ function CounterfactualCards({ items }: { items: string[] }) {
   const visibleItems = items.length ? items : ["No counterfactuals generated."];
   return (
     <div>
-      <h3 className="text-sm font-semibold uppercase tracking-wide text-graphite">How To Improve</h3>
+      <h3 className="text-sm font-semibold uppercase tracking-wide text-graphite dark:text-slate-400">How To Improve</h3>
       <div className="mt-3 grid gap-3 lg:grid-cols-3">
         {visibleItems.map((item, index) => (
           <div key={item} className="rounded border border-mint/30 bg-teal-50 p-4">
@@ -1436,13 +1460,13 @@ function CounterfactualCards({ items }: { items: string[] }) {
 
 function EvaluatorCard({ title, result }: { title: string; result: ApiEvaluatorResult }) {
   return (
-    <div className="rounded border border-gray-200 p-4">
+    <div className="rounded border border-gray-200 dark:border-slate-800 p-4">
       <div className="flex items-center justify-between">
         <h3 className="font-semibold">{title}</h3>
         <span className="text-sm font-semibold text-signal">{result.score}</span>
       </div>
-      <p className="mt-1 text-sm text-graphite">Confidence {result.confidence}</p>
-      <h4 className="mt-4 text-xs font-semibold uppercase tracking-wide text-graphite">Strengths</h4>
+      <p className="mt-1 text-sm text-graphite dark:text-slate-400">Confidence {result.confidence}</p>
+      <h4 className="mt-4 text-xs font-semibold uppercase tracking-wide text-graphite dark:text-slate-400">Strengths</h4>
       <ul className="mt-2 space-y-2">
         {(result.strengths.length ? result.strengths : ["No major strength signal."]).map((item) => (
           <li key={item} className="text-sm leading-5 break-words">
@@ -1450,7 +1474,7 @@ function EvaluatorCard({ title, result }: { title: string; result: ApiEvaluatorR
           </li>
         ))}
       </ul>
-      <h4 className="mt-4 text-xs font-semibold uppercase tracking-wide text-graphite">Risks</h4>
+      <h4 className="mt-4 text-xs font-semibold uppercase tracking-wide text-graphite dark:text-slate-400">Risks</h4>
       <ul className="mt-2 space-y-2">
         {(result.risks.length ? result.risks : ["No major risk signal."]).map((item) => (
           <li key={item} className="text-sm leading-5 break-words">
@@ -1464,7 +1488,7 @@ function EvaluatorCard({ title, result }: { title: string; result: ApiEvaluatorR
 
 function EmptyState({ text }: { text: string }) {
   return (
-    <div className="flex min-h-[220px] items-center justify-center rounded border border-dashed border-gray-300 p-6 text-center text-graphite">
+    <div className="flex min-h-[220px] items-center justify-center rounded border border-dashed border-gray-300 dark:border-slate-700 p-6 text-center text-graphite dark:text-slate-400">
       <div>
         <UserRound className="mx-auto mb-3 h-6 w-6 text-gray-400" aria-hidden="true" />
         {text}
@@ -1598,11 +1622,6 @@ function ForceGraphViz({ graph }: { graph: ApiGraph }) {
     svg.call(zoom.transform, d3.zoomIdentity.translate(padding, padding));
 
     // Render Edges
-    const linkGenerator = d3.line<{x: number, y: number}>()
-      .x(d => d.x)
-      .y(d => d.y)
-      .curve(d3.curveMonotoneY);
-
     const linkData = gDagre.edges().map(e => {
       const edge = gDagre.edge(e);
       return {
@@ -1613,15 +1632,30 @@ function ForceGraphViz({ graph }: { graph: ApiGraph }) {
       };
     });
 
+    // Instead of static Dagre points, we create a dynamic link generator
+    // so we can update it on drag.
     const link = g.append("g").selectAll("path")
       .data(linkData).join("path")
       .attr("fill", "none")
       .attr("stroke", "#cbd5e1").attr("stroke-width", 1.5)
-      .attr("d", d => linkGenerator(d.points))
+      .attr("class", "graph-link")
       .attr("marker-end", d => {
         const tNode = nodeById.get(d.id);
         return `url(#tg-arrow-${getRadius(tNode?.label ?? "")})`;
       });
+
+    // Helper to draw edges
+    const updateEdges = () => {
+      link.attr("d", (d: any) => {
+        // If it has dagre points and hasn't been dragged, use them
+        // For simplicity, let's just draw a straight line to allow dynamic dragging
+        const sourceNode = nodeData.find(n => n.id === d.source.id);
+        const targetNode = nodeData.find(n => n.id === d.target.id);
+        if (!sourceNode || !targetNode) return "";
+        return `M${sourceNode.x},${sourceNode.y} L${targetNode.x},${targetNode.y}`;
+      });
+    };
+    updateEdges(); // initial draw
 
     // Render Nodes
     const nodeData = gDagre.nodes().map(v => gDagre.node(v) as { id: string; label: string; name: string; x: number; y: number; width: number; height: number });
@@ -1736,7 +1770,7 @@ function ForceGraphViz({ graph }: { graph: ApiGraph }) {
       <div className="flex flex-wrap items-center justify-between gap-2">
         <div className="flex flex-wrap gap-x-3 gap-y-1">
           {legendEntries.map(([label, color]) => (
-            <span key={label} className="flex items-center gap-1.5 text-xs text-gray-600">
+            <span key={label} className="flex items-center gap-1.5 text-xs text-gray-600 dark:text-slate-400">
               <span className="inline-block h-2.5 w-2.5 rounded-full" style={{ background: color }} />
               {label}
             </span>
@@ -1744,7 +1778,7 @@ function ForceGraphViz({ graph }: { graph: ApiGraph }) {
         </div>
         <button
           onClick={handleFit}
-          className="inline-flex items-center gap-1.5 rounded border border-gray-200 bg-white px-2.5 py-1 text-xs font-medium text-graphite hover:border-signal hover:text-signal transition-colors"
+          className="inline-flex items-center gap-1.5 rounded border border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-2.5 py-1 text-xs font-medium text-graphite dark:text-slate-400 hover:border-signal hover:text-signal transition-colors"
         >
           <Maximize2 className="h-3 w-3" />
           Fit
@@ -1753,7 +1787,7 @@ function ForceGraphViz({ graph }: { graph: ApiGraph }) {
       {/* Canvas */}
       <div
         ref={containerRef}
-        className="relative overflow-hidden rounded-xl border border-gray-200 bg-gradient-to-br from-slate-50 to-gray-100"
+        className="relative overflow-hidden rounded-xl border border-gray-200 dark:border-slate-800 bg-gradient-to-br from-slate-50 to-gray-100"
         style={{ height: 520 }}
       >
         <svg ref={svgRef} className="w-full h-full select-none" />
@@ -1799,7 +1833,7 @@ const KIND_META: Record<string, { label: string; bg: string; border: string; tex
 
 function kindStyle(kind: string) {
   const key = kind.toLowerCase().split("_")[0];
-  return KIND_META[key] ?? { label: kind, bg: "bg-gray-50", border: "border-gray-200", text: "text-gray-700" };
+  return KIND_META[key] ?? { label: kind, bg: "bg-gray-50 dark:bg-slate-800/50", border: "border-gray-200 dark:border-slate-800", text: "text-gray-700 dark:text-slate-300" };
 }
 
 function SemanticEmbeddingPanel({ collection }: { collection: ApiEmbeddingCollection }) {
@@ -1835,9 +1869,9 @@ function SemanticEmbeddingPanel({ collection }: { collection: ApiEmbeddingCollec
           { value: embeddings.length, label: "Vectors",    color: "text-mint"     },
           { value: vectorDim,        label: "Dimensions", color: "text-amber"    },
         ].map(({ value, label, color }) => (
-          <div key={label} className="rounded-xl border border-gray-200 bg-white p-4 text-center shadow-sm">
+          <div key={label} className="rounded-xl border border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 text-center shadow-sm">
             <p className={`text-2xl font-bold ${color}`}>{value}</p>
-            <p className="mt-0.5 text-xs font-semibold uppercase tracking-wide text-graphite">{label}</p>
+            <p className="mt-0.5 text-xs font-semibold uppercase tracking-wide text-graphite dark:text-slate-400">{label}</p>
           </div>
         ))}
       </div>
@@ -1865,7 +1899,7 @@ function SemanticEmbeddingPanel({ collection }: { collection: ApiEmbeddingCollec
             {sharedKws.map(kw => (
               <span
                 key={kw}
-                className="rounded-full border border-purple-200 bg-white px-3 py-1 text-xs font-medium text-purple-700 shadow-sm"
+                className="rounded-full border border-purple-200 bg-white dark:bg-slate-900 px-3 py-1 text-xs font-medium text-purple-700 shadow-sm"
               >
                 {kw}
               </span>
@@ -1877,14 +1911,14 @@ function SemanticEmbeddingPanel({ collection }: { collection: ApiEmbeddingCollec
       {/* Embedding kinds breakdown */}
       {Object.keys(embKindCounts).length > 0 && (
         <div>
-          <p className="text-xs font-semibold uppercase tracking-wide text-graphite mb-3">Embedding Kinds</p>
+          <p className="text-xs font-semibold uppercase tracking-wide text-graphite dark:text-slate-400 mb-3">Embedding Kinds</p>
           <div className="flex flex-wrap gap-2">
             {Object.entries(embKindCounts).map(([kind, count]) => {
               const s = kindStyle(kind);
               return (
                 <span key={kind} className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium ${s.bg} ${s.border} ${s.text}`}>
                   {kind}
-                  <span className="rounded-full bg-white/70 px-1.5 text-[10px] font-bold">{count}</span>
+                  <span className="rounded-full bg-white dark:bg-slate-900/70 px-1.5 text-[10px] font-bold">{count}</span>
                 </span>
               );
             })}
@@ -1911,10 +1945,10 @@ function ConceptCard({
   const c = colorMap[color];
 
   return (
-    <div className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm space-y-3">
+    <div className="rounded-xl border border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 shadow-sm space-y-3">
       <div className="flex items-center justify-between">
         <p className={`text-sm font-semibold ${c.header}`}>{title}</p>
-        <span className="text-xs text-graphite">{summaries.length} summaries</span>
+        <span className="text-xs text-graphite dark:text-slate-400">{summaries.length} summaries</span>
       </div>
       <div className="flex flex-wrap gap-1.5">
         {keywords.slice(0, 12).map(kw => (
@@ -1924,7 +1958,7 @@ function ConceptCard({
         ))}
       </div>
       {summaries[0] && (
-        <p className="text-xs text-gray-500 leading-5 line-clamp-2 border-t border-gray-100 pt-2">
+        <p className="text-xs text-gray-500 dark:text-slate-400 leading-5 line-clamp-2 border-t border-gray-100 pt-2">
           {summaries[0].text}
         </p>
       )}

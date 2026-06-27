@@ -35,4 +35,19 @@ class EvaluationPipeline:
             raise ValueError(f"Candidate {candidate_id} not found.")
 
         bundle = self.evaluation_service.evaluate(role, candidate)
-        return self.evaluation_repository.save(bundle)
+        saved_bundle = self.evaluation_repository.save(bundle)
+        
+        # Phase 1: Tracking evaluations
+        candidate.evaluations_history.append(saved_bundle.evaluation_id)
+        
+        # Add a timeline entry for the evaluation
+        from datetime import datetime
+        from app.domain.candidate_twin import CandidateTimelineEntry
+        candidate.timeline.append(CandidateTimelineEntry(
+            year=datetime.now().year,
+            event=f"Evaluated against role: {role.role_title}"
+        ))
+        
+        self.candidate_repository.save(candidate)
+        
+        return saved_bundle

@@ -33,10 +33,25 @@ class GrowthEvaluator:
             f"Growth stage is {candidate.growth_stage.value}.",
             f"Learning velocity is {candidate.learning_velocity}.",
         ]
+        evidence = [f"Classified as {candidate.growth_stage.value} based on experience."]
         risks = []
+        missing_signals = []
+        
         if candidate.consistency < 60:
             risks.append("Career/project consistency signal is still developing.")
+            missing_signals.append("Long-term project consistency")
         if leadership_alignment < 65:
             risks.append("Leadership evidence does not fully match the role expectation.")
+            missing_signals.append("Leadership and ownership examples")
 
-        return EvaluatorResult(score=score, confidence=confidence, strengths=strengths, risks=risks)
+        ramp_up_estimate = "Fast (2-4 weeks)" if candidate.learning_velocity >= 75 else "Average (1-3 months)"
+
+        return EvaluatorResult(
+            score=score, 
+            confidence=confidence, 
+            strengths=strengths, 
+            risks=risks,
+            evidence=evidence,
+            missing_signals=missing_signals,
+            ramp_up_estimate=ramp_up_estimate
+        )

@@ -23,6 +23,12 @@ class InMemoryCandidateRepository(CandidateRepository):
     def get_by_candidate_id(self, candidate_id: str) -> CandidateDigitalTwin | None:
         return self._twins.get(candidate_id)
 
+    def get_by_email(self, email: str) -> CandidateDigitalTwin | None:
+        for twin in self._twins.values():
+            if twin.email and twin.email.lower() == email.lower():
+                return twin
+        return None
+
     def list_candidates(self) -> list[CandidateDigitalTwin]:
         return list(self._twins.values())
 

@@ -12,5 +12,7 @@ class ExplanationProfile(BaseModel):
     strengths: list[str] = Field(default_factory=list)
     risks: list[str] = Field(default_factory=list)
     reasoning: list[str] = Field(default_factory=list)
+    evidence: list[str] = Field(default_factory=list)
+    estimations: list[str] = Field(default_factory=list)
     counterfactuals: list[str] = Field(default_factory=list)
     generated_at: datetime = Field(default_factory=lambda: datetime.now(UTC))

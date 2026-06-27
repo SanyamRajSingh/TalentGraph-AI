@@ -39,6 +39,8 @@ class EvaluationService:
         overall_confidence = average(
             [technical.confidence, growth.confidence, domain.confidence, culture.confidence]
         )
+        narrative = self._generate_narrative(candidate, role, technical, growth, domain, culture, overall_match)
+
         return EvaluationBundle(
             candidate_id=candidate.candidate_id,
             role_id=role.role_id,
@@ -48,6 +50,7 @@ class EvaluationService:
             culture=culture,
             overall_match=overall_match,
             overall_confidence=overall_confidence,
+            narrative=narrative,
         )
 
     def _overall_match(
@@ -63,3 +66,37 @@ class EvaluationService:
             + domain.score * self.WEIGHTS["domain"]
             + culture.score * self.WEIGHTS["culture"]
         )
+
+    def _generate_narrative(
+        self,
+        candidate: CandidateDigitalTwin,
+        role: RoleDNAProfile,
+        technical: EvaluatorResult,
+        growth: EvaluatorResult,
+        domain: EvaluatorResult,
+        culture: EvaluatorResult,
+        overall_match: int
+    ) -> str:
+        if overall_match >= 80:
+            fit = "an exceptionally strong fit"
+        elif overall_match >= 65:
+            fit = "a solid fit"
+        elif overall_match >= 50:
+            fit = "a borderline fit"
+        else:
+            fit = "a weak fit"
+
+        parts = [f"{candidate.name} is {fit} for the {role.role_title} role ({overall_match}% overall match)."]
+        
+        if technical.score >= 75:
+            parts.append(f"They demonstrate strong technical alignment, particularly in {', '.join(technical.strengths[:2]) if technical.strengths else 'core skills'}.")
+        elif technical.risks:
+            parts.append(f"There are some technical gaps: {technical.risks[0]}")
+            
+        if growth.score >= 75:
+            parts.append("Their growth trajectory and learning velocity align well with the role's expectations.")
+            
+        if domain.score >= 70:
+            parts.append("They possess relevant domain knowledge which should accelerate their ramp-up time.")
+            
+        return " ".join(parts)

@@ -21,16 +21,32 @@ class DomainEvaluator:
 
         strengths = []
         risks = []
+        evidence = []
+        missing_signals = []
         if domain_matches:
             strengths.append(f"Direct domain overlap: {', '.join(sorted(domain_matches))}.")
+            evidence.append(f"Matched domains: {', '.join(sorted(domain_matches))}.")
         if adjacent:
             strengths.append(f"Ontology-adjacent skills/technologies: {', '.join(sorted(adjacent))}.")
+            evidence.append(f"Found {len(adjacent)} transferable skills from related domains.")
         if not domain_matches:
             risks.append(f"No direct candidate domain match for {role.domain}.")
+            missing_signals.append("Direct industry/domain experience")
         if not transferable_skills:
             risks.append("Limited direct transferable required-skill evidence.")
+            missing_signals.append("Transferable required skills")
 
-        return EvaluatorResult(score=score, confidence=confidence, strengths=strengths, risks=risks)
+        ramp_up_estimate = "1-2 months" if score >= 80 else "3-5 months"
+
+        return EvaluatorResult(
+            score=score, 
+            confidence=confidence, 
+            strengths=strengths, 
+            risks=risks,
+            evidence=evidence,
+            missing_signals=missing_signals,
+            ramp_up_estimate=ramp_up_estimate
+        )
 
     @staticmethod
     def _adjacent_matches(role_skills: list[str], candidate_terms: list[str]) -> set[str]:

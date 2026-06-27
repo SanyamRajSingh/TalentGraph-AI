@@ -7,6 +7,8 @@ from app.contracts.requests.export_requests import ExportRankingsRequest
 from app.contracts.requests.foundation_requests import BuildGraphRequest, GenerateEmbeddingsRequest
 from app.contracts.requests.rank_requests import RankRequest
 from app.contracts.requests.role_dna_requests import GenerateRoleDNARequest, UploadJobRequest
+from app.contracts.requests.recommend_requests import RecommendRequest
+from app.contracts.requests.copilot_requests import CopilotDraftRequest
 
 __all__ = [
     "BuildDigitalTwinRequest",
@@ -17,6 +19,7 @@ __all__ = [
     "GenerateEmbeddingsRequest",
     "GenerateRoleDNARequest",
     "RankRequest",
+    "RecommendRequest",
     "UploadCandidateRequest",
     "UploadJobRequest",
 ]

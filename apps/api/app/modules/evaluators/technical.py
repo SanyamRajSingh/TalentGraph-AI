@@ -27,14 +27,30 @@ class TechnicalEvaluator:
 
         strengths = []
         risks = []
+        missing_required = [skill for skill in role.required_skills if skill.casefold() not in {m.casefold() for m in required_matches}]
+        missing_signals = missing_required.copy()
+        evidence = []
+        
         if required_matches:
             strengths.append(f"Matches required skills: {', '.join(sorted(required_matches))}.")
+            evidence.append(f"Found {len(required_matches)} required skills in candidate profile.")
         if preferred_matches:
             strengths.append(f"Matches preferred skills: {', '.join(sorted(preferred_matches))}.")
-        missing_required = [skill for skill in role.required_skills if skill.casefold() not in {m.casefold() for m in required_matches}]
+            evidence.append(f"Found {len(preferred_matches)} preferred skills.")
         if missing_required:
             risks.append(f"Missing required skills: {', '.join(missing_required)}.")
         if candidate.project_complexity < role.problem_solving:
             risks.append("Project complexity is below the role's problem-solving demand.")
+            missing_signals.append("High-complexity project evidence")
+            
+        ramp_up_estimate = "2-4 weeks" if required_score >= 80 else "1-3 months"
 
-        return EvaluatorResult(score=score, confidence=confidence, strengths=strengths, risks=risks)
+        return EvaluatorResult(
+            score=score, 
+            confidence=confidence, 
+            strengths=strengths, 
+            risks=risks,
+            evidence=evidence,
+            missing_signals=missing_signals,
+            ramp_up_estimate=ramp_up_estimate
+        )

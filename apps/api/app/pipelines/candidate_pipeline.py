@@ -90,6 +90,26 @@ class CandidatePipeline:
             resume_id=resume_id,
             source_name=source_name,
         )
+
+        # Phase 1: Persistent Talent Memory - Merge with existing candidate by email
+        if twin.email:
+            existing = self.candidate_repository.get_by_email(twin.email)
+            if existing:
+                # Merge IDs and history
+                twin.candidate_id = existing.candidate_id
+                twin.resume_versions = existing.resume_versions.copy()
+                twin.evaluations_history = existing.evaluations_history.copy()
+                
+                # Append new timeline entry
+                from datetime import datetime
+                from app.domain.candidate_twin import CandidateTimelineEntry
+                year = datetime.now().year
+                twin.timeline.append(CandidateTimelineEntry(year=year, event=f"Profile updated from {source_name or 'resume'}"))
+        
+        # Append this resume to history
+        if resume:
+            twin.resume_versions.append(resume)
+            
         saved = self.candidate_repository.save(twin)
         return saved, DigitalTwinBuilt(candidate_id=saved.candidate_id)
 

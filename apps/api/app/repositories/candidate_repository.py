@@ -47,6 +47,10 @@ class CandidateRepository(ABC):
         """List persisted candidate digital twins."""
 
     @abstractmethod
+    def get_by_email(self, email: str) -> CandidateDigitalTwin | None:
+        """Fetch a candidate digital twin by email address."""
+
+    @abstractmethod
     def search_candidates(self, filters: CandidateFilter) -> PaginatedCandidateList:
         """Search and filter candidate digital twins."""
 
