@@ -33,3 +33,4 @@ chroma/
 Thumbs.db
 .idea/
 .vscode/
+*.egg-info/
