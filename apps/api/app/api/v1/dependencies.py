@@ -1,5 +1,17 @@
+"""FastAPI dependency providers for all pipelines and repositories.
+
+Repository selection strategy:
+- If DATABASE_URL points to a PostgreSQL instance (settings.use_postgres == True),
+  PostgreSQL-backed repositories are returned.
+- Otherwise (default / tests), in-memory repositories are used.
+
+This means: existing tests continue to pass without any DATABASE_URL set.
+New production deployments set DATABASE_URL to enable persistence.
+"""
+
 from functools import lru_cache
 
+from app.core.settings import get_settings
 from app.modules.candidates import CandidateDigitalTwinService, LocalResumeParserProvider
 from app.modules.embeddings import EmbeddingFoundationService, LocalEmbeddingProvider, SummaryService
 from app.modules.evaluators import EvaluationService
@@ -27,16 +39,98 @@ from app.repositories import (
     InMemoryRankingRepository,
     InMemoryRoleDNARepository,
     InMemoryVectorRepository,
+    PostgresCandidateRepository,
+    PostgresEvaluationRepository,
+    PostgresExplanationRepository,
+    PostgresRankingRepository,
+    PostgresRoleDNARepository,
     RoleDNARepository,
     RankingRepository,
     VectorRepository,
 )
 
 
+# ---------------------------------------------------------------------------
+# Shared singleton session (only created when use_postgres is True)
+# ---------------------------------------------------------------------------
+
+_pg_session = None
+
+
+def _get_pg_session():
+    """Return a long-lived SQLAlchemy Session for singleton Postgres repos.
+
+    For a production app with request-scoped sessions, use get_db() instead.
+    Here we use a single session per process for simplicity, matching the
+    lru_cache pattern already used for in-memory repos.
+    """
+    global _pg_session  # noqa: PLW0603
+    if _pg_session is None:
+        from app.db.session import _get_session_local, create_tables
+        create_tables()  # idempotent — creates tables if they don't exist
+        _pg_session = _get_session_local()()
+    return _pg_session
+
+
+# ---------------------------------------------------------------------------
+# Repository factories — switch between memory and postgres
+# ---------------------------------------------------------------------------
+
 @lru_cache
 def get_role_dna_repository() -> RoleDNARepository:
+    settings = get_settings()
+    if settings.use_postgres:
+        return PostgresRoleDNARepository(session=_get_pg_session())
     return InMemoryRoleDNARepository()
 
+
+@lru_cache
+def get_candidate_repository() -> CandidateRepository:
+    settings = get_settings()
+    if settings.use_postgres:
+        return PostgresCandidateRepository(session=_get_pg_session())
+    return InMemoryCandidateRepository()
+
+
+@lru_cache
+def get_evaluation_repository() -> EvaluationRepository:
+    settings = get_settings()
+    if settings.use_postgres:
+        return PostgresEvaluationRepository(session=_get_pg_session())
+    return InMemoryEvaluationRepository()
+
+
+@lru_cache
+def get_ranking_repository() -> RankingRepository:
+    settings = get_settings()
+    if settings.use_postgres:
+        return PostgresRankingRepository(session=_get_pg_session())
+    return InMemoryRankingRepository()
+
+
+@lru_cache
+def get_explanation_repository() -> ExplanationRepository:
+    settings = get_settings()
+    if settings.use_postgres:
+        return PostgresExplanationRepository(session=_get_pg_session())
+    return InMemoryExplanationRepository()
+
+
+@lru_cache
+def get_graph_repository() -> GraphRepository:
+    # Graph repository remains in-memory (Neo4j integration is a separate phase)
+    return InMemoryGraphRepository()
+
+
+@lru_cache
+def get_vector_repository() -> VectorRepository:
+    # Vector repository remains in-memory (Chroma integration is a separate phase)
+    return InMemoryVectorRepository()
+
+
+# ---------------------------------------------------------------------------
+# Service factories (unchanged from v1.0)
+# ---------------------------------------------------------------------------
 
 @lru_cache
 def get_role_dna_service() -> RoleDNAService:
@@ -48,11 +142,6 @@ def get_role_pipeline() -> RolePipeline:
         role_dna_service=get_role_dna_service(),
         role_repository=get_role_dna_repository(),
     )
-
-
-@lru_cache
-def get_candidate_repository() -> CandidateRepository:
-    return InMemoryCandidateRepository()
 
 
 @lru_cache
@@ -68,11 +157,6 @@ def get_candidate_pipeline() -> CandidatePipeline:
 
 
 @lru_cache
-def get_graph_repository() -> GraphRepository:
-    return InMemoryGraphRepository()
-
-
-@lru_cache
 def get_graph_builder_service() -> GraphBuilderService:
     return GraphBuilderService()
 
@@ -84,11 +168,6 @@ def get_graph_pipeline() -> GraphPipeline:
         role_repository=get_role_dna_repository(),
         candidate_repository=get_candidate_repository(),
     )
-
-
-@lru_cache
-def get_vector_repository() -> VectorRepository:
-    return InMemoryVectorRepository()
 
 
 @lru_cache
@@ -109,11 +188,6 @@ def get_embedding_pipeline() -> EmbeddingPipeline:
 
 
 @lru_cache
-def get_evaluation_repository() -> EvaluationRepository:
-    return InMemoryEvaluationRepository()
-
-
-@lru_cache
 def get_evaluation_service() -> EvaluationService:
     return EvaluationService()
 
@@ -127,11 +201,6 @@ def get_evaluation_pipeline() -> EvaluationPipeline:
     )
 
 
-@lru_cache
-def get_ranking_repository() -> RankingRepository:
-    return InMemoryRankingRepository()
-
-
 def get_ranking_service() -> RankingService:
     return RankingService(
         evaluation_repository=get_evaluation_repository(),
@@ -141,11 +210,6 @@ def get_ranking_service() -> RankingService:
 
 def get_ranking_pipeline() -> RankingPipeline:
     return RankingPipeline(ranking_service=get_ranking_service())
-
-
-@lru_cache
-def get_explanation_repository() -> ExplanationRepository:
-    return InMemoryExplanationRepository()
 
 
 @lru_cache

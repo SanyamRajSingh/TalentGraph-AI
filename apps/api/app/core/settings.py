@@ -29,6 +29,11 @@ class Settings(BaseSettings):
     def cors_origins(self) -> list[str]:
         return [origin.strip() for origin in self.backend_cors_origins.split(",") if origin.strip()]
 
+    @property
+    def use_postgres(self) -> bool:
+        """True when a real DATABASE_URL is configured (non-empty, non-sqlite for production)."""
+        return bool(self.database_url and self.database_url.startswith(("postgresql", "postgres")))
+
 
 @lru_cache
 def get_settings() -> Settings:

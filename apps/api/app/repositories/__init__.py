@@ -13,15 +13,27 @@ from app.repositories.memory import (
     InMemoryRoleDNARepository,
     InMemoryVectorRepository,
 )
+from app.repositories.postgres import (
+    PostgresCandidateRepository,
+    PostgresEvaluationRepository,
+    PostgresExplanationRepository,
+    PostgresRankingRepository,
+    PostgresRoleDNARepository,
+)
 from app.repositories.ranking_repository import RankingRepository
 from app.repositories.role_dna_repository import RoleDNARepository
 from app.repositories.vector_repository import VectorRepository
 
 __all__ = [
+    # Interfaces
     "CandidateRepository",
     "EvaluationRepository",
     "ExplanationRepository",
     "GraphRepository",
+    "RankingRepository",
+    "RoleDNARepository",
+    "VectorRepository",
+    # In-memory implementations (default / tests)
     "InMemoryCandidateRepository",
     "InMemoryEvaluationRepository",
     "InMemoryExplanationRepository",
@@ -29,7 +41,10 @@ __all__ = [
     "InMemoryRankingRepository",
     "InMemoryRoleDNARepository",
     "InMemoryVectorRepository",
-    "RankingRepository",
-    "RoleDNARepository",
-    "VectorRepository",
+    # PostgreSQL implementations (production)
+    "PostgresCandidateRepository",
+    "PostgresEvaluationRepository",
+    "PostgresExplanationRepository",
+    "PostgresRankingRepository",
+    "PostgresRoleDNARepository",
 ]
