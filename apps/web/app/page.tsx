@@ -3,6 +3,7 @@
 import { FormEvent, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import * as d3 from "d3";
+import dagre from "dagre";
 import { Brain, BriefcaseBusiness, ClipboardCheck, Download, FileText, GitBranch, Layers3, Lightbulb, ListOrdered, Loader2, Maximize2, Sparkles, UserRound } from "lucide-react";
 
 type ApiRoleDNA = {
@@ -1077,12 +1078,8 @@ function ForceGraphViz({ graph }: { graph: ApiGraph }) {
   useEffect(() => {
     const svg = d3.select(svgRef.current!);
     const container = containerRef.current!;
-    const W = container.clientWidth || 600;
-    const H = 520;
 
-    svg.attr("width", W).attr("height", H)
-       .attr("viewBox", `0 0 ${W} ${H}`)
-       .selectAll("*").remove();
+    svg.selectAll("*").remove();
 
     const getRadius = (label: string) => {
       if (label === "Role") return 28;
@@ -1091,13 +1088,66 @@ function ForceGraphViz({ graph }: { graph: ApiGraph }) {
       return 16;
     };
 
-    // Arrow markers per size to prevent hiding under nodes
+    // Dagre Setup
+    const gDagre = new dagre.graphlib.Graph();
+    gDagre.setGraph({
+      rankdir: "TB",
+      nodesep: 60,
+      ranksep: 80,
+    });
+    gDagre.setDefaultEdgeLabel(() => ({}));
+
+    const nodes = graph.nodes.map(n => ({ ...n }));
+    const nodeById = new Map(nodes.map(n => [n.id, n]));
+
+    nodes.forEach(n => {
+      const r = getRadius(n.label);
+      // Width 120 matches the foreignObject width for text
+      gDagre.setNode(n.id, { label: n.label, name: n.name, width: 120, height: r * 2 + 60, id: n.id });
+    });
+
+    const validLinks = graph.relationships.filter(r => nodeById.has(r.source_id) && nodeById.has(r.target_id));
+
+    const rankMap: Record<string, number> = {
+      Role: 0,
+      Candidate: 1,
+      Skill: 2,
+      Technology: 3,
+      Project: 4,
+      Domain: 4,
+    };
+
+    validLinks.forEach(l => {
+      const sLabel = nodeById.get(l.source_id)?.label || "";
+      const tLabel = nodeById.get(l.target_id)?.label || "";
+      const sRank = rankMap[sLabel] ?? 5;
+      const tRank = rankMap[tLabel] ?? 5;
+
+      // Ensure Dagre edges point downwards to enforce hierarchy
+      if (sRank > tRank) {
+        gDagre.setEdge(l.target_id, l.source_id, { original: l, reversed: true });
+      } else {
+        gDagre.setEdge(l.source_id, l.target_id, { original: l, reversed: false });
+      }
+    });
+
+    dagre.layout(gDagre);
+
+    const graphWidth = gDagre.graph().width ?? 600;
+    const graphHeight = gDagre.graph().height ?? 500;
+    
+    // Fit to Screen Automatically via viewBox
+    const padding = 80;
+    svg.attr("viewBox", `0 0 ${graphWidth + padding * 2} ${graphHeight + padding * 2}`)
+       .attr("preserveAspectRatio", "xMidYMid meet");
+
+    // Arrow markers
     const defs = svg.append("defs");
     [16, 20, 24, 28].forEach(r => {
       defs.append("marker")
         .attr("id", `tg-arrow-${r}`)
         .attr("viewBox", "0 -5 10 10")
-        .attr("refX", r + 9) // radius + stroke width + padding
+        .attr("refX", r + 9)
         .attr("refY", 0)
         .attr("markerWidth", 5).attr("markerHeight", 5)
         .attr("orient", "auto")
@@ -1113,92 +1163,85 @@ function ForceGraphViz({ graph }: { graph: ApiGraph }) {
     zoomRef.current = zoom;
     svg.call(zoom);
 
-    // Nodes & links
-    const nodes: ForceNode[] = graph.nodes.map(n => ({ ...n }));
-    const nodeById = new Map(nodes.map(n => [n.id, n]));
-    const links: ForceLink[] = graph.relationships
-      .filter(r => nodeById.has(r.source_id) && nodeById.has(r.target_id))
-      .map(r => ({ source: r.source_id, target: r.target_id, type: r.type }));
+    // Initial positioning
+    g.attr("transform", `translate(${padding},${padding})`);
+    svg.call(zoom.transform, d3.zoomIdentity.translate(padding, padding));
 
-    const sim = d3.forceSimulation<ForceNode>(nodes)
-      .force("link", d3.forceLink<ForceNode, ForceLink>(links).id(d => d.id).distance(40).strength(0.1))
-      .force("charge", d3.forceManyBody().strength(-150))
-      .force("y", d3.forceY<ForceNode>(d => {
-        switch (d.label) {
-          case "Role": return H * 0.15;
-          case "Candidate": return H * 0.30;
-          case "Skill": return H * 0.50;
-          case "Technology": return H * 0.70;
-          case "Project":
-          case "Domain": return H * 0.85;
-          default: return H / 2;
-        }
-      }).strength(1.2))
-      .force("x", d3.forceX<ForceNode>(W / 2).strength(0.08))
-      .force("collision", d3.forceCollide<ForceNode>(d => getRadius(d.label) + 24).strength(1));
+    // Render Edges
+    const linkGenerator = d3.line<{x: number, y: number}>()
+      .x(d => d.x)
+      .y(d => d.y)
+      .curve(d3.curveMonotoneY);
 
-    // Edges
-    const link = g.append("g").selectAll<SVGPathElement, ForceLink>("path")
-      .data(links).join("path")
+    const linkData = gDagre.edges().map(e => {
+      const edge = gDagre.edge(e);
+      return {
+        id: e.w,
+        source: { id: e.v },
+        target: { id: e.w },
+        points: edge.points
+      };
+    });
+
+    const link = g.append("g").selectAll("path")
+      .data(linkData).join("path")
       .attr("fill", "none")
       .attr("stroke", "#cbd5e1").attr("stroke-width", 1.5)
+      .attr("d", d => linkGenerator(d.points))
       .attr("marker-end", d => {
-        const tId = typeof d.target === "string" ? d.target : (d.target as ForceNode).id;
-        const tNode = nodeById.get(tId);
+        const tNode = nodeById.get(d.id);
         return `url(#tg-arrow-${getRadius(tNode?.label ?? "")})`;
       });
 
-    // Edge label groups (shown on hover)
-    const linkLabel = g.append("g").selectAll<SVGTextElement, ForceLink>("text")
-      .data(links).join("text")
-      .attr("text-anchor", "middle")
-      .attr("font-size", "9px")
-      .attr("fill", "#6b7280")
-      .attr("opacity", 0)
-      .text(d => d.type.replace(/_/g, " "));
+    // Render Nodes
+    const nodeData = gDagre.nodes().map(v => gDagre.node(v) as { id: string; label: string; name: string; x: number; y: number; width: number; height: number });
 
-    // Node groups
-    const drag = d3.drag<SVGGElement, ForceNode>()
-      .on("start", (ev, d) => { if (!ev.active) sim.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
-      .on("drag",  (ev, d) => { d.fx = ev.x; d.fy = ev.y; })
-      .on("end",   (ev, d) => { if (!ev.active) sim.alphaTarget(0); d.fx = null; d.fy = null; });
+    const node = g.append("g").selectAll("g")
+      .data(nodeData).join("g")
+      .attr("transform", d => `translate(${d.x},${d.y})`)
+      .style("cursor", "pointer");
 
-    const node = g.append("g").selectAll<SVGGElement, ForceNode>("g")
-      .data(nodes).join("g").call(drag).style("cursor", "grab");
-
-    // Shadow for depth
     node.append("circle")
       .attr("r", d => getRadius(d.label) + 2)
       .attr("fill", d => NODE_COLORS[d.label] ?? "#6b7280")
       .attr("class", "node-shadow")
       .attr("opacity", 0.15).attr("cy", 2);
 
-    // Main circle
     node.append("circle")
       .attr("r", d => getRadius(d.label))
       .attr("class", "node-main")
       .attr("fill", d => NODE_COLORS[d.label] ?? "#6b7280")
       .attr("stroke", "#fff").attr("stroke-width", 2.5);
 
-    // Icon letter inside
     node.append("text")
       .attr("text-anchor", "middle").attr("dominant-baseline", "central")
       .attr("font-size", d => d.label === "Role" ? "14px" : d.label === "Candidate" ? "12px" : "10px")
       .attr("font-weight", "700").attr("fill", "#fff")
       .text(d => NODE_ICONS[d.label] ?? d.label[0] ?? "?");
 
-    // Name label below
-    node.append("text")
-      .attr("text-anchor", "middle")
-      .attr("dy", d => getRadius(d.label) + 12)
-      .attr("font-size", "10px").attr("fill", "#374151")
-      .attr("font-weight", "500")
-      .text(d => {
-        const n = d.name ?? d.id ?? "?";
-        return n.length > 14 ? n.slice(0, 13) + "\u2026" : n;
-      });
+    node.append("foreignObject")
+      .attr("x", -60)
+      .attr("y", d => getRadius(d.label) + 5)
+      .attr("width", 120)
+      .attr("height", 60)
+      .style("pointer-events", "none")
+      .append("xhtml:div")
+      .style("width", "100%")
+      .style("height", "100%")
+      .style("display", "flex")
+      .style("align-items", "flex-start")
+      .style("justify-content", "center")
+      .style("text-align", "center")
+      .style("font-size", "10px")
+      .style("color", "#374151")
+      .style("font-weight", "500")
+      .style("line-height", "1.2")
+      .style("overflow", "hidden")
+      .style("white-space", "normal")
+      .style("word-wrap", "break-word")
+      .text(d => d.name ?? d.id ?? "?");
 
-    // Tooltip interactions
+    // Tooltips & Interactions
     const tooltip = tooltipRef.current!;
     node
       .on("mouseover", (_ev, d) => {
@@ -1213,33 +1256,19 @@ function ForceGraphViz({ graph }: { graph: ApiGraph }) {
       .on("mouseout", () => { tooltip.style.opacity = "0"; })
       .on("click", (_ev, clicked) => {
         const neighborIds = new Set<string>();
-        links.forEach(l => {
-          // After first tick, source/target are node objects; before that, strings
-          const sId = typeof l.source === "string" ? l.source : (l.source as ForceNode).id;
-          const tId = typeof l.target === "string" ? l.target : (l.target as ForceNode).id;
-          if (sId === clicked.id) neighborIds.add(tId);
-          if (tId === clicked.id) neighborIds.add(sId);
+        linkData.forEach(l => {
+          if (l.source.id === clicked.id) neighborIds.add(l.target.id);
+          if (l.target.id === clicked.id) neighborIds.add(l.source.id);
         });
         node.select(".node-main")
           .attr("opacity", d => d.id === clicked.id || neighborIds.has(d.id) ? 1 : 0.2);
-        link.attr("opacity", l => {
-          const sId = typeof l.source === "string" ? l.source : (l.source as ForceNode).id;
-          const tId = typeof l.target === "string" ? l.target : (l.target as ForceNode).id;
-          return sId === clicked.id || tId === clicked.id ? 1 : 0.1;
-        });
+        link.attr("opacity", l => l.source.id === clicked.id || l.target.id === clicked.id ? 1 : 0.1);
       });
 
     link
-      .on("mouseover", function(_ev, d) {
-        d3.select(this).attr("stroke", "#7c3aed").attr("stroke-width", 2.5);
-        linkLabel.filter(l => l === d).attr("opacity", 1);
-      })
-      .on("mouseout", function(_ev, d) {
-        d3.select(this).attr("stroke", "#cbd5e1").attr("stroke-width", 1.5);
-        linkLabel.filter(l => l === d).attr("opacity", 0);
-      });
+      .on("mouseover", function() { d3.select(this).attr("stroke", "#7c3aed").attr("stroke-width", 2.5); })
+      .on("mouseout", function() { d3.select(this).attr("stroke", "#cbd5e1").attr("stroke-width", 1.5); });
 
-    // Reset dimming on svg background click
     svg.on("click.reset", (ev) => {
       if (ev.target === svg.node()) {
         node.select(".node-main").attr("opacity", 1);
@@ -1247,27 +1276,7 @@ function ForceGraphViz({ graph }: { graph: ApiGraph }) {
       }
     });
 
-    sim.on("tick", () => {
-      link.attr("d", (d) => {
-        const s = d.source as ForceNode;
-        const t = d.target as ForceNode;
-        const dy = (t.y ?? 0) - (s.y ?? 0);
-        // Soft vertical curve for layered layout
-        return `M${s.x},${s.y} C${s.x},${(s.y ?? 0) + dy / 3} ${t.x},${(t.y ?? 0) - dy / 3} ${t.x},${t.y}`;
-      });
-      linkLabel.attr("x", d => {
-        const s = d.source as ForceNode; const t = d.target as ForceNode;
-        return ((s.x ?? 0) + (t.x ?? 0)) / 2;
-      }).attr("y", d => {
-        const s = d.source as ForceNode; const t = d.target as ForceNode;
-        return ((s.y ?? 0) + (t.y ?? 0)) / 2 - 6;
-      });
-      node.attr("transform", d => `translate(${d.x ?? 0},${d.y ?? 0})`);
-    });
-
     return () => {
-      sim.stop();
-      // Explicitly remove SVG-level event listeners to prevent accumulation
       svg.on(".zoom", null);
       svg.on("click.reset", null);
     };
