@@ -3,7 +3,7 @@ import io
 import uuid
 import zipfile
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import datetime, UTC
 
 from app.pipelines.candidate_pipeline import CandidatePipeline
 
@@ -87,4 +87,4 @@ class BatchPipeline:
                 job.errors.append(f"{filename}: {str(e)}")
                 
         job.status = "COMPLETED" if job.failed_files == 0 else "COMPLETED_WITH_ERRORS"
-        job.completed_at = datetime.utcnow()
+        job.completed_at = datetime.now(UTC)

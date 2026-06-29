@@ -1,3 +1,4 @@
+from fastapi import HTTPException
 from app.providers.embedding_provider import EmbeddingProvider
 
 class SentenceTransformerEmbeddingProvider(EmbeddingProvider):
@@ -11,8 +12,14 @@ class SentenceTransformerEmbeddingProvider(EmbeddingProvider):
     def model(self):
         if self._model is None:
             # Lazy load so it doesn't block startup or memory unless requested
-            from sentence_transformers import SentenceTransformer
-            self._model = SentenceTransformer(self.model_name)
+            try:
+                from sentence_transformers import SentenceTransformer
+                self._model = SentenceTransformer(self.model_name)
+            except ModuleNotFoundError:
+                raise HTTPException(
+                    status_code=501, 
+                    detail="ML dependencies (sentence-transformers) are not installed in this environment."
+                )
         return self._model
 
     def embed(self, text: str) -> list[float]:

@@ -209,13 +209,6 @@ def build_digital_twin(
     return CandidateTwinResponse(candidate_id=twin.candidate_id, twin=twin)
 
 
-@api_router.get("/candidates", response_model=CandidateListResponse, tags=["candidates"])
-def list_candidates(
-    repository: CandidateRepository = Depends(get_candidate_repository),
-) -> CandidateListResponse:
-    return CandidateListResponse(items=repository.list_candidates())
-
-
 @api_router.post("/rank-candidates", tags=["ranking"])
 def rank_candidates() -> None:
     not_implemented("Ranking pipeline")
@@ -369,7 +362,7 @@ from app.contracts.responses.candidate_responses import PaginatedCandidateListRe
 from app.repositories.candidate_repository import CandidateFilter
 
 @api_router.get("/candidates", response_model=PaginatedCandidateListResponse, tags=["candidates"])
-def list_candidates(
+def list_candidates_paginated(
     search: str | None = Query(None, description="Search by name or current role"),
     skills: list[str] = Query(None, description="Filter by skills (must have all)"),
     growth_stage: str | None = Query(None, description="Filter by growth stage"),

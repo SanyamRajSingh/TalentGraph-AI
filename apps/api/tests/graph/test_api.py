@@ -1,3 +1,4 @@
+import pytest
 from fastapi.testclient import TestClient
 
 from app.main import app
@@ -29,6 +30,8 @@ def test_graph_and_embedding_api_round_trip() -> None:
     assert fetch_graph_response.status_code == 200
     assert fetch_graph_response.json()["graph_id"] == graph_id
 
+    # Embeddings require sentence_transformers — skip gracefully if not installed
+    pytest.importorskip("sentence_transformers", reason="sentence_transformers not installed")
     embeddings_response = client.post(
         "/api/v1/generate-embeddings",
         json={"role_id": role_id, "candidate_id": candidate_id},

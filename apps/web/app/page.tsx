@@ -284,16 +284,22 @@ export default function Home() {
     }
   }, [isDarkMode]);
 
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "";
+
   useEffect(() => {
-    // Initial data loading
-  }, []);
+    // Auto-hydrate: load available roles on mount so the UI has data to work with
+    if (!apiBaseUrl) return;
+    fetch(`${apiBaseUrl}/api/v1/role-dna`)
+      .then((r) => r.ok ? r.json() : null)
+      .catch(() => null);
+    // Candidates loaded by CandidateLibrary component
+  }, [apiBaseUrl]);
 
   const [analyticsLoading, setAnalyticsLoading] = useState(false);
   const [compareCandidateId, setCompareCandidateId] = useState<string>("");
   const [comparisonMatrix, setComparisonMatrix] = useState<ApiComparisonMatrix | null>(null);
   const [comparisonLoading, setComparisonLoading] = useState(false);
 
-  const apiBaseUrl = useMemo(() => process.env.NEXT_PUBLIC_API_BASE_URL || "", []);
   const currentRanking = useMemo(
     () => rankings.find((ranking) => ranking.candidate_id === candidateTwin?.candidate_id) ?? null,
     [candidateTwin?.candidate_id, rankings]

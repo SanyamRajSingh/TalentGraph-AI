@@ -235,8 +235,11 @@ def seed(
 
     # ── 3. Evaluations ────────────────────────────────────────────────────────
     eval_count = 0
+    # Limit to first 5 candidates per role to reduce startup memory (10x reduction).
+    # Remaining evaluations are generated on-demand via the API.
+    candidates_for_eval = candidates[:5]
     for j in jobs:
-        for c in candidates:
+        for c in candidates_for_eval:
             try:
                 evaluation_pipeline.run(role_id=j.role_id, candidate_id=c.candidate_id)
                 eval_count += 1
@@ -271,31 +274,13 @@ def seed(
                 logger.debug("  Explanation skipped %s: %s", c.candidate_id, exc)
     logger.info("  Loaded explanations (%d)", exp_count)
 
-    # ── 6. Embeddings ─────────────────────────────────────────────────────────
+    # ── 6. Embeddings (skipped at startup — generated on-demand via API) ──────
     emb_count = 0
-    for c in candidates[:10]:  # first 10 candidates for speed on startup
-        try:
-            embedding_pipeline.run(
-                role_id=primary_job.role_id,
-                candidate_id=c.candidate_id,
-            )
-            emb_count += 1
-        except Exception as exc:
-            logger.debug("  Embedding skipped %s: %s", c.candidate_id, exc)
-    logger.info("  Loaded embeddings (%d)", emb_count)
+    logger.info("  Embeddings: deferred to on-demand generation")
 
-    # ── 7. Graph ──────────────────────────────────────────────────────────────
+    # ── 7. Graph (skipped at startup — generated on-demand via API) ──────────
     graph_count = 0
-    for c in candidates[:5]:  # first 5 for speed
-        try:
-            graph_pipeline.run(
-                role_id=primary_job.role_id,
-                candidate_id=c.candidate_id,
-            )
-            graph_count += 1
-        except Exception as exc:
-            logger.debug("  Graph skipped %s: %s", c.candidate_id, exc)
-    logger.info("  Loaded graph data (%d snapshots)", graph_count)
+    logger.info("  Graph: deferred to on-demand generation")
 
     logger.info(
         "Startup seeder: DONE — %d candidates, %d jobs, %d evals, %d rankings, "

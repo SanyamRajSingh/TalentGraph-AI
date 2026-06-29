@@ -1,3 +1,4 @@
+import pytest
 from fastapi.testclient import TestClient
 
 from app.main import app
@@ -5,6 +6,7 @@ from app.api.v1.dependencies import get_candidate_repository
 from app.domain.candidate_twin import CandidateDigitalTwin
 
 def test_search_candidates_match_type() -> None:
+    pytest.importorskip("sentence_transformers", reason="sentence_transformers not installed")
     client = TestClient(app)
     
     # Pre-populate candidate repository with some mock twins
