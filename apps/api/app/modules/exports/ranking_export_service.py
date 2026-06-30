@@ -176,7 +176,13 @@ class RankingExportService:
                     "\n".join(exp.counterfactuals)
                 ])
             else:
-                sheet.append([name, "", "", "", ""])
+                eval_bundle = self.evaluation_repository.get(r.evaluation_id) if self.evaluation_repository and hasattr(r, "evaluation_id") else None
+                if eval_bundle:
+                    strengths = "\n".join(eval_bundle.technical.strengths + eval_bundle.growth.strengths)
+                    risks = "\n".join(eval_bundle.technical.risks + eval_bundle.growth.risks)
+                    sheet.append([name, strengths, risks, "(Detailed explanation not yet generated)", "(Counterfactuals not yet generated)"])
+                else:
+                    sheet.append([name, "", "", "", ""])
 
         self._format_sheet(sheet)
 
@@ -184,22 +190,20 @@ class RankingExportService:
         headers = ["Candidate", "Email", "Phone", "Location", "Experience (Events)", "Domains", "Skills", "Career Trajectory"]
         self._apply_header_style(sheet, headers)
         
-        for r in rankings:
-            cand = self.candidate_repository.get_by_candidate_id(r.candidate_id)
-            if cand:
-                events = len(cand.timeline)
-                timeline_str = "\n".join(f"{t.year}: {t.event}" for t in sorted(cand.timeline, key=lambda x: x.year, reverse=True))
-                sheet.append([
-                    cand.name,
-                    cand.email,
-                    cand.phone,
-                    cand.location,
-                    f"{events} timeline events",
-                    ", ".join(cand.domains),
-                    ", ".join(cand.skills),
-                    timeline_str
-                ])
-            else:
-                sheet.append([r.candidate_id, "", "", "", "", "", "", ""])
+        all_candidates = self.candidate_repository.list_candidates()
+        
+        for cand in all_candidates:
+            events = len(cand.timeline)
+            timeline_str = "\n".join(f"{t.year}: {t.event}" for t in sorted(cand.timeline, key=lambda x: x.year, reverse=True))
+            sheet.append([
+                cand.name,
+                cand.email or "",
+                cand.phone or "",
+                cand.location or "",
+                f"{events} timeline events",
+                ", ".join(cand.domains) if cand.domains else "",
+                ", ".join(cand.skills) if cand.skills else "",
+                timeline_str
+            ])
 
         self._format_sheet(sheet)

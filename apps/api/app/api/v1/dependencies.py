@@ -199,6 +199,7 @@ def get_graph_pipeline() -> GraphPipeline:
 def get_embedding_foundation_service() -> EmbeddingFoundationService:
     settings = get_settings()
     try:
+        import sentence_transformers
         from app.providers.sentence_transformer_provider import SentenceTransformerEmbeddingProvider
         provider = SentenceTransformerEmbeddingProvider(model_name=settings.sentence_transformers_model)
     except ImportError:

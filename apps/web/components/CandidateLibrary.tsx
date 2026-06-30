@@ -21,10 +21,12 @@ type PaginatedCandidateListResponse = {
 
 export default function CandidateLibrary({ 
   apiBaseUrl, 
-  onSelectCandidate 
+  onSelectCandidate,
+  onCandidatesLoaded 
 }: { 
   apiBaseUrl: string;
   onSelectCandidate?: (candidate: ApiCandidateTwin) => void;
+  onCandidatesLoaded?: (candidates: ApiCandidateTwin[]) => void;
 }) {
   const [candidates, setCandidates] = useState<ApiCandidateTwin[]>([]);
   const [total, setTotal] = useState(0);
@@ -73,6 +75,9 @@ export default function CandidateLibrary({
         const data = (await res.json()) as PaginatedCandidateListResponse;
         setCandidates(data.items);
         setTotal(data.total);
+        if (onCandidatesLoaded) {
+          onCandidatesLoaded(data.items);
+        }
       }
     } catch (err: any) {
       setError(err.message);

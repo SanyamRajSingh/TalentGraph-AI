@@ -292,7 +292,12 @@ export default function Home() {
     fetch(`${apiBaseUrl}/api/v1/role-dna`)
       .then((r) => r.ok ? r.json() : null)
       .catch(() => null);
-    // Candidates loaded by CandidateLibrary component
+    
+    // Auto-hydrate candidates for the comparison dropdown
+    fetch(`${apiBaseUrl}/api/v1/candidates?page_size=500`)
+      .then((r) => r.ok ? r.json() : null)
+      .then((data) => { if (data?.items) setLibraryCandidates(data.items); })
+      .catch(() => null);
   }, [apiBaseUrl]);
 
   const [analyticsLoading, setAnalyticsLoading] = useState(false);
@@ -1082,7 +1087,7 @@ export default function Home() {
 
       {activeTab === "library" && (
         <section className="mx-auto max-w-7xl px-6 pb-8">
-          <CandidateLibrary apiBaseUrl={apiBaseUrl} />
+                <CandidateLibrary apiBaseUrl={apiBaseUrl} onCandidatesLoaded={setLibraryCandidates} />
         </section>
       )}
 
