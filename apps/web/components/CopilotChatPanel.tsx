@@ -51,7 +51,7 @@ export default function CopilotChatPanel({ apiBaseUrl, candidateId, roleId }: Pr
       if (!response.ok) throw new Error('Failed to get response');
       const data = await response.json();
       
-      setMessages(prev => [...prev, { role: 'assistant', content: data.reply }]);
+      setMessages(prev => [...prev, { role: 'assistant', content: data.answer }]);
     } catch (err) {
       setMessages(prev => [...prev, { role: 'assistant', content: 'Sorry, I encountered an error while processing your request.' }]);
     } finally {

@@ -919,6 +919,7 @@ export default function Home() {
         >
           {rankings.length ? (
             <div className="overflow-x-auto w-full">
+              <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">Note: Only candidates that have been evaluated against this role are included in the ranking.</p>
               <table className="min-w-[600px] w-full border-collapse text-left text-sm">
                 <thead>
                   <tr className="border-b border-gray-200 dark:border-slate-800 text-xs uppercase tracking-wide text-graphite dark:text-slate-400">

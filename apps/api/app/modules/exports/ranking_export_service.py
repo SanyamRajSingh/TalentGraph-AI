@@ -160,34 +160,37 @@ class RankingExportService:
         self._format_sheet(sheet)
 
     def _build_explanations(self, sheet, rankings):
-        headers = ["Candidate", "Strengths", "Weaknesses", "Explanations", "Counterfactual Improvements"]
+        headers = ["Candidate", "Strengths", "Weaknesses", "Ramp Up Estimate", "Explanations", "Counterfactual Improvements"]
         self._apply_header_style(sheet, headers)
         
         for r in rankings:
             cand = self.candidate_repository.get_by_candidate_id(r.candidate_id)
             name = cand.name if cand else r.candidate_id
             exp = self.explanation_repository.get_by_candidate_id(r.candidate_id)
+            eval_bundle = self.evaluation_repository.get(r.evaluation_id) if self.evaluation_repository and hasattr(r, "evaluation_id") and r.evaluation_id else None
+            ramp_up = eval_bundle.technical.ramp_up_estimate if eval_bundle and eval_bundle.technical else ""
+
             if exp:
                 sheet.append([
                     name,
                     "\n".join(exp.strengths),
                     "\n".join(exp.risks),
+                    ramp_up,
                     "\n".join(exp.reasoning),
                     "\n".join(exp.counterfactuals)
                 ])
             else:
-                eval_bundle = self.evaluation_repository.get(r.evaluation_id) if self.evaluation_repository and hasattr(r, "evaluation_id") else None
                 if eval_bundle:
-                    strengths = "\n".join(eval_bundle.technical.strengths + eval_bundle.growth.strengths)
-                    risks = "\n".join(eval_bundle.technical.risks + eval_bundle.growth.risks)
-                    sheet.append([name, strengths, risks, "(Detailed explanation not yet generated)", "(Counterfactuals not yet generated)"])
+                    strengths = "\n".join((eval_bundle.technical.strengths if eval_bundle.technical else []) + (eval_bundle.growth.strengths if eval_bundle.growth else []))
+                    risks = "\n".join((eval_bundle.technical.risks if eval_bundle.technical else []) + (eval_bundle.growth.risks if eval_bundle.growth else []))
+                    sheet.append([name, strengths, risks, ramp_up, "(Detailed explanation not yet generated)", "(Counterfactuals not yet generated)"])
                 else:
-                    sheet.append([name, "", "", "", ""])
+                    sheet.append([name, "", "", "", "", ""])
 
         self._format_sheet(sheet)
 
     def _build_candidate_profiles(self, sheet, rankings):
-        headers = ["Candidate", "Email", "Phone", "Location", "Experience (Events)", "Domains", "Skills", "Career Trajectory"]
+        headers = ["Candidate", "Email", "Phone", "Location", "Experience (Events)", "Domains", "Skills", "Projects", "Career Trajectory"]
         self._apply_header_style(sheet, headers)
         
         all_candidates = self.candidate_repository.list_candidates()
@@ -203,6 +206,7 @@ class RankingExportService:
                 f"{events} timeline events",
                 ", ".join(cand.domains) if cand.domains else "",
                 ", ".join(cand.skills) if cand.skills else "",
+                ", ".join(cand.projects) if cand.projects else "",
                 timeline_str
             ])
 

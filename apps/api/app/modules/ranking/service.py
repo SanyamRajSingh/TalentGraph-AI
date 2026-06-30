@@ -3,7 +3,8 @@ from app.domain.ranking import HiringPersona, RankingResult
 from app.modules.recruiter_brain.persona_engine import PersonaEngine
 from app.repositories.evaluation_repository import EvaluationRepository
 from app.repositories.ranking_repository import RankingRepository
-
+from app.repositories.candidate_repository import CandidateRepository
+import uuid
 
 class RankingService:
     """Ranks candidates from existing EvaluationBundles using persona weights."""
@@ -12,10 +13,12 @@ class RankingService:
         self,
         evaluation_repository: EvaluationRepository,
         ranking_repository: RankingRepository,
+        candidate_repository: CandidateRepository,
         persona_engine: PersonaEngine | None = None,
     ) -> None:
         self.evaluation_repository = evaluation_repository
         self.ranking_repository = ranking_repository
+        self.candidate_repository = candidate_repository
         self.persona_engine = persona_engine or PersonaEngine()
 
     def rank(self, role_id: str, persona: HiringPersona) -> list[RankingResult]:
@@ -29,6 +32,8 @@ class RankingService:
         evaluations: list[EvaluationBundle],
         persona: HiringPersona,
     ) -> list[RankingResult]:
+        evaluated_candidate_ids = {e.candidate_id for e in evaluations}
+        
         scored = [
             RankingResult(
                 candidate_id=evaluation.candidate_id,
@@ -41,6 +46,24 @@ class RankingService:
             )
             for evaluation in evaluations
         ]
+        
+        # Add all other candidates as un-evaluated (score 0)
+        all_candidates = self.candidate_repository.list_candidates()
+        
+        for candidate in all_candidates:
+            if candidate.candidate_id not in evaluated_candidate_ids:
+                scored.append(
+                    RankingResult(
+                        candidate_id=candidate.candidate_id,
+                        role_id=role_id,
+                        rank=1,
+                        persona=persona,
+                        score=0,
+                        confidence=0,
+                        evaluation_id=f"unevaluated-{uuid.uuid4()}",
+                    )
+                )
+
         scored.sort(key=lambda ranking: (-ranking.score, -ranking.confidence, ranking.candidate_id))
         return [
             ranking.model_copy(update={"rank": index + 1})

@@ -238,6 +238,7 @@ def get_ranking_service() -> RankingService:
     return RankingService(
         evaluation_repository=get_evaluation_repository(),
         ranking_repository=get_ranking_repository(),
+        candidate_repository=get_candidate_repository(),
     )
 
 
